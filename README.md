@@ -1,4 +1,5 @@
-# ark-vue-demo
+# arkObserver
+自用arknights仓库管理系统
 
 ## Project setup
 ```
