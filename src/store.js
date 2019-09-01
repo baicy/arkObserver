@@ -24,6 +24,9 @@ export default new Vuex.Store({
     mutations: {
         updateCharactersData: (state, payload) => {
             state.characters[payload.key] = payload.value;
+        },
+        updateStock: (state, payload) => {
+            state.resources[payload.key] = payload.amount;
         }
     },
     getters: {
@@ -32,7 +35,16 @@ export default new Vuex.Store({
         },
         getCharacter: (state) => (key) => {
             return state.characters[key];
-        }
+        },
+        getResources: (state) => (refresh) => {
+            return state.resources;
+        },
+        getStock: (state) => (key) => {
+            if(state.resources[key])
+                return state.resources[key];
+            else
+                return 0;
+        },
   },
   actions: {
     // async saveCharacters() {

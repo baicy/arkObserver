@@ -1,5 +1,19 @@
+//todo:在这里import json没用
 let Converter = {};
 
+const NEEDEDS = {
+    materials: ["30011", "30012", "30013", "30014", "30021", "30022", "30023", "30024", "30031", "30032", "30033", "30034", "30041", "30042", "30043", "30044", "30051", "30052", "30053", "30054", "30061", "30062", "30063", "30064", "30073", "30074", "30083", "30084", "30093", "30094", "30103", "30104", "30115", "30125", "30135"],
+    skill_books: ["3301", "3302", "3303"],
+    chips: ["32001","4006","3211", "3212", "3213", "3221", "3222", "3223", "3231", "3232", "3233", "3241", "3242", "3243", "3251", "3252", "3253", "3261", "3262", "3263", "3271", "3272", "3273", "3281", "3282", "3283"],
+    money: ["4001"]
+};
+const DROPPERCENTS = {
+    'ALWAYS': '固定掉落',
+    'ALMOST': '大概率',
+    'USUAL': '概率掉落',
+    'OFTEN': '小概率',
+    'SOMETIMES': '罕见'
+};
 Converter.gameData = {
     toCharacters(characters,skills) {
         var result = {};
@@ -70,10 +84,79 @@ Converter.gameData = {
             result[o.appellation] = r;
         }
         return result;
-    }
-    toResources() {
-        var result = {};
+    },
+    // item_table:items, stage, building_data:workshopFormulas.id.costs
+    //item.type in [GOLD,MATERIAL]
+    // GOLD:龙门币4001
+    // MATERIAL:
+    //  classifyType=NORMAL:采购凭证，赤金，龙骨，碳，建材，家具币,源石碎片
+    //  classifyType=MATERIAL:材料，技能书，芯片助剂，芯片，信物
+    //      ObtainApproach=null:龙门币，赤金，采购凭证，材料，技能书，碳，建材，芯片，家具币
+    //      ObtainApproach!=null:龙骨，芯片助剂，信物
+    //      需要的只有龙门币4001，采购凭证4006，
+    //          材料30011-30135，技能书3301-3303
+    //          芯片3211-3283，芯片助剂32001
+    //      仓库展示只有材料，技能书，采购凭证，芯片助剂，芯片
+    // stageDropList
+    // stageDrop occPer
+    // ALWAYS: 固定掉落
+    // ALMOST: 大概率
+    // USUAL: 概率掉落
+    // OFTEN: 小概率
+    // SOMETIMES: 罕见
+    // buildingProductList->formulaId
+    // iconId
+    // name
+    // rarity 白0 绿1 蓝2 紫3 金4
+    toResources(items, stages, buildings) {
+        var result = {materials:{}, skill_books:{}, chips:{}, money:{}};
+        items = items.items;
+        stages = stages.stages;
+        var formulas = buildings.workshopFormulas;
+        var neededIds = [
+            ...NEEDEDS.materials,
+            ...NEEDEDS.skill_books,
+            ...NEEDEDS.chips,
+            ...NEEDEDS.money
+        ];
+        for(var i in items)
+        {
+            if(!neededIds.includes(i))
+                continue;
+            var r = {};
+            r.id = items[i].itemId;
+            r.name = items[i].name;
+            r.rarity = items[i].rarity;
+            r.iconId = items[i].iconId;
+            r.drops = {};
+            if(items[i]['stageDropList'].length)
+            {
+                for(var j in items[i]['stageDropList'])
+                {
+                    var stageCode = stages[items[i]['stageDropList'][j]['stageId']].code;
+                    r.drops[stageCode] = DROPPERCENTS[items[i]['stageDropList'][j]['occPer']];
+                }
+            }
+            r.formula = {};
+            if(items[i]['buildingProductList'].length)
+            {
+                var formula = formulas[items[i]['buildingProductList'][0]['formulaId']];
+                r.formula['4001'] = formula.goldCost;
+                for(var j in formula.costs)
+                {
+                    r.formula[formula.costs[j]['id']] = formula.costs[j]['count'];
+                }
+            }
+            var group = this.getItemGroup(i);
+            result[group][i] = r;
+        }
         return result;
+    },
+    getItemGroup(id) {
+        if(NEEDEDS.materials.includes(id)) return 'materials';
+        if(NEEDEDS.skill_books.includes(id)) return 'skill_books';
+        if(NEEDEDS.chips.includes(id)) return 'chips';
+        if(NEEDEDS.money.includes(id)) return 'money';
     }
 }
 export default Converter

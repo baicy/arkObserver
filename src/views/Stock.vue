@@ -20,15 +20,15 @@
 </template>
 
 <script>
-    import { PURCHASE_CREDIT, MATERIALS, SKILL_BOOKS, CHIPS } from '../data/Resources.js';
+    import resources from '../data/resources.json';
     import Item from '../components/ResourceItem.vue';
     export default {
         name: 'StockViewer',
         components: { Item },
         data(){
             return {
-                materials: MATERIALS,
-                others: [...SKILL_BOOKS,PURCHASE_CREDIT,...CHIPS]
+                materials: resources.materials,
+                others: Object.assign(resources.skill_books,resources.chips)
             };
         }
     };
