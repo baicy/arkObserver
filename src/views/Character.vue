@@ -31,14 +31,14 @@
                             </v-chip>
                         </v-chip-group>
                         <v-divider></v-divider>
-                        <v-chip-group column>
+                        <v-chip-group column active-class="black white--text">
                             <v-chip
                                 small
                                 label
-                                v-for="(character, index) in characters"
-                                :key="index"
-                                v-if="character.profession==selectedProfession && character.rarity==selectedRarity-1"
-                                @click="selectedCharacterId=index"
+                                v-for="(character, key) in characters"
+                                :key="key"
+                                v-if="character.profession==selectedProfession && character.rarity==selectedRarity"
+                                @click="selectedCharacterKey=key"
                             >
                                 {{ character.name }}
                             </v-chip>
@@ -52,15 +52,15 @@
                     <v-card-text>
                         <v-slider
                             v-for="(option,index) in options"
-                            :key="index"
-                            v-model="selectedCharacter['plan'][option['key']]"
+                            :key="'public-option-'+index"
+                            v-model="selectedCharacter['target'][option['key']]"
                             :min="option.min"
                             :max="option.max"
                             hide-details
                             class="align-center"
                             track-color="green lighten-1"
                             :label="option.title"
-                        >
+                            >
                             <template v-slot:append>
                                 <v-text-field
                                     :value="selectedCharacter[option['key']]+'  →'"
@@ -71,12 +71,44 @@
                                     style="width: 40px"
                                  ></v-text-field>
                                 <v-text-field
-                                    v-model="selectedCharacter['plan'][option['key']]"
+                                    v-model="selectedCharacter['target'][option['key']]"
                                     class="mt-0 pt-0"
                                     hide-details
                                     single-line
                                     type="number"
                                     :max="option.max"
+                                    style="width: 40px"
+                                ></v-text-field>
+                            </template>
+                        </v-slider>
+                        <v-slider
+                            v-if="selectedCharacter.rarity>3"
+                            v-for="(skill,index) in selectedCharacter.skill_names"
+                            :key="'skill_option'+index"
+                            v-model="selectedCharacter['target']['skills'][index]"
+                            min=7
+                            max=10
+                            hide-details
+                            class="align-center"
+                            track-color="green lighten-1"
+                            :label="skill"
+                            >
+                            <template v-slot:append>
+                                <v-text-field
+                                    :value="selectedCharacter['skills'][index]+'  →'"
+                                    class="mt-0 pt-0"
+                                    disabled
+                                    hide-details
+                                    single-line
+                                    style="width: 40px"
+                                 ></v-text-field>
+                                <v-text-field
+                                    v-model="selectedCharacter['target']['skills'][index]"
+                                    class="mt-0 pt-0"
+                                    hide-details
+                                    single-line
+                                    type="number"
+                                    max=10
                                     style="width: 40px"
                                 ></v-text-field>
                             </template>
@@ -91,34 +123,27 @@
         </v-row>
         <div class="text-center">
             <v-dialog v-model="dialog" width="500">
-              <v-card>
-                <v-card-title
-                  class="headline grey lighten-2"
-                  primary-title
-                >
-                  干员数据
-                </v-card-title>
-        
-                <v-card-text>
-                    {{ charactersData }}
-                </v-card-text>
-        
-                <v-divider></v-divider>
-        
-                <v-card-actions>
-                  <div class="flex-grow-1"></div>
-                  <v-btn
-                    color="primary"
-                    text
-                    @click="dialog = false"
-                  >
-                    关闭
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
+                <v-card>
+                    <v-card-title>干员养成数据</v-card-title>
+                    <v-card-text>
+                        <v-textarea solo v-model="charactersData"></v-textarea>
+                    </v-card-text>
+                    <v-card-actions>
+                        <div class="flex-grow-1"></div>
+                            <v-btn
+                                color="primary"
+                                text
+                                @click="dialog = false"
+                            >
+                            关闭
+                            </v-btn>
+                    </v-card-actions>
+                </v-card>
             </v-dialog>
-          </div>
-    
+        </div>
+        <v-snackbar :timeout="snackbarTime" v-model="snackbar">
+            设置完成
+        </v-snackbar>
     </v-container>
 </template>
 
@@ -127,14 +152,16 @@
     export default {
         data() {
             return {
+                snackbar: false,
+                snackbarTime: 1500,
                 dialog: false,
                 charactersData: '',
                 selectedRarity: 6,
                 selectedProfession: '',
-                selectedCharacterId: 0,
+                selectedCharacterKey: '',
                 professions: [
                     { key: 'SNIPER', title: '狙击' },
-                    { key: 'CASTER', title: '术士' },
+                    { key: 'CASTER', title: '术师' },
                     { key: 'MEDIC', title: '医疗' },
                     { key: 'TANK', title: '重装' },
                     { key: 'PIONEER', title: '先锋' },
@@ -147,95 +174,55 @@
         },
         computed: {
             selectedCharacter: function() {
-                var c = this.characters[this.selectedCharacterId];
-                var d = localStorage.getItem('ark_vue_demo');
-                if(d)
-                {
-                    d = JSON.parse(d).characters[c.name];
-                }
-                if(d) {
-                    c.elite = d.elite;
-                    c.level = d.level;
-                    c.skill = d.skill;
-                    c.skill1 = d.skill1;
-                    if(d.skill2)
-                        c.skill2 = d.skill2;
-                    if(d.skill3)
-                        c.skill3 = d.skill3;
+                if(this.selectedCharacterKey=='')
+                    return null;
+                var c = this.characters[this.selectedCharacterKey];
+                var r = this.$store.getters.getCharacter(c.key);
+                if(r){
+                    c.phase = r[0];
+                    c.skill = r[1];
+                    c.skills = r[2]?r[2]:undefined;
                 } else {
-                    c.elite = 0;
-                    c.level = 1;
+                    c.phase = 0;
                     c.skill = 1;
-                    if(c.rarity>2)
-                    {
-                        c.skill1 = 7;
-                        c.skill2 = 7;
-                    }
-                    if(c.rarity>4)
-                        c.skill3 = 7;
+                    c.skills = c.rarity>3?[7,7]:undefined;
+                    if(c.rarity>5)
+                        c.skills[2]=7;
                 }
-                c.plan = {
-                    elite: c.elite,
+                c.target = {
+                    phase: c.phase,
                     skill: c.skill,
+                    skills: c.rarity>3?[...c.skills]:undefined
                 };
-                if(c.rarity>2){} {
-                    c.plan.skill1 = 7;
-                    c.plan.skill2 = 7;
-                }
-                if(c.rarity>4)
-                    c.plan.skill3 = 7;
                 return c;
             },
             options: function() {
                 var c = this.selectedCharacter;
                 var o = [
-                    {key:'elite',title:'精英化',min:0,max:c.meta.max_elite_rank},
+                    {key:'phase',title:'精英化',min:0,max:(c.rarity>3?2:1)},
                     {key:'skill',title:'技能等级',min:1,max:7},
                 ];
-                if(this.selectedCharacter.rarity>2)
-                {
-                    var skills = this.selectedCharacter.skill_names;
-                    o.push({key:'skill1',title:skills[0],min:7,max:10});
-                    o.push({key:'skill2',title:skills[1],min:7,max:10});
-                    if(skills.length>2)
-                        o.push({key:'skill3',title:skills[2],min:7,max:10});
-                }
                 return o; 
             }
         },
         methods: {
             showCharactersData: function() {
                 this.dialog = true;
-                var storageData = localStorage.getItem('ark_vue_demo');
-                if(storageData)
-                {
-                    storageData = JSON.parse(storageData);
-                    this.charactersData = JSON.stringify(storageData.characters);
-                } else {
-                    this.charactersData = '{}';
-                }
+                this.charactersData = this.$store.getters.getCharacters(1);
             },
             updateCharacter: function() {
-                var storageData = {characters:{}, plans:[]};
-                if(localStorage.getItem('ark_vue_demo'))
-                {
-                    storageData = JSON.parse(localStorage.getItem('ark_vue_demo'));
-                }
                 var c = {};
-                c.name = this.selectedCharacter.name;
-                c.elite = this.selectedCharacter.plan.elite;
-                c.skill = this.selectedCharacter.plan.skill;
-                c.skill1 = this.selectedCharacter.plan.skill1;
-                c.skill2 = this.selectedCharacter.plan.skill2;
-                if(this.selectedCharacter.plan.skill3)
-                    c.skill3 = this.selectedCharacter.plan.skill3;
-                storageData.characters[c.name] = c;
-                localStorage.setItem('ark_vue_demo', JSON.stringify(storageData));
+                var sc = this.selectedCharacter;
+                c.key = sc.key;
+                c.value= [
+                    sc.target.phase,
+                    sc.target.skill,
+                    sc.target.skills?sc.target.skills:undefined
+                ];
+                this.$store.commit('updateCharactersData', c);
+                this.snackbar = true;
             }
         }
-        // beforeMount() {
-            // this.selectedCharacter=this.characters[0];
-        // }
     }
 </script>
 

@@ -1,35 +1,38 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+    plugins: [
+        createPersistedState({
+            key: "ark-observer-abc",
+            paths: [
+                "plans",
+                "characters",
+                "resources"
+            ]
+        })
+    ],
     state: {
         data: {},
         plans: [],
-        characters: {}
+        characters: {},
+        resources: {}
     },
     mutations: {
-        updateCharactersData: (state, c) => {
-            state.characters[c.name] = c;
-            localStorage.setItem('')
-        },
-        getCharacterData: (state, name) => {
-            return state.characters[name];
+        updateCharactersData: (state, payload) => {
+            state.characters[payload.key] = payload.value;
         }
     },
     getters: {
-        getExportData: state => {
-            console.log('characters: ');
-            console.log(state.characters);
-            console.log('plans: ');
-            console.log(state.plans);
-            return true;
-        },
-        getCharactersData: state => {
-            // state.characters = 
+        getCharacters: (state) => (refresh) => {
             return JSON.stringify(state.characters);
         },
+        getCharacter: (state) => (key) => {
+            return state.characters[key];
+        }
   },
   actions: {
     // async saveCharacters() {
