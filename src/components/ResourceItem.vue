@@ -5,9 +5,9 @@
         overlap
         >
         <template v-slot:badge>
-            {{ quantity }}
+            {{ displayQuantity }}
         </template>
-        <div class="item-grid" @click="plusItem(item.id)" @click.right.prevent="minusItem(item.id)">
+        <div :class="'item-grid'+scale" @click="plusItem(item.id)" @click.right.prevent="minusItem(item.id)">
             <div class="item-block">
                 <img class="item-bg" :src="require('../assets/icons/T'+(item.rarity+1)+'back.png')">
                 <img class="item-ico" :src="require('../assets/icons/'+item.iconId+'.png')" :alt="item.name"> 
@@ -23,24 +23,63 @@
             item: {
                 type: Object,
                 required: true
+            },
+            isStock: {
+                type: Boolean,
+                default () {
+                    return false
+                }
+            },
+            needQuantity: {
+                type: Number,
+                default () {
+                    return 1
+                }
+            },
+            size: {
+                type: String,
+                default () {
+                    return 'normal'
+                }
             }
         },
         data() {
             return {
-                quantity : this.$store.getters.getStock(this.item.id)
+                quantity : this.isStock?this.$store.getters.getStock(this.item.id):this.needQuantity,
+                scale: ''
+            }
+        },
+        computed: {
+            displayQuantity: function() {
+                if(this.isStock)
+                    return this.quantity;
+                else
+                     return this.needQuantity;
             }
         },
         methods: {
             plusItem(id) {
-                this.quantity++;
-                this.$store.commit('updateStock', {key:id, amount: this.quantity});
+                if(this.isStock)
+                {
+                    this.quantity++;
+                    this.$store.commit('updateStock', {key:id, amount: this.quantity});
+                }
             },
             minusItem(id) {
-                if(this.quantity>0){
+                if(this.isStock && this.quantity>0){
                     this.quantity--;
                     this.$store.commit('updateStock', {key:id, amount: this.quantity});
                 }
                 
+            }
+        },
+        mounted() {
+            switch (this.size){
+                case 'small':
+                    this.scale = '-small';
+                    break;
+                default:
+                    break;
             }
         }
     };
@@ -52,7 +91,7 @@
         height: 68px;
         display: inline-grid;
     }
-    .item-block {
+    .item-grid .item-block {
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -64,6 +103,18 @@
     }
     .item-ico {
         position: absolute;
+    }
+    .item-grid-small {
+        width: 60px;
+        height: 48px;
+        display: inline-grid;
+    }
+    .item-grid-small .item-block {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        transform: scale(0.3);
+        position: relative;
     }
     .v-badge--overlap .v-badge__badge {
         bottom: 5px !important;

@@ -4,14 +4,14 @@
             <v-col cols="7">
                 <v-card>
                     <v-card-text>
-                        <Item :item="item" v-for="(item,index) in materials" :key="index" />
+                        <Item :item="item" is-stock v-for="(item,index) in materials" :key="'stock'+index" />
                     </v-card-text>
                 </v-card>
             </v-col>
             <v-col cols="5">
                 <v-card>
                     <v-card-text>
-                        <Item :item="item" v-for="(item,index) in others" :key="index" />
+                        <Item :item="item" is-stock v-for="(item,index) in others" :key="'stock'+index"></Item>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -28,7 +28,7 @@
         data(){
             return {
                 materials: resources.materials,
-                others: Object.assign(resources.skill_books,resources.chips)
+                others: Object.assign({},resources.skill_books,resources.chips)
             };
         }
     };

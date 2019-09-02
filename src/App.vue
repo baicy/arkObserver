@@ -7,8 +7,7 @@
         </v-toolbar-title>
         <v-toolbar-items>
             <v-btn text router-link to="/">计划</v-btn>
-            <v-btn text router-link to="/character">干员</v-btn>
-            <v-btn text>刷图</v-btn>
+            <v-btn text router-link to="/character">练度</v-btn>
             <v-btn text router-link to="/stock">仓库</v-btn>
         </v-toolbar-items>
         <v-spacer></v-spacer>

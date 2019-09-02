@@ -17,7 +17,7 @@ export default new Vuex.Store({
     ],
     state: {
         data: {},
-        plans: [],
+        plans: {},
         characters: {},
         resources: {}
     },
@@ -25,9 +25,18 @@ export default new Vuex.Store({
         updateCharactersData: (state, payload) => {
             state.characters[payload.key] = payload.value;
         },
+        resetCharactersData: (state) => {
+            state.characters = {};
+            state.plans = {};
+        },
         updateStock: (state, payload) => {
             state.resources[payload.key] = payload.amount;
-        }
+        },
+        updatePlansData: (state, payload) => {
+            for(var i in payload){
+                state.plans[i] = payload[i];
+            }
+        },
     },
     getters: {
         getCharacters: (state) => (refresh) => {
