@@ -1,12 +1,15 @@
 <template>
     <v-container fluid class="px-0 py-0">
-        <v-row>
-            <v-col cols="4" class="py-0">
+        <v-row v-resize="onResize">
+            <v-col cols="12" md="4" class="py-0">
                 <v-data-table
                     :headers="headers"
                     :items="plans_array"
-                    hide-default-footer
                     class="elevation-1"
+                    fixed-header
+                    :height="windowSize.height-100"
+                    :items-per-page="-1"
+                    hide-default-footer
                     >
                     <template v-slot:item.option="{item}">
                         <v-btn text icon color="green lighten-1" :disabled="!(item.completed&&item.onstage)" @click="completePlan(item)">
@@ -24,18 +27,18 @@
                     </template>
                 </v-data-table>
             </v-col>
-        <v-col cols="8" class="py-0">
-            <v-row>
-                <v-col cols="3" v-for="(quantity, index) in requirement" :key="'require-'+index" class="py-1">
-                    <RequirementItem
-                        :item="materials[index]"
-                        :requirement="requirement[index]"
-                        :stock="stock[index]"
-                        :shortage="shortage[index]"
-                        ></RequirementItem>
-                </v-col>
-            </v-row>
-        </v-col>
+            <v-col cols="12" md="8" class="py-0">
+                <v-row>
+                    <v-col cols="6" md="3" v-for="(quantity, index) in requirement" :key="'require-'+index" class="py-1">
+                        <RequirementItem
+                            :item="materials[index]"
+                            :requirement="requirement[index]"
+                            :stock="stock[index]"
+                            :shortage="shortage[index]"
+                            ></RequirementItem>
+                    </v-col>
+                </v-row>
+            </v-col>
         </v-row>
     </v-container>
 </template>
@@ -53,6 +56,7 @@
         data () {
             return {
                 result:'',
+                windowSize:{width:0, height:0},
                 plans: this.$store.getters.getPlans(),
                 plans_array: [],
                 stock: {},
@@ -137,6 +141,9 @@
             removePlan: function(item) {
                 this.deletePlan(item);
                 this.removePlanCommon(item);
+            },
+            onResize () {
+                this.windowSize = {width: window.innerWidth, height:window.innerHeight};
             }
         },
         mounted() {

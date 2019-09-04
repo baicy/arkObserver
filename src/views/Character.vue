@@ -1,137 +1,62 @@
 <template>
-    <v-container>
-        <v-sheet class="float-left">
-            <v-btn color="error" @click="resetCharactersData()">重置练度</v-btn>
-        </v-sheet>
-        <v-row>
-            <v-col cols="4">
-                <v-card
-                    max-width="300"
-                    class="mx-auto"
-                    tile
-                    >
-                    <v-card-text>
-                        <v-chip-group
-                            column
-                            mandatory
-                            active-class="black white--text"
-                            >
-                            <v-chip small label v-for="rarity in [6,5,4,3]" :key="rarity"
-                                @click="selectedRarity=rarity"
-                            >
-                                {{ rarity }}<v-icon small>mdi-star</v-icon>
-                            </v-chip>
-                        </v-chip-group>
-                        <v-chip-group
-                            column
-                            active-class="black white--text"
-                            >
-                            <v-chip small label v-for="(title, key) in professions" :key="key"
-                                @click="selectedProfession=key;"
-                            >
-                                {{ title }}
-                            </v-chip>
-                        </v-chip-group>
-                        <v-divider></v-divider>
-                        <v-chip-group column active-class="black white--text">
-                            <v-chip
-                                small
-                                label
-                                v-for="(character, key) in characters"
-                                :key="key"
-                                v-if="character.profession==selectedProfession && character.rarity==selectedRarity"
-                                @click="selectedCharacterKey=key"
+        <v-container>
+            <v-row>
+                <v-col cols="12">
+                    <v-btn color="error" @click="resetCharactersData()">重置练度</v-btn>
+                </v-col>
+                <v-col cols="12" md="4">
+                    <v-card tile>
+                        <v-card-text>
+                            <v-chip-group
+                                column
+                                mandatory
+                                active-class="black white--text"
                                 >
-                                {{ character.name }}
-                            </v-chip>
-                        </v-chip-group>
-                    </v-card-text>
-                  </v-card>
-            </v-col>
-            <v-col cols="4" v-if="selectedCharacter">
-                <v-card tile min-height="360px">
-                    <v-card-title>{{selectedCharacter.name}}</v-card-title>
-                    <v-card-text>
-                        <v-slider
-                            v-model="target.phase"
-                            min=0 :max="selectedCharacter.rarity>3?2:1"
-                            hide-details class="align-center" track-color="green lighten-1"
-                            label="精英化"
-                            >
-                            <template v-slot:append>
-                                <v-text-field
-                                    :value="current.phase+'  →'"
-                                    class="mt-0 pt-0"
-                                    disabled
-                                    hide-details
-                                    single-line
-                                    style="width: 40px"
-                                 ></v-text-field>
-                                <v-text-field
-                                    v-model="target.phase"
-                                    class="mt-0 pt-0"
-                                    hide-details
-                                    single-line
-                                    type="number"
-                                    :max="selectedCharacter.rarity>3?2:1"
-                                    style="width: 30px"
-                                ></v-text-field>
-                                <v-text-field
-                                    :value="'( '+plan.phase+' )'"
-                                    class="mt-0 pt-0"
-                                    disabled
-                                    hide-details
-                                    single-line
-                                    style="width: 30px"
-                                 ></v-text-field>
-                            </template>
-                        </v-slider>
-                        <v-slider
-                            v-model="target.skill"
-                            min=1 max=7
-                            hide-details class="align-center" track-color="green lighten-1"
-                            label="技能等级"
-                            >
-                            <template v-slot:append>
-                                <v-text-field
-                                    :value="current.skill+'  →'"
-                                    class="mt-0 pt-0"
-                                    disabled
-                                    hide-details
-                                    single-line
-                                    style="width: 40px"
-                                 ></v-text-field>
-                                <v-text-field
-                                    v-model="target.skill"
-                                    class="mt-0 pt-0"
-                                    hide-details
-                                    single-line
-                                    type="number"
-                                    max=7
-                                    style="width: 30px"
-                                ></v-text-field>
-                                <v-text-field
-                                    :value="'( '+plan.skill+' )'"
-                                    class="mt-0 pt-0"
-                                    disabled
-                                    hide-details
-                                    single-line
-                                    style="width: 30px"
-                                 ></v-text-field>
-                            </template>
-                        </v-slider>
-                        <v-sheet v-if="selectedCharacter.rarity>3">
+                                <v-chip small label v-for="rarity in [6,5,4,3]" :key="rarity"
+                                    @click="selectedRarity=rarity"
+                                >
+                                    {{ rarity }}<v-icon small>mdi-star</v-icon>
+                                </v-chip>
+                            </v-chip-group>
+                            <v-chip-group
+                                column
+                                active-class="black white--text"
+                                >
+                                <v-chip small label v-for="(title, key) in professions" :key="key"
+                                    @click="selectedProfession=key;"
+                                >
+                                    {{ title }}
+                                </v-chip>
+                            </v-chip-group>
+                            <v-divider></v-divider>
+                            <v-chip-group column active-class="black white--text">
+                                <v-chip
+                                    small
+                                    label
+                                    v-for="(character, key) in characters"
+                                    :key="key"
+                                    v-if="character.profession==selectedProfession && character.rarity==selectedRarity"
+                                    @click="selectedCharacterKey=key"
+                                    >
+                                    {{ character.name }}
+                                </v-chip>
+                            </v-chip-group>
+                        </v-card-text>
+                      </v-card>
+                </v-col>
+                <v-col cols="12" md="4" v-if="selectedCharacter">
+                    <v-card tile min-height="360px">
+                        <v-card-title>{{selectedCharacter.name}}</v-card-title>
+                        <v-card-text>
                             <v-slider
-                                v-for="(skill,index) in selectedCharacter.skill_names"
-                                :key="'skill_option'+index"
-                                v-model="target['skills'][index]"
-                                min=0 max=3
+                                v-model="target.phase"
+                                min=0 :max="selectedCharacter.rarity>3?2:1"
                                 hide-details class="align-center" track-color="green lighten-1"
-                                :label="skill"
+                                label="精英化"
                                 >
                                 <template v-slot:append>
                                     <v-text-field
-                                        :value="current['skills'][index]+'  →'"
+                                        :value="current.phase+'  →'"
                                         class="mt-0 pt-0"
                                         disabled
                                         hide-details
@@ -139,16 +64,16 @@
                                         style="width: 40px"
                                      ></v-text-field>
                                     <v-text-field
-                                        v-model="target['skills'][index]"
+                                        v-model="target.phase"
                                         class="mt-0 pt-0"
                                         hide-details
                                         single-line
                                         type="number"
-                                        max=3
+                                        :max="selectedCharacter.rarity>3?2:1"
                                         style="width: 30px"
                                     ></v-text-field>
                                     <v-text-field
-                                        :value="'( '+plan['skills'][index]+' )'"
+                                        :value="'( '+plan.phase+' )'"
                                         class="mt-0 pt-0"
                                         disabled
                                         hide-details
@@ -157,50 +82,121 @@
                                      ></v-text-field>
                                 </template>
                             </v-slider>
-                        </v-sheet>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn text @click="updateCharacter()">设置</v-btn>
-                        <v-btn text @click="updatePlans()">添加到计划</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-col>
-            <v-col cols="4" v-if="selectedCharacter">
-                <v-card tile min-height="360px">
-                    <v-card-title>所需材料</v-card-title>
-                    <v-card-text>
-                        <v-sheet v-for="(need,index) in needs" :key="'needsGroup'+index">
-                            <span>{{ need['title']+': ' }}</span>
-                            <Item size="small" v-for="(quantity,itemId) in need['items']" :key="'needsGroup'+index+itemId" :item="materials[itemId]" :need-quantity="quantity"></Item>
-                        </v-sheet>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-        </v-row>
-        <div class="text-center">
-            <v-dialog v-model="dialog" width="500">
-                <v-card>
-                    <v-card-title>干员养成数据</v-card-title>
-                    <v-card-text>
-                        <v-textarea solo v-model="charactersData"></v-textarea>
-                    </v-card-text>
-                    <v-card-actions>
-                        <div class="flex-grow-1"></div>
-                            <v-btn
-                                color="primary"
-                                text
-                                @click="dialog = false"
-                            >
-                            关闭
-                            </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-        </div>
-        <v-snackbar :timeout="snackbarTime" v-model="snackbar">
-            {{snackbarMessage}}
-        </v-snackbar>
-    </v-container>
+                            <v-slider
+                                v-model="target.skill"
+                                min=1 max=7
+                                hide-details class="align-center" track-color="green lighten-1"
+                                label="技能等级"
+                                >
+                                <template v-slot:append>
+                                    <v-text-field
+                                        :value="current.skill+'  →'"
+                                        class="mt-0 pt-0"
+                                        disabled
+                                        hide-details
+                                        single-line
+                                        style="width: 40px"
+                                     ></v-text-field>
+                                    <v-text-field
+                                        v-model="target.skill"
+                                        class="mt-0 pt-0"
+                                        hide-details
+                                        single-line
+                                        type="number"
+                                        max=7
+                                        style="width: 30px"
+                                    ></v-text-field>
+                                    <v-text-field
+                                        :value="'( '+plan.skill+' )'"
+                                        class="mt-0 pt-0"
+                                        disabled
+                                        hide-details
+                                        single-line
+                                        style="width: 30px"
+                                     ></v-text-field>
+                                </template>
+                            </v-slider>
+                            <v-sheet v-if="selectedCharacter.rarity>3">
+                                <v-slider
+                                    v-for="(skill,index) in selectedCharacter.skill_names"
+                                    :key="'skill_option'+index"
+                                    v-model="target['skills'][index]"
+                                    min=0 max=3
+                                    hide-details class="align-center" track-color="green lighten-1"
+                                    :label="skill"
+                                    >
+                                    <template v-slot:append>
+                                        <v-text-field
+                                            :value="current['skills'][index]+'  →'"
+                                            class="mt-0 pt-0"
+                                            disabled
+                                            hide-details
+                                            single-line
+                                            style="width: 40px"
+                                         ></v-text-field>
+                                        <v-text-field
+                                            v-model="target['skills'][index]"
+                                            class="mt-0 pt-0"
+                                            hide-details
+                                            single-line
+                                            type="number"
+                                            max=3
+                                            style="width: 30px"
+                                        ></v-text-field>
+                                        <v-text-field
+                                            :value="'( '+plan['skills'][index]+' )'"
+                                            class="mt-0 pt-0"
+                                            disabled
+                                            hide-details
+                                            single-line
+                                            style="width: 30px"
+                                         ></v-text-field>
+                                    </template>
+                                </v-slider>
+                            </v-sheet>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn text @click="updateCharacter()">设置</v-btn>
+                            <v-btn text @click="updatePlans()">添加到计划</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" md="4" v-if="selectedCharacter">
+                    <v-card tile min-height="360px">
+                        <v-card-title>所需材料</v-card-title>
+                        <v-card-text>
+                            <v-sheet v-for="(need,index) in needs" :key="'needsGroup'+index">
+                                <span>{{ need['title']+': ' }}</span>
+                                <Item size="small" v-for="(quantity,itemId) in need['items']" :key="'needsGroup'+index+itemId" :item="materials[itemId]" :need-quantity="quantity"></Item>
+                            </v-sheet>
+                        </v-card-text>
+                    </v-card>
+                </v-col>
+            </v-row>
+            <div class="text-center">
+                <v-dialog v-model="dialog" width="500">
+                    <v-card>
+                        <v-card-title>干员养成数据</v-card-title>
+                        <v-card-text>
+                            <v-textarea solo v-model="charactersData"></v-textarea>
+                        </v-card-text>
+                        <v-card-actions>
+                            <div class="flex-grow-1"></div>
+                                <v-btn
+                                    color="primary"
+                                    text
+                                    @click="dialog = false"
+                                >
+                                关闭
+                                </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </div>
+            <v-snackbar :timeout="snackbarTime" v-model="snackbar">
+                {{snackbarMessage}}
+            </v-snackbar>
+        </v-container>
 </template>
 
 <script>

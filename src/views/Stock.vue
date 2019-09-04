@@ -1,14 +1,14 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="7">
+            <v-col cols="12" md="7">
                 <v-card>
                     <v-card-text>
                         <Item :item="item" is-stock v-for="(item,index) in materials" :key="'stock'+index" />
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="5">
+            <v-col cols="12" md="5">
                 <v-card>
                     <v-card-text>
                         <Item :item="item" is-stock v-for="(item,index) in others" :key="'stock'+index"></Item>
