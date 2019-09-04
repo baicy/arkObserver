@@ -20,14 +20,11 @@
 </template>
 
 <script>
-import PlanList from './components/PlanList'
-import RandomBackground from './components/RandomBackground'
 
 export default {
   name: 'App',
   components: {
-    PlanList,
-    RandomBackground
+      //
   },
   data: () => ({
     //

@@ -7,18 +7,19 @@
         <template v-slot:badge>
             {{ displayQuantity }}
         </template>
-        <div :class="'item-grid'+scale" @click="plusItem(item.id)" @click.right.prevent="minusItem(item.id)">
-            <div class="item-block">
-                <img class="item-bg" :src="require('../assets/icons/T'+(item.rarity+1)+'back.png')">
-                <img class="item-ico" :src="require('../assets/icons/'+item.iconId+'.png')" :alt="item.name"> 
-            </div>
+        <div @click="plusItem(item.id)" @click.right.prevent="minusItem(item.id)">
+            <Icon :item="item" :size="size"></Icon>
         </div>
     </v-badge>
 </template>
 
 <script>
+    import Icon from '../components/ResourceIcon.vue'
     export default {
         name: "ResourceItem",
+        components: {
+            Icon
+        },
         props: {
             item: {
                 type: Object,
@@ -45,8 +46,7 @@
         },
         data() {
             return {
-                quantity : this.isStock?this.$store.getters.getStock(this.item.id):this.needQuantity,
-                scale: ''
+                quantity : this.isStock?this.$store.getters.getStock(this.item.id):this.needQuantity
             }
         },
         computed: {
@@ -61,7 +61,7 @@
             plusItem(id) {
                 if(this.isStock)
                 {
-                    this.quantity++;
+                    this.quantity = this.quantity<0? 0:++this.quantity;
                     this.$store.commit('updateStock', {key:id, amount: this.quantity});
                 }
             },
@@ -72,50 +72,11 @@
                 }
                 
             }
-        },
-        mounted() {
-            switch (this.size){
-                case 'small':
-                    this.scale = '-small';
-                    break;
-                default:
-                    break;
-            }
         }
     };
 </script>
 
 <style>
-    .item-grid {
-        width: 80px;
-        height: 68px;
-        display: inline-grid;
-    }
-    .item-grid .item-block {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        transform: scale(0.4);
-        position: relative;
-    }
-    .item-bg {
-        position: absolute;
-    }
-    .item-ico {
-        position: absolute;
-    }
-    .item-grid-small {
-        width: 60px;
-        height: 48px;
-        display: inline-grid;
-    }
-    .item-grid-small .item-block {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        transform: scale(0.3);
-        position: relative;
-    }
     .v-badge--overlap .v-badge__badge {
         bottom: 5px !important;
         right: 2px;

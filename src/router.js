@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PlanList from './components/PlanList.vue'
-import Character from './views/Character.vue'
-import Stock from './views/Stock.vue'
+import PlanList from './views/PlanList'
+import Character from './views/Character'
+import Stock from './views/Stock'
 
 Vue.use(Router)
 
