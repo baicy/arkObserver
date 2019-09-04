@@ -10,20 +10,39 @@
                     :height="windowSize.height-100"
                     :items-per-page="-1"
                     hide-default-footer
+                    show-expand
+                    :expanded.sync="expanded"
+                    item-key="key"
                     >
                     <template v-slot:item.option="{item}">
-                        <v-btn text icon color="green lighten-1" :disabled="!(item.completed&&item.onstage)" @click="completePlan(item)">
-                            <v-icon v-if="item.onstage">mdi-check</v-icon>
-                            <v-icon v-else>mdi-check-circle-outline</v-icon>
-                        </v-btn>
-                        <v-btn text icon color="red lighten-1" @click="removePlan(item)">
-                            <v-icon>mdi-close</v-icon>
-                        </v-btn>
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on }">
+                                <v-btn text icon color="green lighten-1" v-on="on" :disabled="!(item.completed&&item.onstage)" @click="completePlan(item)">
+                                    <v-icon v-if="item.completed && !item.onstage">mdi-check-circle-outline</v-icon>
+                                    <v-icon v-else="item.onstage">mdi-check</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>完成</span>
+                        </v-tooltip>
+                        
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on }">
+                                <v-btn text icon color="red lighten-1" v-on="on" @click="removePlan(item)">
+                                    <v-icon>mdi-close</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>移除</span>
+                        </v-tooltip>
                     </template>
                     <template v-slot:no-data>
                         <v-btn text icon color="primary" router-link to="/character">
                             <v-icon>mdi-plus</v-icon>
                         </v-btn>
+                    </template>
+                    <template v-slot:expanded-item="{ item }">
+                         <td :colspan="headers.length+1">
+                             <Item size="xsmall" v-for="(quantity,itemId) in item.needs" :key="itemId" :item="materials[itemId]" :need-quantity="quantity"></Item>
+                         </td>
                     </template>
                 </v-data-table>
             </v-col>
@@ -65,6 +84,7 @@
                     { text: '项目', value: 'item' },
                     { text: '', value: 'option', sortable: false },
                 ],
+                expanded: [],
                 materials: Object.assign({},resources.materials,resources.skill_books,resources.chips)
             }
         },
