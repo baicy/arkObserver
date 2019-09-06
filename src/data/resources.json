@@ -2,7 +2,6 @@
     "materials": {
         "30011": {
             "id": "30011",
-            "sortId": 100015,
             "name": "源岩",
             "rarity": 0,
             "iconId": "MTL_SL_G1",
@@ -11,12 +10,10 @@
                 "S2-5": "固定掉落",
                 "0-9": "固定掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30012": {
             "id": "30012",
-            "sortId": 100014,
             "name": "固源岩",
             "rarity": 1,
             "iconId": "MTL_SL_G2",
@@ -27,13 +24,12 @@
                 "S5-1": "固定掉落"
             },
             "formula": {
+                "4001": 100,
                 "30011": 3
-            },
-            "formulaGoldCost": 100
+            }
         },
         "30013": {
             "id": "30013",
-            "sortId": 100013,
             "name": "固源岩组",
             "rarity": 2,
             "iconId": "MTL_SL_G3",
@@ -43,13 +39,12 @@
                 "5-1": "小概率"
             },
             "formula": {
+                "4001": 200,
                 "30012": 5
-            },
-            "formulaGoldCost": 200
+            }
         },
         "30014": {
             "id": "30014",
-            "sortId": 100012,
             "name": "提纯源岩",
             "rarity": 3,
             "iconId": "MTL_SL_G4",
@@ -57,13 +52,12 @@
                 "4-6": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30013": 4
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30021": {
             "id": "30021",
-            "sortId": 100027,
             "name": "代糖",
             "rarity": 0,
             "iconId": "MTL_SL_STRG1",
@@ -72,12 +66,10 @@
                 "S2-6": "固定掉落",
                 "0-7": "固定掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30022": {
             "id": "30022",
-            "sortId": 100026,
             "name": "糖",
             "rarity": 1,
             "iconId": "MTL_SL_STRG2",
@@ -89,13 +81,12 @@
                 "S5-4": "固定掉落"
             },
             "formula": {
+                "4001": 100,
                 "30021": 3
-            },
-            "formulaGoldCost": 100
+            }
         },
         "30023": {
             "id": "30023",
-            "sortId": 100025,
             "name": "糖组",
             "rarity": 2,
             "iconId": "MTL_SL_STRG3",
@@ -105,13 +96,12 @@
                 "5-2": "小概率"
             },
             "formula": {
+                "4001": 200,
                 "30022": 4
-            },
-            "formulaGoldCost": 200
+            }
         },
         "30024": {
             "id": "30024",
-            "sortId": 100024,
             "name": "糖聚块",
             "rarity": 3,
             "iconId": "MTL_SL_STRG4",
@@ -120,15 +110,14 @@
                 "5-2": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30023": 2,
                 "30043": 1,
                 "30083": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30031": {
             "id": "30031",
-            "sortId": 100023,
             "name": "酯原料",
             "rarity": 0,
             "iconId": "MTL_SL_RUSH1",
@@ -137,12 +126,10 @@
                 "S2-7": "固定掉落",
                 "0-11": "固定掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30032": {
             "id": "30032",
-            "sortId": 100022,
             "name": "聚酸酯",
             "rarity": 1,
             "iconId": "MTL_SL_RUSH2",
@@ -153,13 +140,12 @@
                 "S5-3": "固定掉落"
             },
             "formula": {
+                "4001": 100,
                 "30031": 3
-            },
-            "formulaGoldCost": 100
+            }
         },
         "30033": {
             "id": "30033",
-            "sortId": 100021,
             "name": "聚酸酯组",
             "rarity": 2,
             "iconId": "MTL_SL_RUSH3",
@@ -169,13 +155,12 @@
                 "5-3": "概率掉落"
             },
             "formula": {
+                "4001": 200,
                 "30032": 4
-            },
-            "formulaGoldCost": 200
+            }
         },
         "30034": {
             "id": "30034",
-            "sortId": 100020,
             "name": "聚酸酯块",
             "rarity": 3,
             "iconId": "MTL_SL_RUSH4",
@@ -183,15 +168,14 @@
                 "3-8": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30033": 2,
                 "30053": 1,
                 "30073": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30041": {
             "id": "30041",
-            "sortId": 100031,
             "name": "异铁碎片",
             "rarity": 0,
             "iconId": "MTL_SL_IRON1",
@@ -199,12 +183,10 @@
                 "1-3": "大概率",
                 "S2-8": "固定掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30042": {
             "id": "30042",
-            "sortId": 100030,
             "name": "异铁",
             "rarity": 1,
             "iconId": "MTL_SL_IRON2",
@@ -215,13 +197,12 @@
                 "S3-3": "固定掉落"
             },
             "formula": {
+                "4001": 100,
                 "30041": 3
-            },
-            "formulaGoldCost": 100
+            }
         },
         "30043": {
             "id": "30043",
-            "sortId": 100029,
             "name": "异铁组",
             "rarity": 2,
             "iconId": "MTL_SL_IRON3",
@@ -231,13 +212,12 @@
                 "S4-1": "小概率"
             },
             "formula": {
+                "4001": 200,
                 "30042": 4
-            },
-            "formulaGoldCost": 200
+            }
         },
         "30044": {
             "id": "30044",
-            "sortId": 100028,
             "name": "异铁块",
             "rarity": 3,
             "iconId": "MTL_SL_IRON4",
@@ -246,15 +226,14 @@
                 "S4-1": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30033": 1,
                 "30043": 2,
                 "30063": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30051": {
             "id": "30051",
-            "sortId": 100035,
             "name": "双酮",
             "rarity": 0,
             "iconId": "MTL_SL_KETONE1",
@@ -262,12 +241,10 @@
                 "1-6": "大概率",
                 "S2-9": "固定掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30052": {
             "id": "30052",
-            "sortId": 100034,
             "name": "酮凝集",
             "rarity": 1,
             "iconId": "MTL_SL_KETONE2",
@@ -277,13 +254,12 @@
                 "S2-1": "概率掉落"
             },
             "formula": {
+                "4001": 100,
                 "30051": 3
-            },
-            "formulaGoldCost": 100
+            }
         },
         "30053": {
             "id": "30053",
-            "sortId": 100033,
             "name": "酮凝集组",
             "rarity": 2,
             "iconId": "MTL_SL_KETONE3",
@@ -293,13 +269,12 @@
                 "5-8": "小概率"
             },
             "formula": {
+                "4001": 200,
                 "30052": 4
-            },
-            "formulaGoldCost": 200
+            }
         },
         "30054": {
             "id": "30054",
-            "sortId": 100032,
             "name": "酮阵列",
             "rarity": 3,
             "iconId": "MTL_SL_KETONE4",
@@ -308,15 +283,14 @@
                 "5-8": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30023": 1,
                 "30053": 2,
                 "30083": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30061": {
             "id": "30061",
-            "sortId": 100019,
             "name": "破损装置",
             "rarity": 0,
             "iconId": "MTL_SL_BOSS1",
@@ -325,12 +299,10 @@
                 "2-3": "固定掉落",
                 "1-5": "概率掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30062": {
             "id": "30062",
-            "sortId": 100018,
             "name": "装置",
             "rarity": 1,
             "iconId": "MTL_SL_BOSS2",
@@ -340,13 +312,12 @@
                 "S5-5": "概率掉落"
             },
             "formula": {
+                "4001": 100,
                 "30061": 3
-            },
-            "formulaGoldCost": 100
+            }
         },
         "30063": {
             "id": "30063",
-            "sortId": 100017,
             "name": "全新装置",
             "rarity": 2,
             "iconId": "MTL_SL_BOSS3",
@@ -356,13 +327,12 @@
                 "5-10": "小概率"
             },
             "formula": {
+                "4001": 200,
                 "30062": 4
-            },
-            "formulaGoldCost": 200
+            }
         },
         "30064": {
             "id": "30064",
-            "sortId": 100016,
             "name": "改量装置",
             "rarity": 3,
             "iconId": "MTL_SL_BOSS4",
@@ -370,15 +340,14 @@
                 "4-10": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30013": 2,
                 "30063": 1,
                 "30093": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30073": {
             "id": "30073",
-            "sortId": 100005,
             "name": "扭转醇",
             "rarity": 2,
             "iconId": "MTL_SL_ALCOHOL1",
@@ -388,12 +357,10 @@
                 "4-4": "小概率",
                 "5-4": "小概率"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30074": {
             "id": "30074",
-            "sortId": 100004,
             "name": "白马醇",
             "rarity": 3,
             "iconId": "MTL_SL_ALCOHOL2",
@@ -401,15 +368,14 @@
                 "4-4": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30023": 1,
                 "30073": 1,
                 "30103": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30083": {
             "id": "30083",
-            "sortId": 100007,
             "name": "轻锰矿",
             "rarity": 2,
             "iconId": "MTL_SL_MANGANESE1",
@@ -418,12 +384,10 @@
                 "4-7": "小概率",
                 "5-6": "小概率"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30084": {
             "id": "30084",
-            "sortId": 100006,
             "name": "三水锰矿",
             "rarity": 3,
             "iconId": "MTL_SL_MANGANESE2",
@@ -431,15 +395,14 @@
                 "4-7": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30033": 1,
                 "30073": 1,
                 "30083": 2
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30093": {
             "id": "30093",
-            "sortId": 100009,
             "name": "研磨石",
             "rarity": 2,
             "iconId": "MTL_SL_PG1",
@@ -449,12 +412,10 @@
                 "4-8": "小概率",
                 "5-7": "小概率"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30094": {
             "id": "30094",
-            "sortId": 100008,
             "name": "五水研磨石",
             "rarity": 3,
             "iconId": "MTL_SL_PG2",
@@ -462,15 +423,14 @@
                 "4-8": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30043": 1,
                 "30063": 1,
                 "30093": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30103": {
             "id": "30103",
-            "sortId": 100011,
             "name": "RMA70-12",
             "rarity": 2,
             "iconId": "MTL_SL_RMA7012",
@@ -479,12 +439,10 @@
                 "4-9": "小概率",
                 "5-9": "小概率"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "30104": {
             "id": "30104",
-            "sortId": 100010,
             "name": "RMA70-24",
             "rarity": 3,
             "iconId": "MTL_SL_RMA7024",
@@ -492,58 +450,54 @@
                 "4-9": "罕见"
             },
             "formula": {
+                "4001": 300,
                 "30013": 2,
                 "30053": 1,
                 "30103": 1
-            },
-            "formulaGoldCost": 300
+            }
         },
         "30115": {
             "id": "30115",
-            "sortId": 100003,
             "name": "聚合剂",
             "rarity": 4,
             "iconId": "MTL_SL_PP",
             "drops": {},
             "formula": {
+                "4001": 400,
                 "30014": 1,
                 "30044": 1,
                 "30054": 1
-            },
-            "formulaGoldCost": 400
+            }
         },
         "30125": {
             "id": "30125",
-            "sortId": 100002,
             "name": "双极纳米片",
             "rarity": 4,
             "iconId": "MTL_SL_BN",
             "drops": {},
             "formula": {
+                "4001": 400,
                 "30064": 1,
                 "30074": 2
-            },
-            "formulaGoldCost": 400
+            }
         },
         "30135": {
             "id": "30135",
-            "sortId": 100001,
             "name": "D32钢",
             "rarity": 4,
             "iconId": "MTL_SL_DS",
             "drops": {},
             "formula": {
+                "4001": 400,
                 "30084": 1,
                 "30094": 1,
                 "30104": 1
-            },
-            "formulaGoldCost": 400
+            }
         }
     },
     "skill_books": {
         "3301": {
             "id": "3301",
-            "sortId": 300003,
             "name": "技巧概要·卷1",
             "rarity": 1,
             "iconId": "MTL_SKILL1",
@@ -551,12 +505,10 @@
                 "CA-1": "固定掉落",
                 "1-10": "固定掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         },
         "3302": {
             "id": "3302",
-            "sortId": 300002,
             "name": "技巧概要·卷2",
             "rarity": 2,
             "iconId": "MTL_SKILL2",
@@ -564,13 +516,12 @@
                 "CA-1": "固定掉落"
             },
             "formula": {
-                "3301": 3
-            },
-            "formulaGoldCost": 0
+                "3301": 3,
+                "4001": 0
+            }
         },
         "3303": {
             "id": "3303",
-            "sortId": 300001,
             "name": "技巧概要·卷3",
             "rarity": 3,
             "iconId": "MTL_SKILL3",
@@ -578,15 +529,14 @@
                 "CA-1": "固定掉落"
             },
             "formula": {
-                "3302": 3
-            },
-            "formulaGoldCost": 0
+                "3302": 3,
+                "4001": 0
+            }
         }
     },
     "chips": {
         "3211": {
             "id": "3211",
-            "sortId": 400004,
             "name": "先锋芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_PIO1",
@@ -594,13 +544,12 @@
                 "PR-C-1": "固定掉落"
             },
             "formula": {
-                "3271": 3
-            },
-            "formulaGoldCost": 0
+                "3271": 3,
+                "4001": 0
+            }
         },
         "3212": {
             "id": "3212",
-            "sortId": 400003,
             "name": "先锋芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_PIO2",
@@ -608,23 +557,23 @@
                 "PR-C-1": "固定掉落"
             },
             "formula": {
-                "3272": 3
-            },
-            "formulaGoldCost": 0
+                "3272": 3,
+                "4001": 0
+            }
         },
         "3213": {
             "id": "3213",
-            "sortId": 400002,
             "name": "先锋双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_PIO3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "3113": 3,
+                "4001": 0
+            }
         },
         "3221": {
             "id": "3221",
-            "sortId": 400007,
             "name": "近卫芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_GRD1",
@@ -632,13 +581,12 @@
                 "PR-D-1": "固定掉落"
             },
             "formula": {
-                "3281": 3
-            },
-            "formulaGoldCost": 0
+                "3281": 3,
+                "4001": 0
+            }
         },
         "3222": {
             "id": "3222",
-            "sortId": 400006,
             "name": "近卫芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_GRD2",
@@ -646,23 +594,23 @@
                 "PR-D-1": "固定掉落"
             },
             "formula": {
-                "3282": 3
-            },
-            "formulaGoldCost": 0
+                "3282": 3,
+                "4001": 0
+            }
         },
         "3223": {
             "id": "3223",
-            "sortId": 400005,
             "name": "近卫双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_GRD3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "3112": 1,
+                "4001": 200
+            }
         },
         "3231": {
             "id": "3231",
-            "sortId": 400010,
             "name": "重装芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_TNK1",
@@ -670,13 +618,12 @@
                 "PR-A-1": "固定掉落"
             },
             "formula": {
-                "3261": 3
-            },
-            "formulaGoldCost": 0
+                "3261": 3,
+                "4001": 0
+            }
         },
         "3232": {
             "id": "3232",
-            "sortId": 400009,
             "name": "重装芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_TNK2",
@@ -684,23 +631,23 @@
                 "PR-A-1": "固定掉落"
             },
             "formula": {
-                "3262": 3
-            },
-            "formulaGoldCost": 0
+                "3262": 3,
+                "4001": 0
+            }
         },
         "3233": {
             "id": "3233",
-            "sortId": 400008,
             "name": "重装双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_TNK3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "3113": 1,
+                "4001": 200
+            }
         },
         "3241": {
             "id": "3241",
-            "sortId": 400013,
             "name": "狙击芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_SNP1",
@@ -708,13 +655,12 @@
                 "PR-B-1": "固定掉落"
             },
             "formula": {
-                "3251": 3
-            },
-            "formulaGoldCost": 0
+                "3251": 3,
+                "4001": 0
+            }
         },
         "3242": {
             "id": "3242",
-            "sortId": 400012,
             "name": "狙击芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_SNP2",
@@ -722,23 +668,23 @@
                 "PR-B-1": "固定掉落"
             },
             "formula": {
-                "3252": 3
-            },
-            "formulaGoldCost": 0
+                "3252": 3,
+                "4001": 0
+            }
         },
         "3243": {
             "id": "3243",
-            "sortId": 400011,
             "name": "狙击双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_SNP3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "3114": 1,
+                "4001": 200
+            }
         },
         "3251": {
             "id": "3251",
-            "sortId": 400016,
             "name": "术师芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_CST1",
@@ -746,13 +692,12 @@
                 "PR-B-1": "固定掉落"
             },
             "formula": {
-                "3241": 3
-            },
-            "formulaGoldCost": 0
+                "3241": 3,
+                "4001": 0
+            }
         },
         "3252": {
             "id": "3252",
-            "sortId": 400015,
             "name": "术师芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_CST2",
@@ -760,23 +705,23 @@
                 "PR-B-1": "固定掉落"
             },
             "formula": {
-                "3242": 3
-            },
-            "formulaGoldCost": 0
+                "3242": 3,
+                "4001": 0
+            }
         },
         "3253": {
             "id": "3253",
-            "sortId": 400014,
             "name": "术师双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_CST3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "3131": 1,
+                "4001": 0
+            }
         },
         "3261": {
             "id": "3261",
-            "sortId": 400019,
             "name": "医疗芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_MED1",
@@ -784,13 +729,12 @@
                 "PR-A-1": "固定掉落"
             },
             "formula": {
-                "3231": 3
-            },
-            "formulaGoldCost": 0
+                "3231": 3,
+                "4001": 0
+            }
         },
         "3262": {
             "id": "3262",
-            "sortId": 400018,
             "name": "医疗芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_MED2",
@@ -798,23 +742,23 @@
                 "PR-A-1": "固定掉落"
             },
             "formula": {
-                "3232": 3
-            },
-            "formulaGoldCost": 0
+                "3232": 3,
+                "4001": 0
+            }
         },
         "3263": {
             "id": "3263",
-            "sortId": 400017,
             "name": "医疗双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_MED3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "3132": 1,
+                "4001": 0
+            }
         },
         "3271": {
             "id": "3271",
-            "sortId": 400022,
             "name": "辅助芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_SUP1",
@@ -822,13 +766,12 @@
                 "PR-C-1": "固定掉落"
             },
             "formula": {
-                "3211": 3
-            },
-            "formulaGoldCost": 0
+                "3211": 3,
+                "4001": 0
+            }
         },
         "3272": {
             "id": "3272",
-            "sortId": 400021,
             "name": "辅助芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_SUP2",
@@ -836,23 +779,23 @@
                 "PR-C-1": "固定掉落"
             },
             "formula": {
-                "3212": 3
-            },
-            "formulaGoldCost": 0
+                "3212": 3,
+                "4001": 0
+            }
         },
         "3273": {
             "id": "3273",
-            "sortId": 400020,
             "name": "辅助双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_SUP3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "3133": 1,
+                "4001": 0
+            }
         },
         "3281": {
             "id": "3281",
-            "sortId": 400025,
             "name": "特种芯片",
             "rarity": 2,
             "iconId": "MTL_ASC_SPC1",
@@ -860,13 +803,12 @@
                 "PR-D-1": "固定掉落"
             },
             "formula": {
-                "3221": 3
-            },
-            "formulaGoldCost": 0
+                "3221": 3,
+                "4001": 0
+            }
         },
         "3282": {
             "id": "3282",
-            "sortId": 400024,
             "name": "特种芯片组",
             "rarity": 3,
             "iconId": "MTL_ASC_SPC2",
@@ -874,25 +816,45 @@
                 "PR-D-1": "固定掉落"
             },
             "formula": {
-                "3222": 3
-            },
-            "formulaGoldCost": 0
+                "3222": 3,
+                "4001": 0
+            }
         },
         "3283": {
             "id": "3283",
-            "sortId": 400023,
             "name": "特种双芯片",
             "rarity": 4,
             "iconId": "MTL_ASC_SPC3",
             "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {
+                "4001": 400,
+                "30084": 1,
+                "30094": 1,
+                "30104": 1
+            }
+        },
+        "4006": {
+            "id": "4006",
+            "name": "采购凭证",
+            "rarity": 2,
+            "iconId": "EXGG_SHD",
+            "drops": {
+                "AP-1": "固定掉落"
+            },
+            "formula": {}
+        },
+        "32001": {
+            "id": "32001",
+            "name": "芯片助剂",
+            "rarity": 3,
+            "iconId": "MTL_ASC_DI",
+            "drops": {},
+            "formula": {}
         }
     },
-    "others": {
+    "money": {
         "4001": {
             "id": "4001",
-            "sortId": 10004,
             "name": "龙门币",
             "rarity": 3,
             "iconId": "GOLD",
@@ -906,30 +868,7 @@
                 "S4-6": "固定掉落",
                 "S5-2": "固定掉落"
             },
-            "formula": {},
-            "formulaGoldCost": 0
-        },
-        "4006": {
-            "id": "4006",
-            "sortId": 10008,
-            "name": "采购凭证",
-            "rarity": 2,
-            "iconId": "EXGG_SHD",
-            "drops": {
-                "AP-1": "固定掉落"
-            },
-            "formula": {},
-            "formulaGoldCost": 0
-        },
-        "32001": {
-            "id": "32001",
-            "sortId": 400001,
-            "name": "芯片助剂",
-            "rarity": 3,
-            "iconId": "MTL_ASC_DI",
-            "drops": {},
-            "formula": {},
-            "formulaGoldCost": 0
+            "formula": {}
         }
     }
 }

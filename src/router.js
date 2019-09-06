@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import PlanList from './views/PlanList'
 import Character from './views/Character'
 import Stock from './views/Stock'
-import Convert from './views/Convert'
 
 Vue.use(Router)
 
@@ -23,11 +22,6 @@ export default new Router({
       path: '/stock',
       name: 'stock',
       component: Stock
-    },
-    {
-      path: '/convert',
-      name: 'convert',
-      component: Convert
     },
     {
       path: '/about',
