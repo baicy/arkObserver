@@ -172,17 +172,17 @@
             for(var i in this.plans)
             {
                 this.groupMaterials['t'+(resources.materials[i].rarity+1)].push(i);
-                if(!stock[i]) Vue.set(stock, i, 0);
+                if(!stock[i]) stock[i] = 0;
             }
             for(var i in resources.chips)
             {
                 this.groupMaterials['chip'+(resources.chips[i].rarity-1)].push(i);
-                if(!stock[i]) Vue.set(stock, i, 0);
+                if(!stock[i]) stock[i] = 0;
             }
             for(var i in resources.skill_books)
             {
                 this.groupMaterials['books'].push(i);
-                if(!stock[i]) Vue.set(stock, i, 0);
+                if(!stock[i]) stock[i] = 0;
             }
             this.plans_array = plans_array;
             this.stock = stock;
