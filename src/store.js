@@ -11,8 +11,7 @@ export default new Vuex.Store({
             paths: [
                 "plans",
                 "characters",
-                "resources",
-                "formulateds"
+                "resources"
             ]
         })
     ],
@@ -20,21 +19,14 @@ export default new Vuex.Store({
         data: {},
         plans: {},
         characters: {},
-        resources: {},
-        formulateds: {}
+        resources: {}
     },
     mutations: {
-        updateCharacter: (state, c) => {
-            state.characters[c.key] = c.status;
-        },
         updateCharactersData: (state, payload) => {
             state.characters[payload.key] = payload.value;
         },
         resetCharactersData: (state) => {
             state.characters = {};
-            state.plans = {};
-        },
-        resetPlansData: (state) => {
             state.plans = {};
         },
         updateStock: (state, payload) => {
@@ -48,16 +40,10 @@ export default new Vuex.Store({
                 state.plans[i] = payload[i];
             }
         },
-        updateFormulated: (state, payload) => {
-            Vue.set(state.formulateds, payload.key, payload.value);
-        },
     },
     getters: {
-        getCharactersStr: (state) => (refresh) => {
-            return JSON.stringify(state.characters);
-        },
         getCharacters: (state) => (refresh) => {
-            return state.characters;
+            return JSON.stringify(state.characters);
         },
         getCharacter: (state) => (key) => {
             return state.characters[key];
@@ -73,12 +59,6 @@ export default new Vuex.Store({
         },
         getPlans: (state) => (refresh) => {
             return state.plans;
-        },
-        getFormulateds: (state) => (refresh) => {
-            return state.formulateds;
-        },
-        getFormulated: (state) => (key) => {
-            return state.formulateds[key]?state.formulateds[key]:false;
         }
   },
   actions: {

@@ -253,12 +253,12 @@
                     this.current = {
                         phase: 0,
                         skill: 1,
-                        skills: [0,0,0],
+                        skills: [c.rarity>3?0:-1,c.rarity>3?0:-1,c.skill_names.length>2?0:-1],
                     };
                     this.plan = {
                         phase: 0,
                         skill: 1,
-                        skills: [0,0,0],
+                        skills: [c.rarity>3?0:-1,c.rarity>3?0:-1,c.skill_names.length>2?0:-1],
                     };
                 };
                 this.target = {
@@ -346,12 +346,12 @@
                 {
                     itemKey = c.key+'-skill-all-'+i;
                     itemTitle = '技能等级 '+i+'→'+(parseInt(i)+1);
-                    needs[itemKey] = {title:itemTitle,items:c.skills_up[i-1]};
-                    for(var j in c.skills_up[i-1])
-                    {
-                        needs['total']['items'][j] = needs['total']['items'][j]?(needs['total']['items'][j]+c.skills_up[i-1][j]):c.skills_up[i-1][j];
-                    }
-                    var plan = { charKey:c.key, charName:c.name, item:itemTitle, needs:c.skills_up[i-1] };
+                    needs[itemKey] = {title:itemTitle,items:{}};
+                    c.skills_up[i-1].forEach(function(a){
+                        needs['total']['items'][a[0]] = needs['total']['items'][a[0]]?(needs['total']['items'][a[0]]+a[1]):a[1];
+                        needs[itemKey]['items'][a[0]] = a[1];
+                    });
+                    var plan = { charKey:c.key, charName:c.name, item:itemTitle, needs:needs[itemKey]['items'] };
                     plans[itemKey] = plan;
                 }
                 if(c.rarity>3)
@@ -359,13 +359,13 @@
                     for(var i=source.phase;i<destination.phase;i++)
                     {
                         itemKey = c.key+'-phase-'+i;
-                        itemTitle = '精英化 '+(parseInt(i)+1);
-                        needs[itemKey] = {title:itemTitle,items:c.phases_up[i]};
-                        for(var j in c.phases_up[i])
-                        {
-                            needs['total']['items'][j] = needs['total']['items'][j]?(needs['total']['items'][j]+c.phases_up[i][j]):c.phases_up[i][j];
-                        }
-                        var plan = { charKey:c.key, charName:c.name, item:itemTitle, needs:c.phases_up[i] };
+                        itemTitle = '精'+(parseInt(i)+1);
+                        needs[itemKey] = {title:itemTitle,items:{}};
+                        c.phases_up[i].forEach(function(a){
+                            needs['total']['items'][a[0]] = needs['total']['items'][a[0]]?(needs['total']['items'][a[0]]+a[1]):a[1];
+                            needs[itemKey]['items'][a[0]] = a[1];
+                        });
+                        var plan = { charKey:c.key, charName:c.name, item:itemTitle, needs:needs[itemKey]['items'] };
                         plans[itemKey] = plan;
                     }
                     for(var i in destination.skills)
@@ -374,12 +374,12 @@
                         {
                             itemKey = c.key+'-skill-'+i+'-'+j;
                             itemTitle = c.skill_names[i]+' 专精 '+j+'→'+(parseInt(j)+1);
-                            needs[itemKey] = {title:itemTitle,items:c.skill_ups[i][j]};
-                            for(var k in c.skill_ups[i][j])
-                            {
-                                needs['total']['items'][k] = needs['total']['items'][k]?(needs['total']['items'][k]+c.skill_ups[i][j][k]):c.skill_ups[i][j][k];
-                            }
-                            var plan = { charKey:c.key, charName:c.name, item:itemTitle, needs:c.skill_ups[i][j] };
+                            needs[itemKey] = {title:itemTitle,items:{}};
+                            c.skill_ups[i][j].forEach(function(a){
+                                needs['total']['items'][a[0]] = needs['total']['items'][a[0]]?(needs['total']['items'][a[0]]+a[1]):a[1];
+                                needs[itemKey]['items'][a[0]] = a[1];
+                            });
+                            var plan = { charKey:c.key, charName:c.name, item:itemTitle, needs:needs[itemKey]['items'] };
                             plans[itemKey] = plan;
                         }
                     }
