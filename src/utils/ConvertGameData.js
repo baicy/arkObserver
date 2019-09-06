@@ -4,8 +4,8 @@ let Converter = {};
 const NEEDEDS = {
     materials: ["30011", "30012", "30013", "30014", "30021", "30022", "30023", "30024", "30031", "30032", "30033", "30034", "30041", "30042", "30043", "30044", "30051", "30052", "30053", "30054", "30061", "30062", "30063", "30064", "30073", "30074", "30083", "30084", "30093", "30094", "30103", "30104", "30115", "30125", "30135"],
     skill_books: ["3301", "3302", "3303"],
-    chips: ["32001","4006","3211", "3212", "3213", "3221", "3222", "3223", "3231", "3232", "3233", "3241", "3242", "3243", "3251", "3252", "3253", "3261", "3262", "3263", "3271", "3272", "3273", "3281", "3282", "3283"],
-    money: ["4001"]
+    chips: ["3211", "3212", "3213", "3221", "3222", "3223", "3231", "3232", "3233", "3241", "3242", "3243", "3251", "3252", "3253", "3261", "3262", "3263", "3271", "3272", "3273", "3281", "3282", "3283"],
+    others: ["4001","4006","32001"]
 };
 const DROPPERCENTS = {
     'ALWAYS': '固定掉落',
@@ -31,13 +31,10 @@ Converter.gameData = {
             r.skills_up = [];
             for(var j in o.allSkillLvlup)
             {
-                var p = [];
+                var p = {};
                 for(var k in o.allSkillLvlup[j]['lvlUpCost'])
                 {
-                    p.push([
-                        o.allSkillLvlup[j]['lvlUpCost'][k]['id'],
-                        o.allSkillLvlup[j]['lvlUpCost'][k]['count']
-                    ]);
+                    p[o.allSkillLvlup[j]['lvlUpCost'][k]['id']] = o.allSkillLvlup[j]['lvlUpCost'][k]['count'];
                 }
                 r.skills_up[j] = p;
             }
@@ -47,16 +44,13 @@ Converter.gameData = {
                 r.phases_up = [];
                 for(var j in o.phases)
                 {
-                    var p = [];
+                    var p = {};
                     if(o.phases[j].evolveCost==null) {
-                         continue;
+                        continue;
                     }
                     for(var k in o.phases[j]['evolveCost'])
                     {
-                        p.push([
-                            o.phases[j]['evolveCost'][k]['id'],
-                            o.phases[j]['evolveCost'][k]['count']
-                        ]);
+                        p[o.phases[j]['evolveCost'][k]['id']] = o.phases[j]['evolveCost'][k]['count'];
                     }
                     r.phases_up[j-1] = p;
                 }
@@ -70,11 +64,11 @@ Converter.gameData = {
                     var p = [];
                     for(var k in o.skills[j]['levelUpCostCond'])
                     {
-                        var q = [];
+                        var q = {};
                         var t = o.skills[j]['levelUpCostCond'][k]['levelUpCost'];
                         for(var m in t)
                         {
-                            q[m] = [t[m]['id'], t[m]['count']];
+                            q[[t[m]['id']]] = t[m]['count'];
                         }
                         p[k] = q;
                     }
@@ -109,7 +103,7 @@ Converter.gameData = {
     // name
     // rarity 白0 绿1 蓝2 紫3 金4
     toResources(items, stages, buildings) {
-        var result = {materials:{}, skill_books:{}, chips:{}, money:{}};
+        var result = {materials:{}, skill_books:{}, chips:{}, others:{}};
         items = items.items;
         stages = stages.stages;
         var formulas = buildings.workshopFormulas;
@@ -117,7 +111,7 @@ Converter.gameData = {
             ...NEEDEDS.materials,
             ...NEEDEDS.skill_books,
             ...NEEDEDS.chips,
-            ...NEEDEDS.money
+            ...NEEDEDS.others
         ];
         for(var i in items)
         {
@@ -125,6 +119,7 @@ Converter.gameData = {
                 continue;
             var r = {};
             r.id = items[i].itemId;
+            r.sortId = items[i].sortId;
             r.name = items[i].name;
             r.rarity = items[i].rarity;
             r.iconId = items[i].iconId;
@@ -138,10 +133,11 @@ Converter.gameData = {
                 }
             }
             r.formula = {};
-            if(items[i]['buildingProductList'].length)
+            r.formulaGoldCost = 0;
+            if(items[i]['buildingProductList'].length && items[i]['buildingProductList'][0].roomType=='WORKSHOP')
             {
                 var formula = formulas[items[i]['buildingProductList'][0]['formulaId']];
-                r.formula['4001'] = formula.goldCost;
+                r.formulaGoldCost = formula.goldCost;
                 for(var j in formula.costs)
                 {
                     r.formula[formula.costs[j]['id']] = formula.costs[j]['count'];
@@ -156,7 +152,7 @@ Converter.gameData = {
         if(NEEDEDS.materials.includes(id)) return 'materials';
         if(NEEDEDS.skill_books.includes(id)) return 'skill_books';
         if(NEEDEDS.chips.includes(id)) return 'chips';
-        if(NEEDEDS.money.includes(id)) return 'money';
+        if(NEEDEDS.others.includes(id)) return 'others';
     }
 }
 export default Converter
