@@ -30,6 +30,9 @@
                 materials: resources.materials,
                 others: Object.assign({},resources.skill_books,resources.chips)
             };
+        },
+        mounted() {
+            this.$loading.hide();
         }
     };
 </script>

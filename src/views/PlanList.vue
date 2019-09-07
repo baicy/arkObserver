@@ -7,7 +7,7 @@
                     :items="plans_array"
                     class="elevation-1"
                     fixed-header
-                    :height="windowSize.height-80"
+                    :height="windowSize.height"
                     :items-per-page="-1"
                     hide-default-footer
                     show-expand
@@ -65,16 +65,19 @@
                 </v-data-table>
             </v-col>
             <v-col cols="12" md="8" class="py-0">
-                <v-card tile :height="windowSize.height-80" class= "d-flex flex-column px-3 py-3" style="overflow-y:auto">
-                    <div v-for="n in ['t5','t4','t3','t2','t1','chip3','chip1','books']" class="d-flex flex-row flex-wrap">
-                        <RequirementItem
-                            v-if="m.require>0"
-                            v-for="(m,index) in requirements[n]"
-                            :key="n+'-'+index"
-                            :item="materials[m.id]"
-                            :info="m"
-                            ></RequirementItem>
-                    </div>
+                <v-card tile :height="windowSize.height" class= "d-flex flex-column px-3 pt-1">
+                    <SystemBar></SystemBar>
+                    <v-sheet class="d-flex flex-column pt-2" style="overflow-y:auto">
+                        <div v-for="n in ['t5','t4','t3','t2','t1','chip3','chip1','books']" class="d-flex flex-row flex-wrap">
+                            <RequirementItem
+                                v-if="m.require>0"
+                                v-for="(m,index) in requirements[n]"
+                                :key="n+'-'+index"
+                                :item="materials[m.id]"
+                                :info="m"
+                                ></RequirementItem>
+                        </div>
+                    </v-sheet>
                 </v-card>
             </v-col>
         </v-row>
@@ -88,12 +91,14 @@
     import RequirementItem from '../components/RequirementItem.vue'
     import characters from '../data/characters.json'
     import Icon from '../components/ResourceIcon.vue'
+    import SystemBar from '../components/ArkSystemBar.vue'
     export default {
         name: "PlanList",
         components: {
             Item,
             RequirementItem,
-            Icon
+            Icon,
+            SystemBar
         },
         data () {
             return {
@@ -113,7 +118,7 @@
                     '6-skill-7':'6星技能7'
                 },
                 materials: {},
-                groupMaterials: {}
+                groupMaterials: {},
             }
         },
         computed: {
@@ -370,6 +375,7 @@
             this.stock = stock;
             this.materials = Object.assign({}, resources.materials, resources.chips, resources.skill_books, resources.others);
             // this.$store.commit('updateStocks', stock);
+            this.$loading.hide();
         }
     };
 </script>

@@ -387,8 +387,11 @@
                 this.plans[c.key] = plans;
                 return needs;
             }
+        },
+        mounted() {
+            this.$loading.hide();
         }
-    }
+    };
 </script>
 
 <style>

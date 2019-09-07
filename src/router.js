@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Home from './views/Home'
 import PlanList from './views/PlanList'
 import Character from './views/Character'
 import Stock from './views/Stock'
@@ -11,7 +12,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'planList',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/plan',
+      name: 'plan',
       component: PlanList
     },
     {

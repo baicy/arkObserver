@@ -16,6 +16,16 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    router() {
+      return this.$route.name
+    }
+  },
+  watch: {
+    router(newVal, oldVal) {
+      this.$loading.show();
+    }
+  },
   mounted() {
     this.$loading.show();
     var app = this;
