@@ -77,7 +77,7 @@
         watch: {
             stock(newVal, oldVal) {
                 this.stock = this.stock<0?0:this.stock;
-                this.$store.commit('updateStock', {key: this.info.id, amount: this.stock});
+                this.$store.commit('updateStock', {id: this.info.id, amount: this.stock});
             },
             formulated(newVal, oldVal) {
                 this.$store.commit('updateFormulated', {key: this.info.id, value: this.formulated});
@@ -90,40 +90,23 @@
         },
         methods: {
             mergeMaterial() {
-                var formula = this.info.formula;
-                var s = 0;
-                for(var i in formula)
+                const FORMULA = this.info.formula;
+                let s = 0;
+                for(let i in FORMULA)
                 {
-                    s = this.$store.getters.getStock(i);
-                    s -= formula[i];
+                    s = this.$store.getters.getStock(i).have;
+                    s -= FORMULA[i];
                     s = s<0?0:s;
-                    this.$store.commit('updateStock', {key: i, amount: s});
+                    this.$store.commit('updateStock', {id: i, amount: s});
                 }
-                s = this.$store.getters.getStock(this.info.id);
+                s = this.$store.getters.getStock(this.info.id).have;
                 s++;
                 this.stock = s;
-                this.$store.commit('updateStock', {key: this.info.id, amount: s});
+                this.$store.commit('updateStock', {id: this.info.id, amount: s});
             }
         }
-    }
+    };
 </script>
 
 <style>
-    /* .item-info-block { */
-        /* position: absolute;
-        width: 100px;
-        right: 0;
-        text-align: right;
-        padding: 5px 10px; */
-    /* } */
-    /* .item-info-block .block-title {
-    }
-    .item-info-block .block-value {
-        display: inline-block;
-        width: 50px;
-        text-align: right;
-    }
-    .requirement-info {
-        height: 32px;
-    } */
 </style>

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import StockManager from './utils/StockManager.js'
+import PlanManager from './utils/PlanManager.js'
 
 Vue.use(Vuex)
 
@@ -12,7 +14,8 @@ export default new Vuex.Store({
                 "plans",
                 "characters",
                 "resources",
-                "formulateds"
+                "formulateds",
+                "stocks"
             ]
         })
     ],
@@ -21,11 +24,16 @@ export default new Vuex.Store({
         plans: {},
         characters: {},
         resources: {},
-        formulateds: {}
+        formulateds: {},
+        stocks: {},
+        selectedItem: { character: '', material: '' }
     },
     mutations: {
         updateCharacter: (state, c) => {
             state.characters[c.key] = c.status;
+        },
+        updateCharacters: (state, characters) => {
+            state.characters = characters;
         },
         updateCharactersData: (state, payload) => {
             state.characters[payload.key] = payload.value;
@@ -34,23 +42,39 @@ export default new Vuex.Store({
             state.characters = {};
             state.plans = {};
         },
-        resetPlansData: (state) => {
+        resetPlans: (state) => {
             state.plans = {};
         },
         updateStock: (state, payload) => {
-            state.resources[payload.key] = payload.amount;
+            state.stocks[payload.id].have = payload.amount;
         },
-        updateStocks: (state, payload) => {
-            state.resources = payload;
+        updateStocks: (state, stocks) => {
+            state.stocks = stocks;
         },
         updatePlansData: (state, payload) => {
             for(var i in payload){
                 state.plans[i] = payload[i];
             }
         },
+        updatePlans: (state, plans) => {
+            state.plans = plans;
+        },
+        removePlan: (state, payload) => {
+            let plans = Object.assign({}, state.plans);
+            delete plans[payload.char][payload.key];
+            if(!Object.keys(plans[payload.char]).length)
+                delete plans[payload.char];
+            state.plans = Object.assign({}, plans);
+        },
         updateFormulated: (state, payload) => {
             Vue.set(state.formulateds, payload.key, payload.value);
         },
+        updateFormulateds: (state, formulateds) => {
+            state.formulateds = formulateds;
+        },
+        setSelectedItem: (state, info) => {
+            state.selectedItem[info.type] = info.val;
+        }
     },
     getters: {
         getCharactersStr: (state) => (refresh) => {
@@ -63,11 +87,11 @@ export default new Vuex.Store({
             return state.characters[key];
         },
         getStocks: (state) => (refresh) => {
-            return state.resources;
+            return state.stocks;
         },
         getStock: (state) => (key) => {
-            if(state.resources[key])
-                return state.resources[key];
+            if(state.stocks[key])
+                return state.stocks[key];
             else
                 return 0;
         },
@@ -79,11 +103,15 @@ export default new Vuex.Store({
         },
         getFormulated: (state) => (key) => {
             return state.formulateds[key]?state.formulateds[key]:false;
+        },
+        selectedItem: (state) => (type) => state.selectedItem[type]
+    },
+    actions: {
+        setSelectedItem({commit, state}, info) {
+            commit('setSelectedItem', info);
+        },
+        setStock({commit, state}, info) {
+            commit('updateStock', info);
         }
-  },
-  actions: {
-    // async saveCharacters() {
-    //     // await;
-    // }
-  }
+    }
 })

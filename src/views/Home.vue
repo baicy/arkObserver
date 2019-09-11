@@ -1,21 +1,30 @@
 <template>
-    <v-container fluid>
+    <v-content>
         <v-row class="mt-6">
             <v-col cols="12" md="6" offset-md="2">
-                <v-card dark tile class="elevation-3 fill-height" width="200px">
-                    &nbsp;
+                <v-card dark tile class="elevation-3 fill-height">
+                    <v-card-text>
+                        <p>检测博士上线</p>
+                        <p>不计算合成副产物</p>
+                        <p>不计算大量经验需求</p>
+                        <p>不计算大量龙门币需求</p>
+                        <p v-if="planner">
+                            当前规划期望消耗理智{{planner.cost}}点
+                            作战{{planner.stage}}次
+                        </p>
+                    </v-card-text>
                 </v-card>
             </v-col>
             <v-col cols="12" md="4">
                 <ArkMenu></ArkMenu>
             </v-col>
         </v-row>
-    </v-container>
+    </v-content>
 </template>
 
 <script>
     import ArkMenu from '@/components/ArkTypeMenu'
-
+    import StockManager from '@/utils/StockManager.js'
     export default {
         name: 'home',
         components: {
@@ -26,13 +35,24 @@
                 info: null
             }
         },
-        mounted() {
-            this.$loading.hide();
-            // var data = JSON.parse('{"required":{"提纯源岩":6,"双极纳米片":4},"owned":{"源岩":8,"固源岩":17,"固源岩组":1,"提纯源岩":1,"代糖":1,"糖":11,"糖组":28,"糖聚块":12,"酯原料":11,"聚酸酯":16,"聚酸酯组":5,"聚酸酯块":4,"异铁碎片":2,"异铁":22,"异铁组":7,"异铁块":1,"双酮":8,"酮凝集":9,"酮凝集组":3,"酮阵列":6,"破损装置":7,"装置":9,"全新装置":3,"改量装置":1,"扭转醇":103,"轻锰矿":31,"研磨石":68,"五水研磨石":5,"RMA70-12":1,"RMA70-24":7,"聚合剂":3,"双极纳米片":3,"D32钢":3},"exp_demand":true,"extra_outc":true,"gold_demand":true}');
-            // console.log(data);
-            // const axios = require('axios');
-            // axios.post('https://planner.penguin-stats.io/plan/', data)
-            //     .then(response => (this.info = response));
+        computed: {
+            planner() {
+                if(!this.info)
+                    return null;
+                let stageSum = 0;
+                for(let i of this.info.stages)
+                {
+                    stageSum += parseInt(i.count);
+                }
+                return { cost: this.info.cost, stage: stageSum };
+            }
+        },
+        created() {
+            // this.$loading.hide();
+            let data = StockManager.getPlanner();
+            const axios = require('axios');
+            axios.post('https://planner.penguin-stats.io/plan/', data)
+                .then(response => (this.info = response.data));
         }
     };
 </script>

@@ -7,7 +7,7 @@
         <template v-slot:badge>
             {{ displayQuantity }}
         </template>
-        <div @click="plusItem(item.id)" @click.right.prevent="minusItem(item.id)">
+        <div>
             <Icon :item="item" :size="size"></Icon>
         </div>
     </v-badge>
@@ -46,31 +46,15 @@
         },
         data() {
             return {
-                quantity : this.isStock?this.$store.getters.getStock(this.item.id):this.needQuantity
+                //
             }
         },
         computed: {
             displayQuantity: function() {
                 if(this.isStock)
-                    return this.quantity;
+                    return this.$store.getters.getStock(this.item.id).have;
                 else
                      return this.needQuantity;
-            }
-        },
-        methods: {
-            plusItem(id) {
-                if(this.isStock)
-                {
-                    this.quantity = this.quantity<0? 0:++this.quantity;
-                    this.$store.commit('updateStock', {key:id, amount: this.quantity});
-                }
-            },
-            minusItem(id) {
-                if(this.isStock && this.quantity>0){
-                    this.quantity--;
-                    this.$store.commit('updateStock', {key:id, amount: this.quantity});
-                }
-                
             }
         }
     };

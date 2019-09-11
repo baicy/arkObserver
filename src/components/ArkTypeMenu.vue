@@ -1,11 +1,11 @@
 <template>
     <div class="d-flex flex-column ak-menu" :style="'transform: perspective(1000px) rotateY('+rotateY+'deg);'">
         <v-hover v-slot:default="{ hover }">
-            <v-card tile class="d-flex mt-2 ml-10 ak-block-link ak-block-plan"
+            <v-card tile class="d-flex mt-2 ml-10 justify-end ak-block-link ak-block-plan"
                 :elevation="hover?12:3"
-                @click="$router.push({name: 'plan'})">
-                <div class="d-flex ml-3">12</div>
-                <div class="d-flex display-1 font-weight-medium ml-11 mt-7">
+                @click="$router.push('/plan')">
+                <div class="d-flex display-2 mt-6 mr-4">{{planNum}}</div>
+                <div class="d-flex display-1 font-weight-medium mr-5 mt-7 pr-12" style="width:190px">
                     规划
                 </div>
             </v-card>
@@ -15,7 +15,7 @@
                 <v-card tile class="ml-2 px-6 py-2 ak-block-link"
                     width="160px" height="75px"
                     :elevation="hover?12:3"
-                    @click="$router.push({name: 'character'})">
+                    @click="$router.push('/character')">
                     <div class="headline font-weight-medium mt-1">干员</div>
                     <div class="caption grey--text my-0 ml-1">角色管理</div>
                 </v-card>
@@ -24,7 +24,7 @@
                 <v-card tile class="ml-2 px-6 py-2 ak-block-link"
                     width="160px" height="75px"
                     :elevation="hover?12:3"
-                    @click="$router.push({name: 'stock'})">
+                    @click="$router.push('/stock')">
                     <div class="headline font-weight-medium mt-1">仓库</div>
                     <div class="caption grey--text my-0 ml-1">材料管理</div>
                 </v-card>
@@ -49,12 +49,16 @@
     </div>
 </template>
 <script>
+    import PlanManager from '../utils/PlanManager.js'
     export default {
         name: 'ArklikeMenu',
         data() {
             return {
                 rotateY: -10
             }
+        },
+        computed: {
+            planNum: () => PlanManager.num()
         },
         methods: {
             rotateWithMouse(event) {
@@ -80,7 +84,7 @@
         width: 500px;
         height: 100px;
         border-bottom: 4px solid;
-        border-image: linear-gradient(to right, white, white 25%, orangered 25%, orangered 80%, white 80%, white) 1;
+        border-image: linear-gradient(to right, white, white 35%, orangered 35%, orangered 90%, white 90%, white) 1;
     }
     .ak-menu .ak-block-link {
         cursor: pointer;

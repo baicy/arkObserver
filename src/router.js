@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
-import PlanList from './views/PlanList'
-import Character from './views/Character'
-import Stock from './views/Stock'
+import Layout from './layouts/ArkLayout'
+import PlanList from './components/PlanList'
+import PlanGround from './components/PlanGround'
+import CharacterChooser from './components/CharacterChooser'
+import CharacterInfo from './components/CharacterInfo'
+import StockList from './components/StockList'
+import StockInfo from './components/StockInfo'
 import Convert from './views/Convert'
 
 Vue.use(Router)
@@ -16,20 +20,43 @@ export default new Router({
       component: Home
     },
     {
-      path: '/plan',
-      name: 'plan',
-      component: PlanList
+      path: '/',
+      component: Layout,
+      children: [{
+        path: 'plan',
+        components: {
+          default: PlanGround,
+          list: PlanList
+        }
+      }, {
+        path: 'character',
+        components: {
+          default: CharacterInfo,
+          list: CharacterChooser
+        }
+      }, {
+        path: 'stock',
+        components: {
+          default: StockInfo,
+          list: StockList
+        }
+      }]
     },
-    {
-      path: '/character',
-      name: 'character',
-      component: Character
-    },
-    {
-      path: '/stock',
-      name: 'stock',
-      component: Stock
-    },
+    // {
+    //   path: '/plan',
+    //   name: 'plan',
+    //   component: PlanList
+    // },
+    // {
+    //   path: '/character',
+    //   name: 'character',
+    //   component: Character
+    // },
+    // {
+    //   path: '/stock',
+    //   name: 'stock',
+    //   component: Stock
+    // },
     {
       path: '/convert',
       name: 'convert',
