@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
+import Character from './views/Character'
 import Layout from './layouts/ArkLayout'
 import PlanList from './components/PlanList'
 import PlanGround from './components/PlanGround'
@@ -17,7 +18,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Character
     },
     {
       path: '/',

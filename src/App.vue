@@ -1,15 +1,16 @@
 <template>
   <v-app>
+    <NavMenu />
     <router-view/>
   </v-app>
 </template>
 
 <script>
-
+import NavMenu from '@/components/NavMenu.vue';
 export default {
   name: 'App',
   components: {
-      //
+    NavMenu
   },
   data: () => ({
     //
@@ -25,16 +26,16 @@ export default {
     }
   },
   created() {
-    var loadStockManager = () => import('./utils/StockManager.js');
-    loadStockManager().then((data) => {
-        var stockManager = data.default;
-        stockManager.init();
-        var loadCharacterManager = () => import('./utils/CharacterManager.js');
-        loadCharacterManager().then((data) => {
-            var characterManager = data.default;
-            characterManager.init();
-        });
-    });
+    // var loadStockManager = () => import('./utils/StockManager.js');
+    // loadStockManager().then((data) => {
+    //     var stockManager = data.default;
+    //     stockManager.init();
+    //     var loadCharacterManager = () => import('./utils/CharacterManager.js');
+    //     loadCharacterManager().then((data) => {
+    //         var characterManager = data.default;
+    //         characterManager.init();
+    //     });
+    // });
   },
   mounted() {
     // this.$loading.show();

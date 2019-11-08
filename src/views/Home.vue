@@ -1,6 +1,6 @@
 <template>
     <v-content>
-        <v-row class="mt-6">
+        <!-- <v-row class="mt-6">
             <v-col cols="12" md="6" offset-md="2">
                 <v-card dark tile class="elevation-3 fill-height">
                     <v-card-text>
@@ -18,13 +18,13 @@
             <v-col cols="12" md="4">
                 <ArkMenu></ArkMenu>
             </v-col>
-        </v-row>
+        </v-row> -->
     </v-content>
 </template>
 
 <script>
     import ArkMenu from '@/components/ArkTypeMenu'
-    import StockManager from '@/utils/StockManager.js'
+    // import StockManager from '@/utils/StockManager.js'
     export default {
         name: 'home',
         components: {
@@ -49,10 +49,10 @@
         },
         created() {
             // this.$loading.hide();
-            let data = StockManager.getPlanner();
-            const axios = require('axios');
-            axios.post('https://planner.penguin-stats.io/plan/', data)
-                .then(response => (this.info = response.data));
+            // let data = StockManager.getPlanner();
+            // const axios = require('axios');
+            // axios.post('https://planner.penguin-stats.io/plan/', data)
+            //     .then(response => (this.info = response.data));
         }
     };
 </script>
