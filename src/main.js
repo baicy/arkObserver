@@ -16,6 +16,11 @@ Vue.config.productionTip = false
 Vue.prototype.$fetch = fetch;
 Vue.prototype.$post = post;
 
+import * as filters from './filters'
+Object.keys(filters).forEach((key) => {
+ Vue.filter(key, filters[key]);
+});
+
 new Vue({
   vuetify,
   store,

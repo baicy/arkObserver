@@ -10,7 +10,7 @@ import CharacterInfo from './components/CharacterInfo'
 import StockList from './components/StockList'
 import StockInfo from './components/StockInfo'
 import Convert from './views/Convert'
-
+import Ocr from './views/Ocr'
 Vue.use(Router)
 
 export default new Router({
@@ -62,6 +62,11 @@ export default new Router({
       path: '/convert',
       name: 'convert',
       component: Convert
+    },
+    {
+      path: '/ocr',
+      name: 'ocr',
+      component: Ocr
     },
     {
       path: '/about',
