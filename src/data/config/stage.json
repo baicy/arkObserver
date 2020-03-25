@@ -1,0 +1,200 @@
+[
+  {
+    "id": "opening",
+    "name": "开放中",
+    "activities": [
+      {
+        "id": "rune_season_0_1",
+        "type": "CRISIS",
+        "name": "危机合约 #0荒芜行动",
+        "startTime": 1584417600,
+        "endTime": 1585598399
+      }
+    ]
+  },
+  {
+    "id": "mainline",
+    "name": "主线",
+    "zones" : [
+      "main_0",
+      "main_1",
+      "main_2",
+      "main_3",
+      "main_4",
+      "main_5",
+      "main_6"
+    ]
+  },
+  {
+    "id": "daily1",
+    "name": "物资筹备",
+    "zones" : [
+      "weekly_5",
+      "weekly_6",
+      "weekly_7",
+      "weekly_8",
+      "weekly_9"
+    ]
+  },
+  {
+    "id": "daily2",
+    "name": "芯片搜索",
+    "zones" : [
+      "weekly_1",
+      "weekly_2",
+      "weekly_3",
+      "weekly_4"
+    ]
+  },
+  {
+    "id": "campaign",
+    "name": "剿灭作战"
+  },
+  {
+    "id": "closed",
+    "name": "往期活动",
+    "activities": [
+      {
+        "id": "act7d5",
+        "type": "TYPE_ACT4D0",
+        "name": "午间逸话",
+        "stages": [
+          {
+            "id": "act7d5_01",
+            "code": "SA-1"
+          },
+          {
+            "id": "act7d5_02",
+            "code": "SA-2"
+          },
+          {
+            "id": "act7d5_03",
+            "code": "SA-3"
+          },
+          {
+            "id": "act7d5_04",
+            "code": "SA-4"
+          },
+          {
+            "id": "act7d5_05",
+            "code": "SA-5"
+          },
+          {
+            "id": "act7d5_06",
+            "code": "SA-6"
+          }
+        ],
+        "startTime": 1582617600,
+        "endTime": 1583179199,
+        "rewardEndTime": 1583783999
+      },
+      {
+        "id": "act6d5",
+        "type": "TYPE_ACT4D0",
+        "name": "洪炉示岁",
+        "stages": [
+          {
+            "id": "act6d5_01",
+            "code": "AF-1"
+          },
+          {
+            "id": "act6d5_02",
+            "code": "AF-2"
+          },
+          {
+            "id": "act6d5_03",
+            "code": "AF-3"
+          },
+          {
+            "id": "act6d5_04",
+            "code": "AF-4"
+          },
+          {
+            "id": "act6d5_05",
+            "code": "AF-5"
+          },
+          {
+            "id": "act6d5_06",
+            "code": "AF-6"
+          },
+          {
+            "id": "act6d5_07",
+            "code": "AF-7"
+          },
+          {
+            "id": "act6d5_08",
+            "code": "AF-8"
+          }
+        ],
+        "startTime": 1578513600,
+        "endTime": 1579118399,
+        "rewardEndTime": 1579723199
+      },
+      {
+        "id": "act5d1",
+        "type": "TYPE_ACT5D1",
+        "name": "危机合约",
+        "startTime": 1574150400,
+        "endTime": 1575316799,
+        "rewardEndTime": 1575921599
+      },
+      {
+        "id": "act5d0",
+        "type": "TYPE_ACT5D0",
+        "name": "喧闹法则",
+        "zones": ["act5d0_zone1","act5d0_zone2"],
+        "startTime": 1574150400,
+        "endTime": 1575316799,
+        "rewardEndTime": 1575921599
+      },
+      {
+        "id": "act4d0",
+        "type": "TYPE_ACT4D0",
+        "name": "战地秘闻",
+        "stages": [
+          {
+            "id": "act4d0_01",
+            "code": "SW-EV-1"
+          },
+          {
+            "id": "act4d0_02",
+            "code": "SW-EV-2"
+          },
+          {
+            "id": "act4d0_03",
+            "code": "SW-EV-3"
+          },
+          {
+            "id": "act4d0_04",
+            "code": "SW-EV-4"
+          },
+          {
+            "id": "act4d0_05",
+            "code": "SW-EV-5"
+          }
+        ],
+        "startTime": 1571126400,
+        "endTime": 1571687999,
+        "rewardEndTime": 1572292799
+      },
+      {
+        "id": "act3d0",
+        "type": "TYPE_ACT3D0",
+        "name": "火蓝之心",
+        "zones": ["A003_zone1","A003_zone2","A003_zone3"],
+        "startTime": 1566892800,
+        "endTime": 1568059199,
+        "rewardEndTime": 1568663999
+      },
+      {
+        "id": "1stact",
+        "type": "DEFAULT",
+        "name": "骑兵与猎人",
+        "zones": ["A001_zone1","A001_zone2"],
+        "startTime": 1559181600,
+        "endTime": 1560369599,
+        "rewardEndTime": 1560974399
+      }
+    ]
+  }
+]

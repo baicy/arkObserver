@@ -1,12 +1,12 @@
 <template>
   <v-app>
     <NavMenu />
-    <router-view/>
+    <router-view />
   </v-app>
 </template>
 
 <script>
-import NavMenu from '@/components/NavMenu.vue';
+import NavMenu from '@/components/layouts/NavMenu.vue';
 export default {
   name: 'App',
   components: {
@@ -21,9 +21,9 @@ export default {
     }
   },
   watch: {
-    router(newVal, oldVal) {
-      this.$loading.show();
-    }
+    // router(newVal, oldVal) {
+    //   this.$loading.show();
+    // }
   },
   created() {
     // var loadStockManager = () => import('./utils/StockManager.js');

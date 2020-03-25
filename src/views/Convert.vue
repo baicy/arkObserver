@@ -26,11 +26,11 @@
 </template>
 
 <script>
-    import characters from '../data/character_table.json'
+    import characters from '../data/source/character_table.json'
     import skills from '../data/skill_table.json'
     import resources from '../data/item_table.json'
     import stages from '../data/stage_table.json'
-    import buildings from '../data/building_data.json'
+    import buildings from '../data/source/building_data.json'
     import Converter from '../utils/ConvertGameData.js'
     export default {
         data() {

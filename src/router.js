@@ -1,7 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
+
+import Furniture from './views/Furniture'
+import GachaPool from './views/GachaPool'
+import Handbook from './views/Handbook'
 import Character from './views/Character'
+import Stage from './views/Stage'
+
 import Layout from './layouts/ArkLayout'
 import PlanList from './components/PlanList'
 import PlanGround from './components/PlanGround'
@@ -18,29 +24,55 @@ export default new Router({
     {
       path: '/',
       name: 'home',
+      component: GachaPool
+    },
+    {
+      path: '/furniture',
+      name: 'furniture',
+      component: Furniture
+    },
+    {
+      path: '/gacha/pool',
+      name: 'gachaPool',
+      component: GachaPool
+    },
+    {
+      path: '/handbook',
+      name: 'handbook',
+      component: Handbook
+    },
+    {
+      path: '/character',
+      name: 'character',
       component: Character
+    },
+    {
+      path: '/stage',
+      name: 'stage',
+      component: Stage
     },
     {
       path: '/',
       component: Layout,
-      children: [{
-        path: 'plan',
-        components: {
-          default: PlanGround,
-          list: PlanList
-        }
-      }, {
-        path: 'character',
-        components: {
-          default: CharacterInfo,
-          list: CharacterChooser
-        }
-      }, {
-        path: 'stock',
-        components: {
-          default: StockInfo,
-          list: StockList
-        }
+      children: [
+        {
+          path: 'plan',
+          components: {
+            default: PlanGround,
+            list: PlanList
+          }
+        }, {
+          path: 'character',
+          components: {
+            default: CharacterInfo,
+            list: CharacterChooser
+          }
+        }, {
+          path: 'stock',
+          components: {
+            default: StockInfo,
+            list: StockList
+        },
       }]
     },
     // {

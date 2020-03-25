@@ -38,8 +38,7 @@
         computed: {
             planner() {
                 if(!this.info)
-                    return null;
-                let stageSum = 0;
+                    return null;                let stageSum = 0;
                 for(let i of this.info.stages)
                 {
                     stageSum += parseInt(i.count);
