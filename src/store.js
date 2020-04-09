@@ -100,6 +100,9 @@ export default new Vuex.Store({
     clearGachaLimitLast6: (state) => {
       state.gachaLogs.last6s.unshift(state.gachaLogs.limitLast6+0.5);
       state.gachaLogs.limitLast6 = 0;
+    },
+    clearPoolLogs: (state, poolId) => {
+      Vue.delete(state.gachaLogs.logs, poolId);
     }
   },
   getters: {
@@ -151,6 +154,9 @@ export default new Vuex.Store({
     },
     clearGachaLimitLast6({commit, state}, info) {
       commit('clearGachaLimitLast6', info);
+    },
+    clearPoolLogs({commit, state}, poolId) {
+      commit('clearPoolLogs', poolId);
     }
   }
 })

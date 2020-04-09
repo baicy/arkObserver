@@ -11,7 +11,8 @@
       <!-- 卡池信息区 -->
       <el-row>
         <el-col :span="8">
-          <span>开放时间：{{new Date(pool.openTime*1000).toLocaleString(undefined, {hour12: false})}} - {{new Date(pool.endTime*1000).toLocaleString(undefined, {hour12: false})}}</span>
+          <p>开放时间：{{new Date(pool.openTime*1000).toLocaleString(undefined, {hour12: false})}} - {{new Date(pool.endTime*1000).toLocaleString(undefined, {hour12: false})}}</p>
+          <el-button v-if="logs[pool.gachaPoolId]" @click="clearPoolLogs(pool.gachaPoolId)" type="danger" size="small">清除卡池记录</el-button>
         </el-col>
         <el-col :span="10">
           <el-row>
@@ -232,6 +233,9 @@ export default {
     },
     clearLimitLast() {
       this.$store.dispatch('clearGachaLimitLast6');
+    },
+    clearPoolLogs(poolId) {
+      this.$store.dispatch('clearPoolLogs', poolId);
     }
   },
   mounted() {
