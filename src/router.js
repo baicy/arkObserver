@@ -7,6 +7,8 @@ import GachaPool from './views/GachaPool'
 import Handbook from './views/Handbook'
 import Character from './views/Character'
 import Stage from './views/Stage'
+import Story from './views/Story'
+import Store from './views/Store'
 
 import Layout from './layouts/ArkLayout'
 import PlanList from './components/PlanList'
@@ -50,6 +52,21 @@ export default new Router({
       path: '/stage',
       name: 'stage',
       component: Stage
+    },
+    {
+      path: '/story',
+      name: 'story',
+      component: Story
+    },
+    {
+      path: '/store',
+      name: 'store',
+      component: Store
+    },
+    {
+      path: '/ocr',
+      name: 'ocr',
+      component: Ocr
     },
     {
       path: '/',

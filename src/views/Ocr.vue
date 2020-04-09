@@ -2,7 +2,7 @@
     <v-container>
         <v-row>
             <v-col cols="12" md="6">
-                <v-img src='https://tesseract.projectnaptha.com/img/eng_bw.png'></v-img>
+                <v-img :src="require('../assets/store.png')"></v-img>
             </v-col>
             <v-col cols="12" md="6">
                 {{info}}
@@ -20,20 +20,34 @@
                 info: ''
             }
         },
+        //'https://tesseract.projectnaptha.com/img/eng_bw.png'
         mounted() {
-            const { TesseractWorker } = Tesseract;
-            const worker = new TesseractWorker();
-
-            worker
-              .recognize('https://tesseract.projectnaptha.com/img/eng_bw.png')
-              .progress((p) => {
-                console.log('progress', p);
-              })
-              .then(({ text }) => {
-                console.log(text);
-                this.info = text;
-                worker.terminate();
+            // Tesseract.recognize(
+            //   require('@/assets/store.png'),
+            //   'chi_sim',
+            //   { logger: m => console.log(m) }
+            // ).then(({ data: { text } }) => {
+            //   console.log(text);
+            // });
+            const { createWorker } = Tesseract;
+            (async () => {
+              const worker = createWorker();
+              await worker.load();
+              await worker.loadLanguage('eng');
+              await worker.initialize('eng');
+              await worker.setParameters({
+                tessedit_char_whitelist: '0123456789',
               });
+              const { data: { text } } = await worker.recognize(require('@/assets/store.png'));
+              console.log(text);
+              this.info = text;
+            })();
+            // Tesseract
+            //   .recognize('../assets/store.png')
+            //   .then(({ data: { text } }) => {
+            //     console.log(text);
+            //     this.info = text;
+            //   });
         }
     };
 </script>

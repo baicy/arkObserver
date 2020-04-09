@@ -11,7 +11,6 @@ export default new Vuex.Store({
     createPersistedState({
       key: "ark-observer-abc",
       paths: [
-        "furnitures",
         "gachaLogs"
         // "plans",
         // "characters",
@@ -24,7 +23,6 @@ export default new Vuex.Store({
   state: {
     // data: {},
     // plans: {},
-    furnitures: {},
     // characters: {},
     gachaLogs: {
       logs: {},
@@ -84,21 +82,6 @@ export default new Vuex.Store({
     setSelectedItem: (state, info) => {
         state.selectedItem[info.type] = info.val;
     },
-    updateFurnitures: (state, furnitures) => {
-      state.furnitures = furnitures;
-    },
-    addFurnitureDrop: (state, info) => {
-      if(!state.furnitures[info.furniture[0]]) {
-        state.furnitures[info.furniture[0]] = {};
-        Vue.set(state.furnitures, info.furniture[0], {});
-      }
-      if(!state.furnitures[info.furniture[0]][info.furniture[1]]) {
-        Vue.set(state.furnitures[info.furniture[0]], info.furniture[1] ,[]);
-      }
-      if(!state.furnitures[info.furniture[0]][info.furniture[1]].includes(info.stage)) {
-        state.furnitures[info.furniture[0]][info.furniture[1]].push(info.stage);
-      }
-    },
     addGachaLog: (state, info) => {
       if(!state.gachaLogs.logs[info.poolId]) {
         Vue.set(state.gachaLogs.logs, info.poolId, []);
@@ -148,13 +131,6 @@ export default new Vuex.Store({
           return state.formulateds[key]?state.formulateds[key]:false;
       },
       selectedItem: (state) => (type) => state.selectedItem[type],
-      furnitures: (state) => (id) => {
-        if(id) {
-          return state.furnitures[id];
-        } else {
-          return state.furnitures;
-        }
-      },
       gachaLogs: (state) => (poolId) => {
         if(poolId) {
           return state.gachaLogs[poolId];
@@ -169,12 +145,6 @@ export default new Vuex.Store({
     },
     setStock({commit, state}, info) {
         commit('updateStock', info);
-    },
-    updateFurnitures({commit, state}, info) {
-      commit('updateFurnitures', info);
-    },
-    addFurnitureDrop({commit, state}, info) {
-      commit('addFurnitureDrop', info);
     },
     addGachaLog({commit, state}, info) {
       commit('addGachaLog', info);

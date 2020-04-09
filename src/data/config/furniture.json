@@ -1,258 +1,32 @@
 {
-  "activeThemes": {
-    "furni_set_rococo": {
+  "activeThemes": [
+    {
       "id": "furni_set_rococo",
       "name": "兰赛拉尔宴会厅",
       "desc": "再现了偏远小国兰赛拉尔王城宴会厅的概念房间。群山之间一点光。",
-      "quickSetup": [
-        {
-          "furnitureId": "furni_rococo_cabinet_01",
-          "pos0": 0,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_rococo_bustStatue_01",
-          "pos0": 0,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_table_01",
-          "pos0": 6,
-          "pos1": 6
-        },
-        {
-          "furnitureId": "furni_rococo_mainSeat_01",
-          "pos0": 16,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_secondarySeat_01",
-          "pos0": 13,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_secondarySeat_01",
-          "pos0": 19,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_secondarySeat_01",
-          "pos0": 10,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_secondarySeat_01",
-          "pos0": 22,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_secondarySeat_01",
-          "pos0": 7,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_secondarySeat_01",
-          "pos0": 25,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_stool_01",
-          "pos0": 3,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_fireplace_01",
-          "pos0": 28,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_rococo_carpet_01",
-          "pos0": 28,
-          "pos1": 2
-        },
-        {
-          "furnitureId": "furni_rococo_brazier_01",
-          "pos0": 30,
-          "pos1": 2
-        },
-        {
-          "furnitureId": "furni_rococo_observationDeck_01",
-          "pos0": 8,
-          "pos1": 2
-        },
-        {
-          "furnitureId": "furni_rococo_pillar_01",
-          "pos0": 11,
-          "pos1": 1
-        },
-        {
-          "furnitureId": "furni_rococo_pillar_01",
-          "pos0": 21,
-          "pos1": 1
-        },
-        {
-          "furnitureId": "furni_rococo_framedArt_01",
-          "pos0": 5,
-          "pos1": 4
-        },
-        {
-          "furnitureId": "furni_rococo_mirror_01",
-          "pos0": 29,
-          "pos1": 5
-        },
-        {
-          "furnitureId": "furni_rococo_ceilingLight1_01",
-          "pos0": 15,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_ceilingLight2_01",
-          "pos0": 5,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_ceilingLight2_01",
-          "pos0": 25,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_rococo_doorMat_01",
-          "pos0": 0,
-          "pos1": 6
-        },
-        {
-          "furnitureId": "furni_rococo_doorMat_01",
-          "pos0": 32,
-          "pos1": 6
-        },
-        {
-          "furnitureId": "furni_rococo_wallpaper_01",
-          "pos0": 0,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_rococo_floor_01",
-          "pos0": 0,
-          "pos1": 0
-        }
-      ]
+      "dropGroup": {
+        "1": 0,
+        "2": 1,
+        "3": 2,
+        "4": 3
+      }
     },
-    "furni_set_lightFood": {
+    {
       "id": "furni_set_lightFood",
       "name": "健康快餐店",
       "desc": "新概念快餐店，店员招募中。美味与健康总可兼得。",
-      "quickSetup": [
-        {
-          "furnitureId": "furni_lightFood_priceList_01",
-          "pos0": 0,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_lightFood_sign_01",
-          "pos0": 9,
-          "pos1": 7
-        },
-        {
-          "furnitureId": "furni_lightFood_cashierDesk_01",
-          "pos0": 0,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_lightFood_spotlight_01",
-          "pos0": 0,
-          "pos1": 5
-        },
-        {
-          "furnitureId": "furni_lightFood_foodCabinet_01",
-          "pos0": 0,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_juicer_01",
-          "pos0": 8,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_orderingMachine_01",
-          "pos0": 14,
-          "pos1": 1
-        },
-        {
-          "furnitureId": "furni_lightFood_vendingMachine_01",
-          "pos0": 17,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_board_01",
-          "pos0": 2,
-          "pos1": 6
-        },
-        {
-          "furnitureId": "furni_lightFood_partitionGate_01",
-          "pos0": 21,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_wallSticker_01",
-          "pos0": 22,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_table_01",
-          "pos0": 25,
-          "pos1": 3
-        },
-        {
-          "furnitureId": "furni_lightFood_chair_01",
-          "pos0": 24,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_ceiling_01",
-          "pos0": 22,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_carpet_01",
-          "pos0": 22,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_downlight_01",
-          "pos0": 3,
-          "pos1": 7
-        },
-        {
-          "furnitureId": "furni_lightFood_downlight_01",
-          "pos0": 6,
-          "pos1": 7
-        },
-        {
-          "furnitureId": "furni_lightFood_downlight_01",
-          "pos0": 9,
-          "pos1": 7
-        },
-        {
-          "furnitureId": "furni_lightFood_downlight_01",
-          "pos0": 13,
-          "pos1": 7
-        },
-        {
-          "furnitureId": "furni_lightFood_downlight_01",
-          "pos0": 16,
-          "pos1": 7
-        },
-        {
-          "furnitureId": "furni_lightFood_wallpaper_01",
-          "pos0": 0,
-          "pos1": 0
-        },
-        {
-          "furnitureId": "furni_lightFood_floor_01",
-          "pos0": 0,
-          "pos1": 0
-        }
-      ]
+      "dropGroup": {
+        "1": 3,
+        "2": 0,
+        "3": 1,
+        "4": 2
+      }
     }
-  }
+  ],
+  "dropStages": [
+    ["1-7", "3-1", "3-7", "4-2", "4-9", "5-7", "6-16"],
+    ["2-1", "2-5", "2-10", "S3-1", "4-6", "4-8", "5-8", "6-11"],
+    ["3-2", "3-4", "4-4", "6-1"],
+    ["3-3", "S3-4", "4-5", "4-7", "4-10", "S4-1", "6-2", "6-5", "6-9"]
+  ]
 }
