@@ -4,6 +4,7 @@ import Home from './views/Home'
 
 import Furniture from './views/Furniture'
 import GachaPool from './views/GachaPool'
+import GachaUp from './views/GachaUp'
 import Handbook from './views/Handbook'
 import Character from './views/Character'
 import Stage from './views/Stage'
@@ -37,6 +38,11 @@ export default new Router({
       path: '/gacha/pool',
       name: 'gachaPool',
       component: GachaPool
+    },
+    {
+      path: '/gacha/up',
+      name: 'gachaUp',
+      component: GachaUp
     },
     {
       path: '/handbook',
@@ -111,11 +117,6 @@ export default new Router({
       path: '/convert',
       name: 'convert',
       component: Convert
-    },
-    {
-      path: '/ocr',
-      name: 'ocr',
-      component: Ocr
     },
     {
       path: '/about',

@@ -1,9 +1,13 @@
 <template>
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="/gacha/pool">卡池记录</el-menu-item>
-  <el-menu-item index="/furniture">家具记录</el-menu-item>
-  <el-menu-item index="/handbook">情报网络</el-menu-item>
+  <el-submenu index="gacha">
+    <template slot="title">卡池记录</template>
+    <el-menu-item index="/gacha/pool">抽卡记录</el-menu-item>
+    <el-menu-item index="/gacha/up">UP记录</el-menu-item>
+  </el-submenu>
+  <el-menu-item index="/furniture">家具掉落</el-menu-item>
   <el-menu-item index="/character">干员仓管</el-menu-item>
+  <el-menu-item index="/handbook">情报网络</el-menu-item>
   <!-- <el-menu-item index="/stage">作战地图</el-menu-item>
   <el-menu-item index="/story">剧情回放</el-menu-item>
   <el-menu-item index="/store">仓库识别</el-menu-item> -->

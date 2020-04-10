@@ -7,7 +7,7 @@
     <el-table-column
       prop="name"
       label="套装"
-      width="240px">
+      width="240">
     </el-table-column>
     <el-table-column
       prop="furnitures"
