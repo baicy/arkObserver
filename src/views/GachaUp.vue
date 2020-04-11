@@ -7,7 +7,7 @@
   <el-table
     :data="list"
     height="400"
-    :default-sort = "{prop: 'lastUp', order: 'descending'}"
+    :default-sort="{prop: 'lastUp', order: 'descending'}"
     border>
     <el-table-column
       prop="name"

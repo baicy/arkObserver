@@ -7,13 +7,15 @@
           :data="stages"
           :props="treeProps"
           node-key="id"
-          :default-expanded-keys="['daily2']"
-          @node-click="handleNodeClick"></el-tree>
+          @node-click="selectMap"></el-tree>
       </el-col>
       <el-col :span="18">
-        <div style="background:#333333;width:100%;height:300px;">
-          <div v-for="(row, rowIndex) in map.mapData.map" :key="rowIndex">
-            <div v-for="(column, columnIndex) in row" :key="columnIndex" :class="map.mapData.tiles[column].tileKey"></div>
+        <div v-if="Object.keys(stage).length" class="stage">{{stage.code+' '+stage.name}}</div>
+        <div class="map">
+          <div v-for="(row, rowIndex) in map.mapData.map" :key="rowIndex" class="row">
+            <div v-for="(column, columnIndex) in row" :key="columnIndex" :class="['tile', map.mapData.tiles[column].tileKey.replace(/_/g, '-')]">
+              <div v-if="map.tokens[rowIndex][columnIndex]" :class="'predefine-'+map.tokens[rowIndex][columnIndex].direction">{{map.tokens[rowIndex][columnIndex].name}}</div>
+            </div>
           </div>
         </div>
       </el-col>
@@ -24,93 +26,7 @@
 import stagesInfo from '@/data/config/stage.json'
 import stagesData from '@/data/source/stage_table.json'
 import zonesData from '@/data/source/zone_table.json'
-/**
- * @param {number} capacity
- */
-var LFUCache = function(capacity) {
-    this.cache = [];
-    this.capacity = capacity;
-    this.size = 0;
-    this.frequencies = [];
-    this.frequencyList = [];
-};
-
-/** 
- * @param {number} key
- * @return {number}
- */
-LFUCache.prototype.get = function(key) {
-    if(this.capacity<=0) {
-        return -1;
-    }
-    if(this.cache[key]==undefined) {
-        return -1;
-    } else {
-        this.update(key);
-        return this.cache[key];
-    }
-};
-
-/** 
- * @param {number} key 
- * @param {number} value
- * @return {void}
- */
-LFUCache.prototype.put = function(key, value) {
-    if(this.capacity==0) {
-        return null;
-    }
-    this.cache[key] = value;
-    this.update(key);
-};
-
-/** 
- * @param {number} key
- * @return {void}
- */
-LFUCache.prototype.update = function(key) {
-    if(this.frequencies[key]==undefined) {
-        this.size++;
-        this.frequencies[key] = -1;
-    } else {
-        this.frequencyList[this.frequencies[key]].delete(key);
-    }
-    if(this.size>this.capacity) {
-        let find = false;
-        for(const fset of this.frequencyList) {
-            if(!fset) continue;
-            for(const f of fset) {
-                fset.delete(f);
-                delete(this.frequencies[f]);
-                delete(this.cache[f]);
-                this.size--;
-                find = true;
-            }
-            if(find) break;
-        }
-    }
-    this.frequencies[key] = this.frequencies[key]+1;
-    this.frequencyList[this.frequencies[key]] = this.frequencyList[this.frequencies[key]] || new Set();
-    this.frequencyList[this.frequencies[key]].add(key);
-}
-
-/**
- * Your LFUCache object will be instantiated and called as such:
- * var obj = new LFUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
-let lfu = new LFUCache(2);
-lfu.put(1,1);
-lfu.put(2,2);
-lfu.get(1);
-lfu.put(3,3);
-lfu.get(2);
-lfu.get(3);
-lfu.put(4,4);
-lfu.get(1);
-lfu.get(3);
-lfu.get(4);
+import charactersData from '@/data/source/character_table.json'
 export default {
   data() {
     return {
@@ -123,7 +39,8 @@ export default {
         mapData: {
           map: []
         }
-      }
+      },
+      stage: {}
     }
   },
   mounted() {
@@ -136,7 +53,7 @@ export default {
     stagesInfo[4].stages = [];
     let activities = {};
     for(let i in stagesData.stages) {
-      if(stagesData.stages[i].stageType=='MAIN' && stagesData.stages[i].difficulty=='NORMAL') {
+      if(stagesData.stages[i].stageType=='MAIN' && stagesData.stages[i].difficulty=='NORMAL' && stagesData.stages[i].levelId) {
         stagesInfo[1].stages[stagesData.stages[i].zoneId].push({
           id: i,
           code: stagesData.stages[i].code
@@ -153,7 +70,7 @@ export default {
           id: i,
           name: stagesData.stages[i].name
         });
-      } else if(stagesData.stages[i].stageType=='ACTIVITY' && stagesData.stages[i].difficulty=='NORMAL') {
+      } else if(stagesData.stages[i].stageType=='ACTIVITY' && stagesData.stages[i].difficulty=='NORMAL' && stagesData.stages[i].levelId) {
         let zoneId = stagesData.stages[i].zoneId;
         if(zoneId.substr(0,4)!='main') {
           if(!activities[zoneId]) {
@@ -232,62 +149,188 @@ export default {
     }
   },
   methods: {
-    handleNodeClick(node) {
-      // console.log(node);
+    selectMap(node) {
       if(!node.children) {
-        if(node.id.substr(0,4)=='main') {
-          import('../data/source/levels/obt/main/level_'+node.id+'.json').then(data => {
+        if(stagesData.stages[node.id]) {
+          this.stage = stagesData.stages[node.id];
+          import('../data/source/levels/'+this.stage.levelId.toLowerCase()+'.json').then(data => {
             Object.assign(this.map, data.default);
-            console.log(this.map);
+            this.map.tokens = [];
+            for(let i=0;i<this.map.mapData.height;i++) {
+              this.map.tokens.push(Array(this.map.mapData.width));
+            }
+            if(this.map.predefines) {
+              for(let i of this.map.predefines.tokenInsts) {
+                this.map.tokens[this.map.mapData.height-i.position.row-1][i.position.col] = {
+                  name: charactersData[i.inst.characterKey].name,
+                  direction: i.direction
+                };
+              }
+              for(let i of this.map.predefines.characterInsts) {
+                this.map.tokens[this.map.mapData.height-i.position.row-1][i.position.col] = {
+                  name: charactersData[i.inst.characterKey].name,
+                  direction: i.direction
+                };
+              }
+            }
           });
         }
-        // this.$message(node.label);
       }
     }
   }
 }
 </script>
 <style lang="less" scoped>
-.tile {
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  color: white;
-}
-.tile-border {
-  border: 1px solid #ffffff;
-}
-.tile_forbidden {
-  background: #333333;
-  .tile;
-}
-.tile_floor {
-  background: #333333;
-  .tile;
-}
-.tile_wall {
-  background: #eeeeee;
-  .tile;
-  .tile-border;
-}
-.tile_road {
-  background: #777777;
-  .tile;
-  .tile-border;
-}
-.tile_end {
-  background: lightblue;
-  .tile;
-  .tile-border;
-}
-.tile_start {
-  background: red;
-  .tile;
-  .tile-border;
-}
-.tile_flystart {
-  background: lightcoral;
-  .tile;
-  .tile-border;
+.map {
+  .row {
+    margin: 0;
+    .tile {
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      color: white;
+      font-size: 14px;
+      padding: 2px 5px;
+      line-height: 18px;
+    }
+    .tile:hover {
+      border: 1px solid #ffffff;
+      cursor: pointer;
+    }
+    .tile-border {
+      border: 1px solid #ffffff;
+    }
+    .tile-forbidden {
+      background: #333333;
+    }
+    .tile-floor {
+      background-image: url("../assets/images/texture/forbidden.png");
+      background-size: 100%;
+    }
+    .tile-wall, .tile-rcm-operator {
+      background: #bbbbbb;
+      color: #333333;
+      .tile-border
+    }
+    .tile-road, .tile-rcm-crate {
+      background: #777777;
+      .tile-border
+    }
+    .tile-fence {
+      background: #777777;
+      box-shadow: inset #444444 0px 0px 0px 5px;
+      .tile-border
+    }
+    .tile-hole {
+      background: #ffffff;
+      box-shadow: inset #333333 0px 0px 0px 8px;
+      .tile-border
+    }
+    .tile-end {
+      background: lightblue;
+      .tile-border
+    }
+    .tile-start {
+      background: red;
+      .tile-border
+    }
+    .tile-flystart {
+      background: lightcoral;
+      .tile-border
+    }
+    .tile-grass {
+      background-color: #35d035;
+      .tile-border
+    }
+    .tile-gazebo {
+      background-image: url("../assets/images/texture/AA.png");
+      background-size: 100%;
+    }
+    .tile-bigforce {
+      background-image: url("../assets/images/texture/force.png");
+      background-size: 100%;
+    }
+    .tile-healing {
+      background-image: url("../assets/images/texture/heal.png");
+      background-size: 100%;
+    }
+    .tile-infection {
+      background-image: url("../assets/images/texture/fury.png");
+      background-size: 100%;
+    }
+    .tile-volcano {
+      background-image: url("../assets/images/texture/fire.png");
+      background-size: 100%;
+    }
+    .tile-telin, .tile-telout {
+      background-color: #333333;
+      background-image: url("../assets/images/texture/tel_light.png");
+      background-size: 100%;
+      .tile-border
+    }
+    .tile-before {
+      color: #dddddd;
+      line-height: 38px;
+    }
+    .tile-telin:before {
+      content: 'in';
+      margin-left: 10px;
+      .tile-before
+    }
+    .tile-telout:before {
+      content: 'out';
+      margin-left: 7px;
+      .tile-before
+    }
+    .tile-defup {
+      background-image: url("../assets/images/texture/def.png");
+      background-size: 100%;
+    }
+    .tile-corrosion {
+      background-image: url("../assets/images/texture/corrosion.png");
+      background-size: 100%;
+    }
+    .tile-deepwater {
+      background: #3e95f3;
+    }
+    .tile-volspread {
+      background-image: url("../assets/images/texture/flow_32.png");
+      background-size: 100%;
+    }
+    .predefine-0, .predefine-1, .predefine-2, .predefine-3 {
+      position: relative;
+    }
+    .predefine-before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      border: 8px solid #fff;
+    }
+    .predefine-0:before {
+      .predefine-before;
+      border-color: transparent transparent white transparent;
+      right: 6px;
+      top: -18px;
+    }
+    .predefine-1:before {
+      .predefine-before;
+      border-color: transparent transparent transparent white;
+      right: -22px;
+      top: 10px;
+    }
+    .predefine-2:before {
+      .predefine-before;
+      border-color: white transparent transparent transparent;
+      right: 6px;
+      top: 38px;
+    }
+    .predefine-3:before {
+      .predefine-before;
+      border-color: transparent white transparent transparent;
+      left: -22px;
+      top: 10px;
+    }
+  }
 }
 </style>

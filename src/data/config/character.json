@@ -1,5 +1,18 @@
 [
   {
+    "id": "char_159_peacok",
+    "name": "断罪者",
+    "rarity": 3,
+    "potential": 0,
+    "phase": 1,
+    "level": 1,
+    "skills": [
+      1,
+      1
+    ],
+    "favor": 115
+  },
+  {
     "id": "char_222_bpipe",
     "name": "风笛",
     "rarity": 5,
@@ -11,19 +24,19 @@
       7,
       8
     ],
-    "favor": 36
+    "favor": 182
   },
   {
     "id": "char_252_bibeak",
     "name": "柏喙",
     "rarity": 4,
-    "potential": 0,
+    "potential": 5,
     "phase": 0,
     "level": 1,
     "skills": [
       1
     ],
-    "favor": 29
+    "favor": 161
   },
   {
     "id": "char_379_sesa",
@@ -45,7 +58,7 @@
     "skills": [
       1
     ],
-    "favor": 32
+    "favor": 160
   },
   {
     "id": "char_385_finlpp",
@@ -66,7 +79,7 @@
     "rarity": 5,
     "potential": 0,
     "phase": 2,
-    "level": 50,
+    "level": 70,
     "skills": [
       7,
       8,
@@ -106,7 +119,7 @@
     "rarity": 5,
     "potential": 0,
     "phase": 2,
-    "level": 40,
+    "level": 50,
     "skills": [
       7,
       7,
@@ -208,7 +221,7 @@
     "rarity": 5,
     "potential": 0,
     "phase": 2,
-    "level": 40,
+    "level": 50,
     "skills": [
       7,
       7,
@@ -221,9 +234,10 @@
     "name": "槐琥",
     "rarity": 4,
     "potential": 0,
-    "phase": 0,
+    "phase": 2,
     "level": 1,
     "skills": [
+      1,
       1
     ],
     "favor": 200
@@ -368,7 +382,7 @@
     "phase": 2,
     "level": 50,
     "skills": [
-      7,
+      10,
       7
     ],
     "favor": 200
@@ -617,7 +631,7 @@
     "rarity": 5,
     "potential": 0,
     "phase": 2,
-    "level": 40,
+    "level": 50,
     "skills": [
       7,
       7,
@@ -645,11 +659,11 @@
     "rarity": 5,
     "potential": 2,
     "phase": 2,
-    "level": 50,
+    "level": 60,
     "skills": [
       7,
       7,
-      8
+      9
     ],
     "favor": 200
   },
@@ -659,7 +673,7 @@
     "rarity": 5,
     "potential": 0,
     "phase": 2,
-    "level": 85,
+    "level": 90,
     "skills": [
       7,
       8,
@@ -673,7 +687,7 @@
     "rarity": 5,
     "potential": 3,
     "phase": 2,
-    "level": 75,
+    "level": 80,
     "skills": [
       7,
       10,
@@ -687,7 +701,7 @@
     "rarity": 5,
     "potential": 1,
     "phase": 2,
-    "level": 50,
+    "level": 60,
     "skills": [
       7,
       8,

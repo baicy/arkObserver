@@ -1,66 +1,88 @@
 <template>
   <el-card>
-    <div slot="header">
-      <div>
-        <div class="filter-box filter-box-inline" style="margin-right:120px">
-          <div class="group">
-            <el-button @click="allRarity" :type="filtersByRarity.length==6?'':'success'" :icon="filtersByRarity.length==6?'':'el-icon-refresh-right'" size="small">稀有度</el-button>
+    <el-table
+      :data="list"
+      border
+      height="500"
+      :default-sort="{prop: 'level', order: 'descending'}"
+      :cell-style="cellStyle"
+      :span-method="spanMethod"
+      show-summary
+      :summary-method="getSummaries"
+      class="character-list">
+      <el-table-column prop="name" label="代号" width="100"></el-table-column>
+      <el-table-column
+        prop="profession"
+        label="职业"
+        :filters="[{text: '近卫', value: 'warrior'}, {text: '重装', value: 'tank'}, {text: '医疗', value: 'medic'}, {text: '狙击', value: 'sniper'}, {text: '术师', value: 'caster'}, {text: '特种', value: 'special'}, {text: '辅助', value: 'support'}, {text: '先锋', value: 'pioneer'}]"
+        :filter-method="filterEqual"
+        filter-placement="bottom"
+        width="100">
+        <template slot-scope="scope">
+          {{professions[scope.row.profession]}}
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="rarity"
+        label="稀有度"
+        width="150"
+        :filters="[{text: '6星', value: 5}, {text: '5星', value: 4}, {text: '4星', value: 3}, {text: '3星', value: 2}, {text: '2星', value: 1}, {text: '1星', value: 0}]"
+        :filter-method="filterEqual"
+        sortable>
+        <template slot-scope="scope">
+          <div class="rarity">
+            <div v-for="i in scope.row.rarity+1" :key="i" class="star"></div>
           </div>
-          <div class="methods">
-            <el-button @click="toggleRarity(6-i)" :type="filtersByRarity.includes(6-i)?'primary':''" v-for="i in 6" :key="i" size="small" icon="el-icon-star-on">{{7-i}}</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column prop="potential" label="潜能" width="80" sortable>
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.potential==-1" type="danger" effect="dark" disable-transitions>未持有</el-tag>
+          <div v-else :class="'potential-'+scope.row.potential"></div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="level" label="等级" width="80" sortable :sort-by="['phase', 'level', 'rarity']">
+        <template slot-scope="scope">
+          <div :class="'elite-'+scope.row.phase"></div>
+          <div class="level">
+            <div class="lv-text"></div>
+            <div class="lv-number">{{scope.row.level}}</div>
           </div>
-        </div>
-        <div class="filter-box filter-box-inline">
-          <div class="group">
-            <el-button @click="allProfession" :type="filtersByProfession.length==8?'':'success'" :icon="filtersByProfession.length==8?'':'el-icon-refresh-right'" size="small">职业</el-button>
-          </div>
-          <div class="methods">
-            <el-button @click="toggleProfession(i)" :type="filtersByProfession.includes(i)?'primary':''" v-for="i in filtersOfProfession" :key="i" size="small">{{professions[i]}}</el-button>
-          </div>
-        </div>
-      </div>
-      <div class="filter-box">
-        <div class="group">
-          <el-button @click="clearSort" :type="sortBy==''?'':'danger'" :icon="sortBy==''?'':'el-icon-circle-close'" size="small">排序</el-button>
-        </div>
-        <div class="methods">
-          <el-button @click="toggleSort('level')" :type="sortBy=='level'?'primary':''" :icon="sortBy=='level'?('el-icon-sort-'+(sortDesc?'down':'up')):''" size="small">等级</el-button>
-          <el-button @click="toggleSort('rarity')" :type="sortBy=='rarity'?'primary':''" :icon="sortBy=='rarity'?('el-icon-sort-'+(sortDesc?'down':'up')):''" size="small">稀有度</el-button>
-        </div>
-      </div>
-    </div>
-    <el-row>
-      <el-col v-for="(character,i) in list" :key="i" :span="4">
-        <div class="character-list">
-          <el-image
-            class="avatar"
-            :src="require('../assets/images/avatars/'+character.id+'_'+(character.phase<2?'1':'2')+'.png')"></el-image>
-          <div :class="'profession-icon-'+character.profession"></div>
-          <div class="info-label">
-            <div :class="'rarity-'+character.rarity"></div>
-            <div :class="'elite-'+character.phase"></div>
-            <div :class="'potential-'+character.potential"></div>
-            <div class="level">
-              <div class="lv-text"></div>
-              <div class="lv-number">{{character.level}}</div>
-            </div>
-          </div>
-          <div class="right-label">
-            <el-tooltip v-for="skill in character.skillDetails" :key="skill.id" effect="dark" :content="skill.name" placement="right">
-              <div class="skill">
-                <el-image
-                  class="icon"
-                  :src="require('../assets/images/skills/skill_icon_'+skill.id+'.png')"></el-image>
-                <div :class="'rank-'+skill.level">
-                  <div></div>
-                </div>
+        </template>
+      </el-table-column>
+      <el-table-column label="技能" sortable :sort-method="skillSort">
+        <el-table-column prop="skill1" label="技能1" sortable :sort-method="skill1Sort">
+          <template slot-scope="scope">
+            <div v-if="scope.row.skillDetails[0]" class="skill">
+              <div class="name">{{scope.row.skillDetails[0].name}}</div>
+              <div :class="'rank-'+scope.row.skillDetails[0].level">
+                <div></div>
               </div>
-            </el-tooltip>
-            <div class="name">{{character.name}}</div>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="skill2" label="技能2" sortable :sort-method="skill2Sort">
+          <template slot-scope="scope">
+            <div v-if="scope.row.skillDetails[1]" class="skill">
+              <div class="name">{{scope.row.skillDetails[1].name}}</div>
+              <div :class="'rank-'+scope.row.skillDetails[1].level">
+                <div></div>
+              </div>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="skill3" label="技能3" sortable :sort-method="skill3Sort">
+          <template slot-scope="scope">
+            <div v-if="scope.row.skillDetails[2]" class="skill">
+              <div class="name">{{scope.row.skillDetails[2].name}}</div>
+              <div :class="'rank-'+scope.row.skillDetails[2].level">
+                <div></div>
+              </div>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table-column>
+    </el-table>
   </el-card>
 </template>
 <script>
@@ -73,53 +95,17 @@ export default {
   data() {
     return {
       characters: [],
-      sortBy: 'level',
-      sortDesc: true,
-      filtersOfRarity: [5, 4, 3, 2, 1, 0],
-      filtersOfProfession: ['warrior', 'tank', 'medic', 'sniper', 'caster', 'special', 'support', 'pioneer'],
-      filtersByRarity: [],
-      filtersByProfession: [],
       professions: {warrior: '近卫', tank: '重装', medic: '医疗', sniper: '狙击', caster: '术师', special: '特种', support: '辅助', pioneer: '先锋'}
     }
   },
   computed: {
     list() {
-      if(this.filtersByRarity.length==0) {
-        return [];
-      }
-      if(this.filtersByProfession.length==0) {
-        return [];
-      }
       let list = [...this.characters];
-      if(this.filtersByRarity.length<6) {
-        list = list.filter(c=>this.filtersByRarity.includes(c.rarity));
-      }
-      if(this.filtersByProfession.length<8) {
-        list = list.filter(c=>this.filtersByProfession.includes(c.profession));
-      }
-      if(this.sortBy) {
-        list.sort((a,b)=>a.profession<b.profession?1:-1);
-        if(this.sortBy=='level') {
-          list.sort((a,b)=>b.rarity-a.rarity);
-          if(this.sortDesc) {
-            list.sort((a,b)=>b.level-a.level).sort((a,b)=>b.phase-a.phase);
-          } else {
-            list.sort((a,b)=>a.level-b.level).sort((a,b)=>a.phase-b.phase);
-          }
-        } else {
-          list.sort((a,b)=>b.level-a.level).sort((a,b)=>b.phase-a.phase);
-          if(this.sortDesc) {
-            list.sort((a,b)=>b.rarity-a.rarity);
-          } else {
-            list.sort((a,b)=>a.rarity-b.rarity);
-          }
-        }
-      }
       return list;
     }
   },
   created() {
-    this.characters = charactersData.filter(c=>c.potential>-1);
+    this.characters = charactersData;
     for(let i in this.characters) {
       this.characters[i].profession = charactersDetails[this.characters[i].id].profession.toLowerCase();
 
@@ -127,65 +113,80 @@ export default {
       for(let j in this.characters[i].skills) {
         let skillId = charactersDetails[this.characters[i].id].skills[j].skillId;
         skills.push({
-          id: skillsData[skillId].iconId?skillsData[skillId].iconId:skillId,
-          name: skillsData[skillId].levels[0].name,
+          name: skillsData[skillId] ? skillsData[skillId].levels[0].name :'',
           level: this.characters[i].skills[j]
         });
       }
       this.characters[i].skillDetails = [...skills];
     }
-    this.allRarity();
-    this.allProfession();
   },
   methods: {
-    clearSort() {
-      this.sortBy = '';
-    },
-    toggleSort(type) {
-      if(this.sortBy!=type) {
-        this.sortBy = type;
-        this.sortDesc = true;
-      } else {
-        if(this.sortDesc) {
-          this.sortDesc = false;
-        } else {
-          this.sortBy = '';
+    cellStyle({row, column, rowIndex, columnIndex}) {
+      if(['potential', 'level'].includes(column.property) && row.potential!=-1) {
+        return {
+          backgroundColor: '#313131'
         }
       }
     },
-    allRarity() {
-      this.filtersByRarity = [...this.filtersOfRarity];
-    },
-    toggleRarity(rarity) {
-      const index = this.filtersByRarity.indexOf(rarity);
-      if(index!=-1) {
-        this.filtersByRarity.splice(index, 1);
-      } else {
-        this.filtersByRarity.push(rarity);
+    spanMethod({ row, column, rowIndex, columnIndex }) {
+      if (row.potential === -1 && column.property === 'potential') {
+        return [1, 5]
       }
     },
-    allProfession() {
-      this.filtersByProfession = [...this.filtersOfProfession];
+    skillSort(a, b) {
+      const la = a.skills.reduce((sum, x)=>sum+x,0);
+      const lb = b.skills.reduce((sum, x)=>sum+x,0);
+      return la - lb;
     },
-    toggleProfession(profession) {
-      const index = this.filtersByProfession.indexOf(profession);
-      if(index!=-1) {
-        this.filtersByProfession.splice(index, 1);
-      } else {
-        this.filtersByProfession.push(profession);
+    skill1Sort(a, b) {
+      const la = a.skillDetails[0] ? a.skillDetails[0].level : -1;
+      const lb = b.skillDetails[0] ? b.skillDetails[0].level : -1;
+      return la - lb;
+    },
+    skill2Sort(a, b) {
+      const la = a.skillDetails[1] ? a.skillDetails[1].level : -1;
+      const lb = b.skillDetails[1] ? b.skillDetails[1].level : -1;
+      return la - lb;
+    },
+    skill3Sort(a, b) {
+      const la = a.skillDetails[2] ? a.skillDetails[2].level : -1;
+      const lb = b.skillDetails[2] ? b.skillDetails[2].level : -1;
+      return la - lb;
+    },
+    filterEqual(value, row, column) {
+      return row[column.property] === value;
+    },
+    getSummaries(param) {
+      const { columns, data } = param;
+      const sums = [];
+      let owned = 0;
+      let phaseCount = [0, 0, 0];
+      let masterCount = [0, 0, 0];
+      for(let item of data) {
+        if(item.potential>-1) owned++;
+        phaseCount[item.phase]++;
+        for(let level of item.skills) {
+          if(level>7)
+            masterCount[level-8]++;
+        }
       }
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = owned+'/'+data.length;
+          return;
+        }
+        if (column.property=='skill1') {
+          sums[index] = '精英化: '+phaseCount[2]+'(2)/'+phaseCount[1]+'(1)/'+phaseCount[0];
+          return;
+        }
+        if (column.property=='skill2') {
+          sums[index] = '专精: '+masterCount[2]+'(3)/'+masterCount[1]+'(2)/'+masterCount[0]+'(1)';
+          return;
+        }
+      });
+
+      return sums;
     }
   }
 }
 </script>
-<style lang="less" scoped>
-.filter-box-inline {
-  display: inline-block;
-}
-.el-row .el-col {
-  margin-top: 15px;
-  &:nth-child(-n+6) {
-    margin-top: 0;
-  }
-}
-</style>
