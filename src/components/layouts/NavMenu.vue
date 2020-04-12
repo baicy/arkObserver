@@ -7,6 +7,7 @@
   </el-submenu>
   <el-menu-item index="/furniture">家具掉落</el-menu-item>
   <el-menu-item index="/character">干员仓管</el-menu-item>
+  <el-menu-item index="/material">材料管理</el-menu-item>
   <el-menu-item index="/handbook">情报网络</el-menu-item>
   <el-menu-item index="/stage">作战地图</el-menu-item>
   <!-- <el-menu-item index="/story">剧情回放</el-menu-item>

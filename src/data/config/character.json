@@ -10,7 +10,7 @@
       1,
       1
     ],
-    "favor": 115
+    "favor": 123
   },
   {
     "id": "char_222_bpipe",
@@ -24,7 +24,7 @@
       7,
       8
     ],
-    "favor": 182
+    "favor": 186
   },
   {
     "id": "char_252_bibeak",
@@ -36,7 +36,7 @@
     "skills": [
       1
     ],
-    "favor": 161
+    "favor": 164
   },
   {
     "id": "char_379_sesa",
@@ -58,7 +58,7 @@
     "skills": [
       1
     ],
-    "favor": 160
+    "favor": 163
   },
   {
     "id": "char_385_finlpp",
@@ -617,7 +617,7 @@
     "rarity": 5,
     "potential": 3,
     "phase": 2,
-    "level": 60,
+    "level": 70,
     "skills": [
       7,
       7,
@@ -659,7 +659,7 @@
     "rarity": 5,
     "potential": 2,
     "phase": 2,
-    "level": 60,
+    "level": 70,
     "skills": [
       7,
       7,
@@ -687,7 +687,7 @@
     "rarity": 5,
     "potential": 3,
     "phase": 2,
-    "level": 80,
+    "level": 81,
     "skills": [
       7,
       10,
@@ -701,7 +701,7 @@
     "rarity": 5,
     "potential": 1,
     "phase": 2,
-    "level": 60,
+    "level": 70,
     "skills": [
       7,
       8,

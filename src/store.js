@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import StockManager from './utils/StockManager.js'
 import PlanManager from './utils/PlanManager.js'
 
 Vue.use(Vuex)
@@ -11,12 +10,10 @@ export default new Vuex.Store({
     createPersistedState({
       key: "ark-observer-abc",
       paths: [
-        "gachaLogs"
+        "gachaLogs",
+        "stores"
         // "plans",
         // "characters",
-        // "resources",
-        // "formulateds",
-        // "stocks"
       ]
     })
   ],
@@ -30,9 +27,7 @@ export default new Vuex.Store({
       limitLast6: 0,
       last6s: []
     },
-    // resources: {},
-    // formulateds: {},
-    // stocks: {},
+    stores: {}
     // selectedItem: { character: '', material: '' }
   },
   mutations: {
@@ -52,12 +47,6 @@ export default new Vuex.Store({
     resetPlans: (state) => {
         state.plans = {};
     },
-    updateStock: (state, payload) => {
-        state.stocks[payload.id].have = payload.amount;
-    },
-    updateStocks: (state, stocks) => {
-        state.stocks = stocks;
-    },
     updatePlansData: (state, payload) => {
         for(var i in payload){
             state.plans[i] = payload[i];
@@ -72,12 +61,6 @@ export default new Vuex.Store({
         if(!Object.keys(plans[payload.char]).length)
             delete plans[payload.char];
         state.plans = Object.assign({}, plans);
-    },
-    updateFormulated: (state, payload) => {
-        Vue.set(state.formulateds, payload.key, payload.value);
-    },
-    updateFormulateds: (state, formulateds) => {
-        state.formulateds = formulateds;
     },
     setSelectedItem: (state, info) => {
         state.selectedItem[info.type] = info.val;
@@ -103,6 +86,13 @@ export default new Vuex.Store({
     },
     clearPoolLogs: (state, poolId) => {
       Vue.delete(state.gachaLogs.logs, poolId);
+    },
+    setStore: (state, info) => {
+      if(info.mid) {
+        Vue.set(state.stores, info.mid, info.number);
+      } else {
+        Vue.set(state, 'stores', info);
+      }
     }
   },
   getters: {
@@ -115,23 +105,8 @@ export default new Vuex.Store({
       getCharacter: (state) => (key) => {
           return state.characters[key];
       },
-      getStocks: (state) => (refresh) => {
-          return state.stocks;
-      },
-      getStock: (state) => (key) => {
-          if(state.stocks[key])
-              return state.stocks[key];
-          else
-              return 0;
-      },
       getPlans: (state) => (refresh) => {
           return state.plans;
-      },
-      getFormulateds: (state) => (refresh) => {
-          return state.formulateds;
-      },
-      getFormulated: (state) => (key) => {
-          return state.formulateds[key]?state.formulateds[key]:false;
       },
       selectedItem: (state) => (type) => state.selectedItem[type],
       gachaLogs: (state) => (poolId) => {
@@ -140,14 +115,14 @@ export default new Vuex.Store({
         } else {
           return state.gachaLogs;
         }
+      },
+      stores: (state) => (mid) => {
+        return mid ? state.stores[mid] : state.stores;
       }
   },
   actions: {
     setSelectedItem({commit, state}, info) {
         commit('setSelectedItem', info);
-    },
-    setStock({commit, state}, info) {
-        commit('updateStock', info);
     },
     addGachaLog({commit, state}, info) {
       commit('addGachaLog', info);
@@ -157,6 +132,9 @@ export default new Vuex.Store({
     },
     clearPoolLogs({commit, state}, poolId) {
       commit('clearPoolLogs', poolId);
+    },
+    setStore({commit, state}, info) {
+      commit('setStore', info);
     }
   }
 })

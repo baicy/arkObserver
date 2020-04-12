@@ -1,0 +1,1010 @@
+{
+  "material": [
+    {
+      "itemId": "30011",
+      "name": "源岩",
+      "rarity": 0,
+      "sortId": 100015
+    },
+    {
+      "itemId": "30012",
+      "name": "固源岩",
+      "rarity": 1,
+      "sortId": 100014,
+      "formula": {
+        "sortId": 2701,
+        "formulaId": "34",
+        "rarity": 0,
+        "goldCost": 100,
+        "costs": [
+          [
+            "30011",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30013",
+      "name": "固源岩组",
+      "rarity": 2,
+      "sortId": 100013,
+      "formula": {
+        "sortId": 2702,
+        "formulaId": "35",
+        "rarity": 0,
+        "goldCost": 200,
+        "costs": [
+          [
+            "30012",
+            5
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30014",
+      "name": "提纯源岩",
+      "rarity": 3,
+      "sortId": 100012,
+      "formula": {
+        "sortId": 2703,
+        "formulaId": "36",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30013",
+            4
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30021",
+      "name": "代糖",
+      "rarity": 0,
+      "sortId": 100027
+    },
+    {
+      "itemId": "30022",
+      "name": "糖",
+      "rarity": 1,
+      "sortId": 100026,
+      "formula": {
+        "sortId": 2601,
+        "formulaId": "31",
+        "rarity": 0,
+        "goldCost": 100,
+        "costs": [
+          [
+            "30021",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30023",
+      "name": "糖组",
+      "rarity": 2,
+      "sortId": 100025,
+      "formula": {
+        "sortId": 2602,
+        "formulaId": "32",
+        "rarity": 0,
+        "goldCost": 200,
+        "costs": [
+          [
+            "30022",
+            4
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30024",
+      "name": "糖聚块",
+      "rarity": 3,
+      "sortId": 100024,
+      "formula": {
+        "sortId": 2603,
+        "formulaId": "33",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30023",
+            2
+          ],
+          [
+            "30043",
+            1
+          ],
+          [
+            "30083",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30031",
+      "name": "酯原料",
+      "rarity": 0,
+      "sortId": 100023
+    },
+    {
+      "itemId": "30032",
+      "name": "聚酸酯",
+      "rarity": 1,
+      "sortId": 100022,
+      "formula": {
+        "sortId": 2501,
+        "formulaId": "28",
+        "rarity": 0,
+        "goldCost": 100,
+        "costs": [
+          [
+            "30031",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30033",
+      "name": "聚酸酯组",
+      "rarity": 2,
+      "sortId": 100021,
+      "formula": {
+        "sortId": 2502,
+        "formulaId": "29",
+        "rarity": 0,
+        "goldCost": 200,
+        "costs": [
+          [
+            "30032",
+            4
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30034",
+      "name": "聚酸酯块",
+      "rarity": 3,
+      "sortId": 100020,
+      "formula": {
+        "sortId": 2503,
+        "formulaId": "30",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30033",
+            2
+          ],
+          [
+            "30053",
+            1
+          ],
+          [
+            "30073",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30041",
+      "name": "异铁碎片",
+      "rarity": 0,
+      "sortId": 100031
+    },
+    {
+      "itemId": "30042",
+      "name": "异铁",
+      "rarity": 1,
+      "sortId": 100030,
+      "formula": {
+        "sortId": 2401,
+        "formulaId": "25",
+        "rarity": 0,
+        "goldCost": 100,
+        "costs": [
+          [
+            "30041",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30043",
+      "name": "异铁组",
+      "rarity": 2,
+      "sortId": 100029,
+      "formula": {
+        "sortId": 2402,
+        "formulaId": "26",
+        "rarity": 0,
+        "goldCost": 200,
+        "costs": [
+          [
+            "30042",
+            4
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30044",
+      "name": "异铁块",
+      "rarity": 3,
+      "sortId": 100028,
+      "formula": {
+        "sortId": 2403,
+        "formulaId": "27",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30043",
+            2
+          ],
+          [
+            "30063",
+            1
+          ],
+          [
+            "30033",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30051",
+      "name": "双酮",
+      "rarity": 0,
+      "sortId": 100035
+    },
+    {
+      "itemId": "30052",
+      "name": "酮凝集",
+      "rarity": 1,
+      "sortId": 100034,
+      "formula": {
+        "sortId": 2301,
+        "formulaId": "22",
+        "rarity": 0,
+        "goldCost": 100,
+        "costs": [
+          [
+            "30051",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30053",
+      "name": "酮凝集组",
+      "rarity": 2,
+      "sortId": 100033,
+      "formula": {
+        "sortId": 2302,
+        "formulaId": "23",
+        "rarity": 0,
+        "goldCost": 200,
+        "costs": [
+          [
+            "30052",
+            4
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30054",
+      "name": "酮阵列",
+      "rarity": 3,
+      "sortId": 100032,
+      "formula": {
+        "sortId": 2303,
+        "formulaId": "24",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30053",
+            2
+          ],
+          [
+            "30023",
+            1
+          ],
+          [
+            "30083",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30061",
+      "name": "破损装置",
+      "rarity": 0,
+      "sortId": 100019
+    },
+    {
+      "itemId": "30062",
+      "name": "装置",
+      "rarity": 1,
+      "sortId": 100018,
+      "formula": {
+        "sortId": 2201,
+        "formulaId": "19",
+        "rarity": 0,
+        "goldCost": 100,
+        "costs": [
+          [
+            "30061",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30063",
+      "name": "全新装置",
+      "rarity": 2,
+      "sortId": 100017,
+      "formula": {
+        "sortId": 2202,
+        "formulaId": "20",
+        "rarity": 0,
+        "goldCost": 200,
+        "costs": [
+          [
+            "30062",
+            4
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30064",
+      "name": "改量装置",
+      "rarity": 3,
+      "sortId": 100016,
+      "formula": {
+        "sortId": 2203,
+        "formulaId": "21",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30063",
+            1
+          ],
+          [
+            "30013",
+            2
+          ],
+          [
+            "30093",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30073",
+      "name": "扭转醇",
+      "rarity": 2,
+      "sortId": 100005
+    },
+    {
+      "itemId": "30074",
+      "name": "白马醇",
+      "rarity": 3,
+      "sortId": 100004,
+      "formula": {
+        "sortId": 2106,
+        "formulaId": "18",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30073",
+            1
+          ],
+          [
+            "30023",
+            1
+          ],
+          [
+            "30103",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30083",
+      "name": "轻锰矿",
+      "rarity": 2,
+      "sortId": 100007
+    },
+    {
+      "itemId": "30084",
+      "name": "三水锰矿",
+      "rarity": 3,
+      "sortId": 100006,
+      "formula": {
+        "sortId": 2105,
+        "formulaId": "17",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30083",
+            2
+          ],
+          [
+            "30033",
+            1
+          ],
+          [
+            "30073",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30093",
+      "name": "研磨石",
+      "rarity": 2,
+      "sortId": 100009
+    },
+    {
+      "itemId": "30094",
+      "name": "五水研磨石",
+      "rarity": 3,
+      "sortId": 100008,
+      "formula": {
+        "sortId": 2104,
+        "formulaId": "16",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30093",
+            1
+          ],
+          [
+            "30043",
+            1
+          ],
+          [
+            "30063",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30103",
+      "name": "RMA70-12",
+      "rarity": 2,
+      "sortId": 100011
+    },
+    {
+      "itemId": "30104",
+      "name": "RMA70-24",
+      "rarity": 3,
+      "sortId": 100010,
+      "formula": {
+        "sortId": 2103,
+        "formulaId": "15",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30103",
+            1
+          ],
+          [
+            "30013",
+            2
+          ],
+          [
+            "30053",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30115",
+      "name": "聚合剂",
+      "rarity": 4,
+      "sortId": 100003,
+      "formula": {
+        "sortId": 2003,
+        "formulaId": "14",
+        "rarity": 0,
+        "goldCost": 400,
+        "costs": [
+          [
+            "30014",
+            1
+          ],
+          [
+            "30044",
+            1
+          ],
+          [
+            "30054",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30125",
+      "name": "双极纳米片",
+      "rarity": 4,
+      "sortId": 100002,
+      "formula": {
+        "sortId": 2002,
+        "formulaId": "13",
+        "rarity": 0,
+        "goldCost": 400,
+        "costs": [
+          [
+            "30064",
+            1
+          ],
+          [
+            "30074",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "30135",
+      "name": "D32钢",
+      "rarity": 4,
+      "sortId": 100001,
+      "formula": {
+        "sortId": 2001,
+        "formulaId": "12",
+        "rarity": 0,
+        "goldCost": 400,
+        "costs": [
+          [
+            "30084",
+            1
+          ],
+          [
+            "30094",
+            1
+          ],
+          [
+            "30104",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "31013",
+      "name": "凝胶",
+      "rarity": 2,
+      "sortId": 100037
+    },
+    {
+      "itemId": "31014",
+      "name": "聚合凝胶",
+      "rarity": 3,
+      "sortId": 100036,
+      "formula": {
+        "sortId": 2102,
+        "formulaId": "56",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30043",
+            1
+          ],
+          [
+            "31013",
+            1
+          ],
+          [
+            "31023",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "31023",
+      "name": "炽合金",
+      "rarity": 2,
+      "sortId": 100039
+    },
+    {
+      "itemId": "31024",
+      "name": "炽合金块",
+      "rarity": 3,
+      "sortId": 100038,
+      "formula": {
+        "sortId": 2101,
+        "formulaId": "55",
+        "rarity": 0,
+        "goldCost": 300,
+        "costs": [
+          [
+            "30063",
+            1
+          ],
+          [
+            "30093",
+            1
+          ],
+          [
+            "31023",
+            1
+          ]
+        ]
+      }
+    }
+  ],
+  "chip": [
+    {
+      "itemId": "32001",
+      "name": "芯片助剂",
+      "rarity": 3,
+      "sortId": 400001
+    },
+    {
+      "itemId": "3211",
+      "name": "先锋芯片",
+      "rarity": 2,
+      "sortId": 400004,
+      "formula": {
+        "sortId": 4005,
+        "formulaId": "43",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3271",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3212",
+      "name": "先锋芯片组",
+      "rarity": 3,
+      "sortId": 400003,
+      "formula": {
+        "sortId": 4105,
+        "formulaId": "51",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3272",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3221",
+      "name": "近卫芯片",
+      "rarity": 2,
+      "sortId": 400007,
+      "formula": {
+        "sortId": 4007,
+        "formulaId": "45",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3281",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3222",
+      "name": "近卫芯片组",
+      "rarity": 3,
+      "sortId": 400006,
+      "formula": {
+        "sortId": 4107,
+        "formulaId": "53",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3282",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3231",
+      "name": "重装芯片",
+      "rarity": 2,
+      "sortId": 400010,
+      "formula": {
+        "sortId": 4001,
+        "formulaId": "39",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3261",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3232",
+      "name": "重装芯片组",
+      "rarity": 3,
+      "sortId": 400009,
+      "formula": {
+        "sortId": 4101,
+        "formulaId": "47",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3262",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3241",
+      "name": "狙击芯片",
+      "rarity": 2,
+      "sortId": 400013,
+      "formula": {
+        "sortId": 4003,
+        "formulaId": "41",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3251",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3242",
+      "name": "狙击芯片组",
+      "rarity": 3,
+      "sortId": 400012,
+      "formula": {
+        "sortId": 4103,
+        "formulaId": "49",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3252",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3251",
+      "name": "术师芯片",
+      "rarity": 2,
+      "sortId": 400016,
+      "formula": {
+        "sortId": 4004,
+        "formulaId": "42",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3241",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3252",
+      "name": "术师芯片组",
+      "rarity": 3,
+      "sortId": 400015,
+      "formula": {
+        "sortId": 4104,
+        "formulaId": "50",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3242",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3261",
+      "name": "医疗芯片",
+      "rarity": 2,
+      "sortId": 400019,
+      "formula": {
+        "sortId": 4002,
+        "formulaId": "40",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3231",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3262",
+      "name": "医疗芯片组",
+      "rarity": 3,
+      "sortId": 400018,
+      "formula": {
+        "sortId": 4102,
+        "formulaId": "48",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3232",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3271",
+      "name": "辅助芯片",
+      "rarity": 2,
+      "sortId": 400022,
+      "formula": {
+        "sortId": 4006,
+        "formulaId": "44",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3211",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3272",
+      "name": "辅助芯片组",
+      "rarity": 3,
+      "sortId": 400021,
+      "formula": {
+        "sortId": 4106,
+        "formulaId": "52",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3212",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3281",
+      "name": "特种芯片",
+      "rarity": 2,
+      "sortId": 400025,
+      "formula": {
+        "sortId": 4008,
+        "formulaId": "46",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3221",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3282",
+      "name": "特种芯片组",
+      "rarity": 3,
+      "sortId": 400024,
+      "formula": {
+        "sortId": 4108,
+        "formulaId": "54",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3222",
+            3
+          ]
+        ]
+      }
+    }
+  ],
+  "book": [
+    {
+      "itemId": "3301",
+      "name": "技巧概要·卷1",
+      "rarity": 1,
+      "sortId": 300003
+    },
+    {
+      "itemId": "3302",
+      "name": "技巧概要·卷2",
+      "rarity": 2,
+      "sortId": 300002,
+      "formula": {
+        "sortId": 3001,
+        "formulaId": "37",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3301",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "itemId": "3303",
+      "name": "技巧概要·卷3",
+      "rarity": 3,
+      "sortId": 300001,
+      "formula": {
+        "sortId": 3002,
+        "formulaId": "38",
+        "rarity": 0,
+        "goldCost": 0,
+        "costs": [
+          [
+            "3302",
+            3
+          ]
+        ]
+      }
+    }
+  ]
+}

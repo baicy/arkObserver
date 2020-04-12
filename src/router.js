@@ -10,6 +10,7 @@ import Character from './views/Character'
 import Stage from './views/Stage'
 import Story from './views/Story'
 import Store from './views/Store'
+import Material from './views/Material'
 
 import Layout from './layouts/ArkLayout'
 import PlanList from './components/PlanList'
@@ -68,6 +69,11 @@ export default new Router({
       path: '/store',
       name: 'store',
       component: Store
+    },
+    {
+      path: '/material',
+      name: 'material',
+      component: Material
     },
     {
       path: '/ocr',
