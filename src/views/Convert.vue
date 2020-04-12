@@ -27,9 +27,9 @@
 
 <script>
     import characters from '../data/source/character_table.json'
-    import skills from '../data/skill_table.json'
-    import resources from '../data/item_table.json'
-    import stages from '../data/stage_table.json'
+    import skills from '../data/source/skill_table.json'
+    import resources from '../data/source/item_table.json'
+    import stages from '../data/source/stage_table.json'
     import buildings from '../data/source/building_data.json'
     import Converter from '../utils/ConvertGameData.js'
     export default {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import PlanManager from './utils/PlanManager.js'
+// import PlanManager from './utils/PlanManager.js'
 
 Vue.use(Vuex)
 

@@ -50,8 +50,8 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="技能" sortable :sort-method="skillSort">
-        <el-table-column prop="skill1" label="技能1" sortable :sort-method="skill1Sort">
+      <el-table-column label="技能" sortable :sort-method="skillSort(null,null,0)">
+        <el-table-column prop="skill1" label="技能1" sortable :sort-method="skillSort(null,null,1)">
           <template slot-scope="scope">
             <div v-if="scope.row.skillDetails[0]" class="skill">
               <div class="name">{{scope.row.skillDetails[0].name}}</div>
@@ -61,7 +61,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="skill2" label="技能2" sortable :sort-method="skill2Sort">
+        <el-table-column prop="skill2" label="技能2" sortable :sort-method="skillSort(null,null,2)">
           <template slot-scope="scope">
             <div v-if="scope.row.skillDetails[1]" class="skill">
               <div class="name">{{scope.row.skillDetails[1].name}}</div>
@@ -71,7 +71,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="skill3" label="技能3" sortable :sort-method="skill3Sort">
+        <el-table-column prop="skill3" label="技能3" sortable :sort-method="skillSort(null,null,3)">
           <template slot-scope="scope">
             <div v-if="scope.row.skillDetails[2]" class="skill">
               <div class="name">{{scope.row.skillDetails[2].name}}</div>
@@ -133,25 +133,20 @@ export default {
         return [1, 5]
       }
     },
-    skillSort(a, b) {
-      const la = a.skills.reduce((sum, x)=>sum+x,0);
-      const lb = b.skills.reduce((sum, x)=>sum+x,0);
-      return la - lb;
-    },
-    skill1Sort(a, b) {
-      const la = a.skillDetails[0] ? a.skillDetails[0].level : -1;
-      const lb = b.skillDetails[0] ? b.skillDetails[0].level : -1;
-      return la - lb;
-    },
-    skill2Sort(a, b) {
-      const la = a.skillDetails[1] ? a.skillDetails[1].level : -1;
-      const lb = b.skillDetails[1] ? b.skillDetails[1].level : -1;
-      return la - lb;
-    },
-    skill3Sort(a, b) {
-      const la = a.skillDetails[2] ? a.skillDetails[2].level : -1;
-      const lb = b.skillDetails[2] ? b.skillDetails[2].level : -1;
-      return la - lb;
+    skillSort(a, b, skill) {
+      if(skill) {
+        return (a, b) => {
+          const la = a.skills[skill-1] ? a.skills[skill-1] : -1;
+          const lb = b.skills[skill-1] ? b.skills[skill-1] : -1;
+          return la - lb;
+        }
+      } else {
+        return (a, b) => {
+          const la = a.skills.reduce((sum, x)=>sum+x,0);
+          const lb = b.skills.reduce((sum, x)=>sum+x,0);
+          return la - lb;
+        }
+      }
     },
     filterEqual(value, row, column) {
       return row[column.property] === value;
