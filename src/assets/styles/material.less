@@ -35,3 +35,74 @@
         }
     }
 }
+.workshop {
+    background: #404040;
+    position: relative;
+    .pane-material {
+        position: relative;
+        display: grid;
+        gap: 5px;
+        .material:hover {
+            cursor: pointer;
+        }
+        .grid-0 {
+            grid-column: 1;
+        }
+        .require {
+            display: grid;
+            grid-template-columns: 30px 70px 30px 50px;
+            gap: 5px 0;
+            padding: 5px;
+            .number {
+                width: 50px;
+            }
+            .el-tag {
+                padding: 0;
+                border-radius: 0;
+                text-align: center;
+            }
+            .name {
+                font-size: 15px;
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
+            .tag-cal {
+                cursor: pointer;
+            }
+            .tag-store {
+                grid-column: 3;
+            }
+        }
+        .require.needed {
+            background-color: #ffffff;
+            .name {
+                font-weight: bold;
+            }
+        }
+    }
+    .pane-need {
+        width: 50%;
+        height: 140px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        overflow-y: auto;
+    }
+    .pane-ground {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        overflow: auto;
+        margin-top: 15px;
+        min-height: 451px;
+    }
+    .toolbar-ground {
+        position: absolute;
+        top: 180px;
+        left: 10px;
+    }
+    .pane-plan {
+        display: flex;
+    }
+    .list-plan {
+        width: 50%;
+    }
+}

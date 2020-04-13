@@ -1,5 +1,87 @@
 // Variables
 @images: "../images";
+@colorExp: #f8d206;
+@colorFavor: #f06292;
+@colorDanger: #f56c6c;
+@colorBackground: #404040;
+@colorWhite: #ffffff;
+.potential {
+    width: 50px;
+    height: 50px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.potential-levels(5);
+.potential-levels(@n, @i: 0, @j: 1) when (@i =< @n) {
+  .potential-@{i} {
+    background-image: url("@{images}/ui/potential/@{j}.png");
+    .potential
+  }
+  .potential-levels(@n, (@i + 1), (@j + 1));
+}
+.elite {
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.elite-0 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cdefs%3E%3Cfilter id='a' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-color='%23000' flood-opacity='.6' result='flood'/%3E%3CfeComposite in='flood' in2='SourceGraphic' operator='in' result='c1'/%3E%3CfeGaussianBlur in='c1' result='blur' stdDeviation='6'/%3E%3CfeOffset dy='6' result='o'/%3E%3CfeComposite in='SourceGraphic' in2='o'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23fff' d='M248 80.5105c-40.042 26.5728-80.179 52.9135-120.2202 79.4877L8 80.5049l18.6425 41.7632 79.6886 52.0353-14.6086 9.6244L73.2443 225l54.7693-36.425 54.26 36.1007-18.0925-40.5213-14.675-9.851 79.8718-52.6124zm-12.1306 14.555l-10.5196 23.2235-85.0375 56.0694 19.6553 12.682 9.721 22.958-41.5554-27.3966-43.075 28.1066 11.3279-24.0386 18.9735-12.4216-84.8218-55.8269-10.1684-23.0658 107.4104 70.7034z' filter='url(%23a)'/%3E%3C/svg%3E");
+    .elite
+}
+.elite-1 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cdefs%3E%3Cfilter id='a' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-color='%23000' flood-opacity='.6' result='flood'/%3E%3CfeComposite in='flood' in2='SourceGraphic' operator='in' result='c1'/%3E%3CfeGaussianBlur in='c1' result='blur' stdDeviation='6'/%3E%3CfeOffset dy='6' result='o'/%3E%3CfeComposite in='SourceGraphic' in2='o'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23fff' d='M8 80.3581l18.4219 41.2695L182.5377 225l-18.3128-40.9614z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M248 80.1296l-18.4219 41.2695L73.4623 224.7715 91.7751 183.81z' filter='url(%23a)'/%3E%3C/svg%3E");
+    .elite
+}
+.elite-2 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cdefs%3E%3Cfilter id='a' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-color='%23000' flood-opacity='.6' result='flood'/%3E%3CfeComposite in='flood' in2='SourceGraphic' operator='in' result='c1'/%3E%3CfeGaussianBlur in='c1' result='blur' stdDeviation='6'/%3E%3CfeOffset dy='6' result='o'/%3E%3CfeComposite in='SourceGraphic' in2='o'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23fff' d='M248 80.1584l-18.4182 41.2612L73.497 224.7716l18.3091-40.9533z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M8.0477 80.3869l18.4182 41.2612L182.5507 225l-18.3091-40.9532z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M248 31.9147l-18.4182 41.2612L73.497 176.528l18.309-40.9534z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M8 32.415l18.3076 41.2838 155.1469 103.4085-18.1991-40.9756z' filter='url(%23a)'/%3E%3C/svg%3E");
+    .elite
+}
+.level {
+    .lv-text {
+        width: 15px;
+        height: 10px;
+        display: inline-block;
+        background-size: 100%;
+        background-image: url("@{images}/ui/character/lv_text.svg");
+    }
+    .lv-number {
+        display: inline-block;
+        text-align: center;
+        width: 30px;
+        font-size: 16px;
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+    }
+}
+.skill {
+    .name {
+        display: inline-block;
+        width: 150px;
+        position: relative;
+        top: -10px;
+    }
+    .rank {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+    .rank-levels(10);
+    .rank-levels(@n, @i: 1) when (@i =< @n) {
+      .rank-@{i} {
+        background-image: url("@{images}/ui/rank/0.png");
+        > div {
+            background-image: url("@{images}/ui/rank/@{i}.png");
+            .rank
+        }
+        .rank
+      }
+      .rank-levels(@n, (@i + 1));
+    }
+}
 .filter-box {
     margin-bottom: 10px;
     &:last-child {
@@ -29,81 +111,113 @@
             background-image: url("@{images}/ui/character/star.svg");
         } 
     }
-    .potential {
-        width: 50px;
-        height: 50px;
-        background-size: 100%;
-        background-repeat: no-repeat;
+}
+.character-info {
+    .el-dialog__header {
+        padding-bottom: 0;
     }
-    .potential-levels(5);
-    .potential-levels(@n, @i: 0, @j: 1) when (@i =< @n) {
-      .potential-@{i} {
-        background-image: url("@{images}/ui/potential/@{j}.png");
-        .potential
-      }
-      .potential-levels(@n, (@i + 1), (@j + 1));
+    .el-dialog__body {
+        padding: 0 20px;
+    }
+    .potential {
+        width: 35px;
+        height: 35px;
     }
     .elite {
-        width: 40px;
-        height: 40px;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position: center;
+        width: 35px;
+        height: 35px;
     }
-    .elite-0 {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cdefs%3E%3Cfilter id='a' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-color='%23000' flood-opacity='.6' result='flood'/%3E%3CfeComposite in='flood' in2='SourceGraphic' operator='in' result='c1'/%3E%3CfeGaussianBlur in='c1' result='blur' stdDeviation='6'/%3E%3CfeOffset dy='6' result='o'/%3E%3CfeComposite in='SourceGraphic' in2='o'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23fff' d='M248 80.5105c-40.042 26.5728-80.179 52.9135-120.2202 79.4877L8 80.5049l18.6425 41.7632 79.6886 52.0353-14.6086 9.6244L73.2443 225l54.7693-36.425 54.26 36.1007-18.0925-40.5213-14.675-9.851 79.8718-52.6124zm-12.1306 14.555l-10.5196 23.2235-85.0375 56.0694 19.6553 12.682 9.721 22.958-41.5554-27.3966-43.075 28.1066 11.3279-24.0386 18.9735-12.4216-84.8218-55.8269-10.1684-23.0658 107.4104 70.7034z' filter='url(%23a)'/%3E%3C/svg%3E");
-        .elite
-    }
-    .elite-1 {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cdefs%3E%3Cfilter id='a' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-color='%23000' flood-opacity='.6' result='flood'/%3E%3CfeComposite in='flood' in2='SourceGraphic' operator='in' result='c1'/%3E%3CfeGaussianBlur in='c1' result='blur' stdDeviation='6'/%3E%3CfeOffset dy='6' result='o'/%3E%3CfeComposite in='SourceGraphic' in2='o'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23fff' d='M8 80.3581l18.4219 41.2695L182.5377 225l-18.3128-40.9614z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M248 80.1296l-18.4219 41.2695L73.4623 224.7715 91.7751 183.81z' filter='url(%23a)'/%3E%3C/svg%3E");
-        .elite
-    }
-    .elite-2 {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cdefs%3E%3Cfilter id='a' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-color='%23000' flood-opacity='.6' result='flood'/%3E%3CfeComposite in='flood' in2='SourceGraphic' operator='in' result='c1'/%3E%3CfeGaussianBlur in='c1' result='blur' stdDeviation='6'/%3E%3CfeOffset dy='6' result='o'/%3E%3CfeComposite in='SourceGraphic' in2='o'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='%23fff' d='M248 80.1584l-18.4182 41.2612L73.497 224.7716l18.3091-40.9533z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M8.0477 80.3869l18.4182 41.2612L182.5507 225l-18.3091-40.9532z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M248 31.9147l-18.4182 41.2612L73.497 176.528l18.309-40.9534z' filter='url(%23a)'/%3E%3Cpath fill='%23fff' d='M8 32.415l18.3076 41.2838 155.1469 103.4085-18.1991-40.9756z' filter='url(%23a)'/%3E%3C/svg%3E");
-        .elite
-    }
-    .level {
-        .lv-text {
-            width: 15px;
-            height: 10px;
-            display: inline-block;
-            background-size: 100%;
-            background-image: url("@{images}/ui/character/lv_text.svg");
+    .summary {
+        background-color: @colorBackground;
+        color: @colorWhite;
+        margin-right: 20px;
+        padding: 10px;
+        height: 62px;
+        display: flex;
+        &>div {
+            display: flex;
         }
-        .lv-number {
-            display: inline-block;
-            text-align: center;
-            width: 30px;
-            font-size: 16px;
-            color: rgb(255, 255, 255);
+        .name {
+            line-height: 35px;
+            margin-right: 10px;
+        }
+        .potential {
+            margin-right: 5px;
+        }
+        .level {
+            line-height: 35px;
+            margin-right: 5px;
+        }
+        .favor {
+            color: @colorFavor;
+            line-height: 35px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+    }
+    .summary-none {
+        background-color: @colorDanger;
+    }
+    .pane-icon {
+        background-color: @colorBackground;
+        color: @colorWhite;
+        width: 80px;
+        .icon-operate {
+            cursor: pointer;
             font-weight: bold;
         }
     }
-    .skill {
-        .name {
-            display: inline-block;
-            width: 150px;
-            position: relative;
-            top: -10px;
+    .pane-public {
+        display: flex;
+        background-color:@colorBackground;
+        padding: 5px 15px;
+        border-right: 20px solid @colorWhite;
+        .pane-range {
+            width: 200px;
+            margin-left: 10px;
+            margin-right: 15px;
         }
-        .rank {
-            display: inline-block;
-            width: 35px;
-            height: 35px;
-            background-size: 100%;
-            background-repeat: no-repeat;
+        .range-value {
+            font-weight: bold;
+            line-height: 38px;
         }
-        .rank-levels(10);
-        .rank-levels(@n, @i: 1) when (@i =< @n) {
-          .rank-@{i} {
-            background-image: url("@{images}/ui/rank/0.png");
-            > div {
-                background-image: url("@{images}/ui/rank/@{i}.png");
-                .rank
+    }
+    .range-exp {
+        .el-slider__bar {
+            background-color: @colorExp;
+        }
+        .el-slider__button {
+            border-color: @colorExp;
+        }
+        .range-value {
+            color: @colorExp;
+        }
+    }
+    .range-favor {
+        .el-slider__bar {
+            background-color: @colorFavor;
+        }
+        .el-slider__button {
+            border-color: @colorFavor;
+        }
+        .range-value {
+            color: @colorFavor;
+        }
+    }
+    .pane-skill {
+        width: 200px;
+        margin-top: 10px;
+        padding: 10px;
+        .skill {
+            display: flex;
+            .name {
+                position: relative;
+                top: 8px;
+                text-align: center;
             }
-            .rank
-          }
-          .rank-levels(@n, (@i + 1));
+        }
+        .operates {
+            text-align: center;
         }
     }
 }

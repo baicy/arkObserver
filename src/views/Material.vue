@@ -1,7 +1,7 @@
 <template>
 <el-card class="workshop">
-  <div slot="header">
-    <div class="pane pane-need">
+  <div slot="header" class="pane-plan">
+    <div class="pane-material pane-need">
       <div :class="[{ 'grid-0': i&&material.rarity<neededMaterials[i-1].rarity }]" v-for="(material,i) in neededMaterials" :key="i">
         <el-popover
           placement="bottom-start"
@@ -16,6 +16,32 @@
         </el-popover>
       </div>
     </div>
+    <el-table
+      :data="planList"
+      :row-style="rowStyle"
+      border
+      height="140"
+      class="list-plan">
+      <el-table-column width="60">
+        <template slot-scope="{row}">
+          <i @click="hideOrShowPlan(row)" class="el-icon-view"></i>
+          <i @click="removePlan(row.id)" class="el-icon-minus"></i>
+        </template>
+      </el-table-column>
+      <el-table-column prop="chara" label="干员" width="100"></el-table-column>
+      <el-table-column prop="item" label="项目" width="180">
+        <template slot-scope="{row}">
+          {{row.item}} {{row.from}}->{{row.to}}
+        </template>
+      </el-table-column>
+      <el-table-column prop="materials" label="材料" width="380">
+        <template slot-scope="{row}">
+          <div style="display:flex;">
+            <Material v-for="(m,i) in row.materials" :key="i" :item="materials[indexes[m[0]]]" :number="m[1]"></Material>
+          </div>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
   <div class="toolbar-ground">
     <el-switch
@@ -23,8 +49,8 @@
       active-text="只显示需求材料">
     </el-switch>
   </div>
-  <div class="pane pane-ground">
-    <div :class="['require', { 'grid-0': i&&material.rarity<groundMaterials[i-1].rarity }, { 'needed': totalNeeds[material.itemId] }]" v-for="(material,i) in groundMaterials" :key="i">
+  <div class="pane-material pane-ground">
+    <div :class="['require', { 'grid-0': (material.type&&!groundMaterials[i-1].type)||(!material.type&&i&&material.rarity<groundMaterials[i-1].rarity) }, { 'needed': totalNeeds[material.itemId] }]" v-for="(material,i) in groundMaterials" :key="i">
       <el-popover
         class="name"
         placement="bottom-start"
@@ -64,7 +90,9 @@
 </template>
 <script>
 import '@/assets/styles/material.less'
-import {material} from '@/data/config/material.json'
+import { material, book, chip } from '@/data/config/material.json'
+import characters from '@/data/source/character_table.json'
+import skills from '@/data/source/skill_table.json'
 import Material from '@/components/Material'
 
 export default {
@@ -77,7 +105,8 @@ export default {
       cals: {},
       stores: {},
       ableMergeds: {},
-      onlyNeeded: false
+      onlyNeeded: false,
+      plans: []
     }
   },
   computed: {
@@ -97,7 +126,7 @@ export default {
       return results;
     },
     neededMaterials() {
-      return this.materials.filter(m=>this.needs[m.itemId]);
+      return this.materials.filter(m=>this.needs[m.itemId]).sort((a,b)=>b.rarity-a.rarity);
     },
     totalNeeds() {
       let results = {};
@@ -118,6 +147,26 @@ export default {
     },
     groundMaterials() {
       return this.onlyNeeded ? this.materials.filter(m=>this.totalNeeds[m.itemId]) : this.materials;
+    },
+    planList() {
+      for(const i in this.materials) {
+        this.$set(this.requires, this.materials[i].itemId, 0);
+      }
+      let list = [];
+      for(const i in this.plans) {
+        if(!this.plans[i].hide) {
+          for(const m of this.plans[i].materials) {
+            this.$set(this.requires, m[0], this.requires[m[0]]+m[1]);
+          }
+        }
+        list.push(this.plans[i]);
+      }
+      list.sort((a,b)=>{
+        const la = a.hide?1:-1;
+        const lb = b.hide?1:-1;
+        return la-lb;
+      });
+      return list;
     }
   },
   watch:{
@@ -128,6 +177,12 @@ export default {
           this.$set(this.ableMergeds, m.itemId, !(m.formula.costs.reduce((r, c)=>r && this.stores[c[0]]>=c[1], true)));
           this.$store.dispatch('setStore', newVal);
         }
+      },
+      deep: true
+    },
+    cals: {
+      handler(newVal, oldVal) {
+        this.$store.dispatch('setCal', newVal);
       },
       deep: true
     }
@@ -144,89 +199,54 @@ export default {
       if(this.cals[material.itemId]) {
         this.$set(this.cals, material.itemId, this.cals[material.itemId]-1);
       }
+    },
+    rowStyle({row, rowIndex}) {
+      if(row.hide) {
+        return {
+          color: '#bfbfbf',
+          textDecoration: 'line-through'
+        }
+      }
+    },
+    hideOrShowPlan(row) {
+      row.hide = !row.hide;
+      this.$store.dispatch('setPlan', {
+        id: row.id,
+        data: row
+      });
+    },
+    removePlan(id) {
+      this.$store.dispatch('removePlan', id);
     }
   },
   created() {
-    this.materials = [...material].sort((a,b)=>b.rarity-a.rarity);
+    this.materials = [
+      ...material.sort((a,b)=>b.rarity-a.rarity),
+      ...book.sort((a,b)=>b.rarity-a.rarity),
+      ...chip.sort((a,b)=>b.rarity-a.rarity)
+    ];
     for(const i in this.materials) {
       this.$set(this.indexes, this.materials[i].itemId, i);
       this.$set(this.requires, this.materials[i].itemId, 0);
       this.$set(this.cals, this.materials[i].itemId, 0);
     }
     let stores = this.$store.getters.stores();
-    if(Object.keys(stores).length) {
-      this.stores = stores;
-    } else {
-      stores = {};
-      for(const m of this.materials) {
+    for(const m of this.materials) {
+      if(stores[m.itemId]===undefined) {
         this.$set(stores, m.itemId, 0);
       }
-      this.$store.dispatch('setStore', stores);
-      this.stores = this.$store.getters.stores();
     }
+    this.$store.dispatch('setStore', stores);
+    this.stores = this.$store.getters.stores();
+    let cals = this.$store.getters.cals();
+    for(const m of this.materials) {
+      if(cals[m.itemId]===undefined) {
+        this.$set(cals, m.itemId, 0);
+      }
+    }
+    this.$store.dispatch('setCal', cals);
+    this.cals = this.$store.getters.cals();
+    this.plans = this.$store.getters.plans();
   }
 }
 </script>
-<style lang="less" scoped>
-.workshop {
-  background: #404040;
-  position: relative;
-  .pane {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 5px;
-    overflow-x: auto;
-    .material:hover {
-      cursor: pointer;
-    }
-    .grid-0 {
-      grid-column: 1;
-    }
-    .require {
-      display: grid;
-      grid-template-columns: 30px 55px 30px 50px;
-      gap: 5px 0;
-      padding: 5px;
-      .number {
-        width: 50px;
-      }
-      .el-tag {
-        padding: 0;
-        border-radius: 0;
-        text-align: center;
-      }
-      .name {
-        font-size: 15px;
-        grid-column-start: 1;
-        grid-column-end: 3;
-      }
-      .tag-cal {
-        cursor: pointer;
-      }
-      .tag-store {
-        grid-column: 3;
-      }
-    }
-    .require.needed {
-      background-color: #ffffff;
-      .name {
-        font-weight: bold;
-      }
-    }
-  }
-  .pane-need {
-    min-height: 140px;
-  }
-  .pane-ground {
-    margin-top: 15px;
-    min-height: 375px;
-  }
-  .toolbar-ground {
-    position: absolute;
-    top: 180px;
-    left: 10px;
-  }
-}
-</style>

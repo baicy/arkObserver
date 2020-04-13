@@ -2,9 +2,11 @@
   <el-card>
     <el-table
       :data="list"
+      @row-click="editCharacter"
       border
       height="500"
       :default-sort="{prop: 'level', order: 'descending'}"
+      :row-style="{cursor: 'pointer'}"
       :cell-style="cellStyle"
       :span-method="spanMethod"
       show-summary
@@ -83,41 +85,56 @@
         </el-table-column>
       </el-table-column>
     </el-table>
+    <Info
+      :open.sync="editing"
+      :data="editingCharacter"
+      @updateInfo="updateEditingCharacter"
+      class="pane-edit"></Info>
   </el-card>
 </template>
 <script>
-import charactersData from '@/data/config/character.json'
-import charactersDetails from '@/data/source/character_table.json'
+import defaultData from '@/data/config/character.json'
+import details from '@/data/source/character_table.json'
 import skillsData from '@/data/source/skill_table.json'
 import '@/assets/styles/character.less'
+import Info from '@/components/CharacterInfo'
+
 export default {
-  components: {},
+  components: { Info },
   data() {
     return {
       characters: [],
-      professions: {warrior: '近卫', tank: '重装', medic: '医疗', sniper: '狙击', caster: '术师', special: '特种', support: '辅助', pioneer: '先锋'}
+      professions: {warrior: '近卫', tank: '重装', medic: '医疗', sniper: '狙击', caster: '术师', special: '特种', support: '辅助', pioneer: '先锋'},
+      editing: false,
+      editingCharacter: false
     }
   },
   computed: {
     list() {
       let list = [...this.characters];
+      for(let i in list) {
+        list[i].profession = details[list[i].id].profession.toLowerCase();
+        let skills = [];
+        for(let j in list[i].skills) {
+          let skillId = details[list[i].id].skills[j].skillId;
+          skills.push({
+            name: skillsData[skillId] ? skillsData[skillId].levels[0].name :'',
+            level: list[i].skills[j]
+          });
+        }
+        list[i].skillDetails = [...skills];
+      }
       return list;
     }
   },
   created() {
-    this.characters = charactersData;
-    for(let i in this.characters) {
-      this.characters[i].profession = charactersDetails[this.characters[i].id].profession.toLowerCase();
-
-      let skills = [];
-      for(let j in this.characters[i].skills) {
-        let skillId = charactersDetails[this.characters[i].id].skills[j].skillId;
-        skills.push({
-          name: skillsData[skillId] ? skillsData[skillId].levels[0].name :'',
-          level: this.characters[i].skills[j]
-        });
-      }
-      this.characters[i].skillDetails = [...skills];
+    let characters = this.$store.getters.characters();
+    if(Object.keys(characters).length) {
+      this.characters = characters;
+    } else {
+      characters = defaultData;
+      this.$store.dispatch('setCharacter', characters);
+      this.characters = this.$store.getters.characters();
     }
   },
   methods: {
@@ -181,7 +198,33 @@ export default {
       });
 
       return sums;
+    },
+    editCharacter(row, column, event) {
+      this.editing = true;
+      this.editingCharacter = row;
+    },
+    updateEditingCharacter(id) {
+      this.editingCharacter = id?this.$store.getters.characters(id):id;
     }
   }
 }
 </script>
+
+<style lang="less" scoped>
+.el-card {
+  position: relative;
+}
+.pane-edit {
+  position: absolute;
+  top: 20px;
+  left: 530px;
+  width: calc(100% - 550px);
+}
+</style>
+<style lang="less">
+.pane-edit {
+  .character-info {
+    height: 480px;
+  }
+}
+</style>

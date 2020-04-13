@@ -11,23 +11,25 @@ export default new Vuex.Store({
       key: "ark-observer-abc",
       paths: [
         "gachaLogs",
-        "stores"
-        // "plans",
-        // "characters",
+        "stores",
+        "cals",
+        "characters",
+        "plans"
       ]
     })
   ],
   state: {
     // data: {},
-    // plans: {},
-    // characters: {},
     gachaLogs: {
       logs: {},
       normalLast6: 0,
       limitLast6: 0,
       last6s: []
     },
-    stores: {}
+    stores: {},
+    cals: {},
+    characters: [],
+    plans: []
     // selectedItem: { character: '', material: '' }
   },
   mutations: {
@@ -93,32 +95,61 @@ export default new Vuex.Store({
       } else {
         Vue.set(state, 'stores', info);
       }
+    },
+    setCal: (state, info) => {
+      if(info.mid) {
+        Vue.set(state.cals, info.mid, info.number);
+      } else {
+        Vue.set(state, 'cals', info);
+      }
+    },
+    setCharacter: (state, info) => {
+      if(info.id) {
+        const index = state.characters.findIndex(c=>c.id==info.id);
+        if(index!=-1) {
+          Vue.set(state.characters, index, info.data);
+        } else {
+          state.characters.unshift(info.data);
+        }
+      } else {
+        Vue.set(state, 'characters', info);
+      }
+    },
+    setPlan: (state, info) => {
+      if(info.id) {
+        Vue.set(state.plans, info.id, info.data);
+      } else {
+        Vue.set(state, 'plans', info);
+      }
+    },
+    removePlan: (state, id) => {
+      Vue.delete(state.plans, id);
     }
   },
   getters: {
-      getCharactersStr: (state) => (refresh) => {
-          return JSON.stringify(state.characters);
-      },
-      getCharacters: (state) => (refresh) => {
-          return state.characters;
-      },
-      getCharacter: (state) => (key) => {
-          return state.characters[key];
-      },
-      getPlans: (state) => (refresh) => {
-          return state.plans;
-      },
-      selectedItem: (state) => (type) => state.selectedItem[type],
-      gachaLogs: (state) => (poolId) => {
-        if(poolId) {
-          return state.gachaLogs[poolId];
-        } else {
-          return state.gachaLogs;
-        }
-      },
-      stores: (state) => (mid) => {
-        return mid ? state.stores[mid] : state.stores;
+    getPlans: (state) => (refresh) => {
+        return state.plans;
+    },
+    selectedItem: (state) => (type) => state.selectedItem[type],
+    gachaLogs: (state) => (poolId) => {
+      if(poolId) {
+        return state.gachaLogs[poolId];
+      } else {
+        return state.gachaLogs;
       }
+    },
+    stores: (state) => (mid) => {
+      return mid ? state.stores[mid] : state.stores;
+    },
+    cals: (state) => (mid) => {
+      return mid ? state.cals[mid] : state.cals;
+    },
+    characters: (state) => (id) => {
+      return id ? state.characters.find(c=>c.id==id) : state.characters;
+    },
+    plans: (state) => (id) => {
+      return id ? state.plans.find(p=>p.id==id) : state.plans;
+    }
   },
   actions: {
     setSelectedItem({commit, state}, info) {
@@ -135,6 +166,18 @@ export default new Vuex.Store({
     },
     setStore({commit, state}, info) {
       commit('setStore', info);
+    },
+    setCal({commit, state}, info) {
+      commit('setCal', info);
+    },
+    setCharacter({commit, state}, info) {
+      commit('setCharacter', info);
+    },
+    setPlan({commit, state}, info) {
+      commit('setPlan', info);
+    },
+    removePlan({commit, state}, id) {
+      commit('removePlan', id);
     }
   }
 })
