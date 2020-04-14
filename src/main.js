@@ -1,14 +1,15 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
-import vuetify from './plugins/vuetify';
 import store from './store'
 import router from './router'
 import loading from './plugins/loading'
 import {fetch,post} from './utils/http'
 import path from '@/utils/paths'
 import less from 'less'
+import './assets/styles/main.less'
+
 
 Vue.use(loading)
 Vue.use(ElementUI)
@@ -26,7 +27,6 @@ Object.keys(filters).forEach((key) => {
 });
 
 new Vue({
-  vuetify,
   store,
   router,
   render: h => h(App)

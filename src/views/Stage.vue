@@ -185,6 +185,7 @@ export default {
   .row {
     margin: 0;
     .tile {
+      box-sizing: border-box;
       width: 40px;
       height: 40px;
       display: inline-block;
