@@ -1,3 +1,5 @@
+@colorDanger: #f56c6c;
+@colorSuccess: #67c23a;
 .el-input-number.is-controls-right .el-input__inner {
     padding-left: 5px;
     padding-right: 20px;
@@ -38,6 +40,12 @@
 .workshop {
     background: #404040;
     position: relative;
+    .el-card__header {
+        padding: 0;
+    }
+    .el-card__body {
+        padding: 38px 0 18px 20px;
+    }
     .pane-material {
         position: relative;
         display: grid;
@@ -50,11 +58,11 @@
         }
         .require {
             display: grid;
-            grid-template-columns: 30px 70px 30px 50px;
+            grid-template-columns: 30px 70px 30px 60px;
             gap: 5px 0;
             padding: 5px;
             .number {
-                width: 50px;
+                width: 60px;
             }
             .el-tag {
                 padding: 0;
@@ -79,30 +87,76 @@
                 font-weight: bold;
             }
         }
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+            background-color: #404040;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: #404040;
+        }
+        &::-webkit-scrollbar-corner {
+            background-color: #404040;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #ffffff;
+        }
     }
     .pane-need {
         width: 50%;
-        height: 140px;
+        padding: 30px 20px 20px;
+        height: 205px;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(5, 1fr);
+        grid-template-rows: repeat(6, 1fr);
         overflow-y: auto;
     }
     .pane-ground {
         grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: repeat(6, 1fr);
+        grid-template-rows: repeat(4, 72px);
         overflow: auto;
-        margin-top: 15px;
-        min-height: 451px;
+        height: 320px;
     }
     .toolbar-ground {
         position: absolute;
-        top: 180px;
-        left: 10px;
+        top: 210px;
+        left: 20px;
+    }
+    .pane-gold {
+        position: absolute;
+        color: #ffffff;
+        right: calc(50% + 10px);
+        top: 5px;
     }
     .pane-plan {
         display: flex;
     }
     .list-plan {
-        width: 50%;
+        .icon-tool-remove {
+            color: @colorDanger;
+        }
+        .icon-tool-complete {
+            color: @colorSuccess;
+        }
+        .row-dense {
+            th {
+                padding: 8px 0;
+            }
+            td {
+                padding: 0;
+            }
+            .materials {
+                display: flex;
+                .material +.material {
+                    margin-left: 10px;
+                }
+            }
+        }
+        .row-hide {
+            color: #bfbfbf;
+            text-decoration: line-through;
+            .icon-tool-hide {
+                color: #bfbfbf;
+            }
+        }
     }
 }

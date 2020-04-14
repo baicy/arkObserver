@@ -669,43 +669,58 @@
   ],
   "chip": [
     {
+      "itemId": "4006",
+      "name": "采购凭证",
+      "rarity": 2,
+      "sortId": 10008,
+      "type": "chip"
+    },
+    {
       "itemId": "32001",
       "name": "芯片助剂",
       "rarity": 3,
-      "sortId": 400001
+      "sortId": 400001,
+      "type": "chip",
+      "formula": {
+        "goldCost": 0,
+        "costs": [
+          [
+            "4006",
+            90
+          ]
+        ]
+      }
     },
     {
       "itemId": "3211",
       "name": "先锋芯片",
       "rarity": 2,
       "sortId": 400004,
-      "formula": {
-        "sortId": 4005,
-        "formulaId": "43",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3271",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3212",
       "name": "先锋芯片组",
       "rarity": 3,
       "sortId": 400003,
+      "type": "chip"
+    },
+    {
+      "itemId": "3213",
+      "name": "先锋双芯片",
+      "rarity": 4,
+      "sortId": 400001,
+      "type": "chip",
       "formula": {
-        "sortId": 4105,
-        "formulaId": "51",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3272",
-            3
+            "3212",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
@@ -715,33 +730,31 @@
       "name": "近卫芯片",
       "rarity": 2,
       "sortId": 400007,
-      "formula": {
-        "sortId": 4007,
-        "formulaId": "45",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3281",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3222",
       "name": "近卫芯片组",
       "rarity": 3,
       "sortId": 400006,
+      "type": "chip"
+    },
+    {
+      "itemId": "3223",
+      "name": "近卫双芯片",
+      "rarity": 4,
+      "sortId": 400001,
+      "type": "chip",
       "formula": {
-        "sortId": 4107,
-        "formulaId": "53",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3282",
-            3
+            "3222",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
@@ -751,33 +764,31 @@
       "name": "重装芯片",
       "rarity": 2,
       "sortId": 400010,
-      "formula": {
-        "sortId": 4001,
-        "formulaId": "39",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3261",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3232",
       "name": "重装芯片组",
       "rarity": 3,
       "sortId": 400009,
+      "type": "chip"
+    },
+    {
+      "itemId": "3233",
+      "name": "重装双芯片",
+      "rarity": 4,
+      "sortId": 400001,
+      "type": "chip",
       "formula": {
-        "sortId": 4101,
-        "formulaId": "47",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3262",
-            3
+            "3232",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
@@ -787,33 +798,31 @@
       "name": "狙击芯片",
       "rarity": 2,
       "sortId": 400013,
-      "formula": {
-        "sortId": 4003,
-        "formulaId": "41",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3251",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3242",
       "name": "狙击芯片组",
       "rarity": 3,
       "sortId": 400012,
+      "type": "chip"
+    },
+    {
+      "itemId": "3243",
+      "name": "狙击双芯片",
+      "rarity": 4,
+      "sortId": 400011,
+      "type": "chip",
       "formula": {
-        "sortId": 4103,
-        "formulaId": "49",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3252",
-            3
+            "3242",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
@@ -823,33 +832,31 @@
       "name": "术师芯片",
       "rarity": 2,
       "sortId": 400016,
-      "formula": {
-        "sortId": 4004,
-        "formulaId": "42",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3241",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3252",
       "name": "术师芯片组",
       "rarity": 3,
       "sortId": 400015,
+      "type": "chip"
+    },
+    {
+      "itemId": "3253",
+      "name": "术师双芯片",
+      "rarity": 4,
+      "sortId": 400014,
+      "type": "chip",
       "formula": {
-        "sortId": 4104,
-        "formulaId": "50",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3242",
-            3
+            "3252",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
@@ -859,33 +866,31 @@
       "name": "医疗芯片",
       "rarity": 2,
       "sortId": 400019,
-      "formula": {
-        "sortId": 4002,
-        "formulaId": "40",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3231",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3262",
       "name": "医疗芯片组",
       "rarity": 3,
       "sortId": 400018,
+      "type": "chip"
+    },
+    {
+      "itemId": "3263",
+      "name": "医疗双芯片",
+      "rarity": 4,
+      "sortId": 400017,
+      "type": "chip",
       "formula": {
-        "sortId": 4102,
-        "formulaId": "48",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3232",
-            3
+            "3262",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
@@ -895,33 +900,31 @@
       "name": "辅助芯片",
       "rarity": 2,
       "sortId": 400022,
-      "formula": {
-        "sortId": 4006,
-        "formulaId": "44",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3211",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3272",
       "name": "辅助芯片组",
       "rarity": 3,
       "sortId": 400021,
+      "type": "chip"
+    },
+    {
+      "itemId": "3273",
+      "name": "辅助双芯片",
+      "rarity": 4,
+      "sortId": 400020,
+      "type": "chip",
       "formula": {
-        "sortId": 4106,
-        "formulaId": "52",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3212",
-            3
+            "3272",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
@@ -931,33 +934,31 @@
       "name": "特种芯片",
       "rarity": 2,
       "sortId": 400025,
-      "formula": {
-        "sortId": 4008,
-        "formulaId": "46",
-        "rarity": 0,
-        "goldCost": 0,
-        "costs": [
-          [
-            "3221",
-            3
-          ]
-        ]
-      }
+      "type": "chip"
     },
     {
       "itemId": "3282",
       "name": "特种芯片组",
       "rarity": 3,
       "sortId": 400024,
+      "type": "chip"
+    },
+    {
+      "itemId": "3283",
+      "name": "特种双芯片",
+      "rarity": 4,
+      "sortId": 400023,
+      "type": "chip",
       "formula": {
-        "sortId": 4108,
-        "formulaId": "54",
-        "rarity": 0,
         "goldCost": 0,
         "costs": [
           [
-            "3222",
-            3
+            "3282",
+            2
+          ],
+          [
+            "32001",
+            1
           ]
         ]
       }
