@@ -1,9 +1,8 @@
 <template>
-
-  <div id="app">
-    <NavMenu />
-    <router-view />
-  </div>
+<div id="app">
+  <NavMenu class="top-nav-menu" />
+  <router-view class="container-content" />
+</div>
 </template>
 
 <script>
@@ -19,5 +18,15 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+#app {
+  height: 100%;
+  .top-nav-menu {
+    height: 60px;
+  }
+  .container-content {
+    height: calc(100% - 63px);
+    overflow-y: auto;
+  }
+}
 </style>

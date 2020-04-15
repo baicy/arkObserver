@@ -66,7 +66,8 @@
   </el-row>
   <div slot="title" :class="['summary', {'summary-none': data.potential==-1}]">
     <span class="name">{{data.name}}</span>
-    <div v-if="data.potential>-1">
+    <div :class="'rarity-'+data.rarity"></div>
+    <div v-if="data.potential>-1" class="summary-info">
       <div :class="'potential potential-'+data.potential"></div>
       <div :class="'elite elite-'+data.phase"></div>
       <div class="level">

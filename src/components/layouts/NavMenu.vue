@@ -1,5 +1,5 @@
 <template>
-<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+<el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
   <el-submenu index="gacha">
     <template slot="title">卡池记录</template>
     <el-menu-item index="/gacha/pool">抽卡记录</el-menu-item>

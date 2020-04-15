@@ -1,5 +1,5 @@
 <template>
-<el-card style="margin: 10px">
+<el-card>
   <el-tabs type="card" v-model="rarity">
     <el-tab-pane label="6星" name="6"></el-tab-pane>
     <el-tab-pane label="5星" name="5"></el-tab-pane>

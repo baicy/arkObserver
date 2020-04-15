@@ -38,7 +38,7 @@
             {{ row.item ? (row.item+' '+row.from+'->'+row.to) : '' }}
           </template>
         </el-table-column>
-        <el-table-column prop="materials" label="材料" width="380">
+        <el-table-column prop="materials" label="材料">
           <template slot-scope="{row}">
             <div class="materials">
               <Material v-for="(m,i) in row.materials" :key="i" :item="materials[indexes[m[0]]]" :number="m[1]" class="material"></Material>

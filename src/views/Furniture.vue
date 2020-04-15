@@ -2,6 +2,7 @@
 <el-card>
   <el-table
     :data="list"
+    height="500"
     class="furniture-table"
     border>
     <el-table-column

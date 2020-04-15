@@ -1,6 +1,6 @@
 <template>
-<div>
-  <el-tabs type="border-card" v-model="currentPoolId" @tab-click="handleChangePool" style="height: calc(100% - 20px);margin: 10px;">
+<el-card>
+  <el-tabs type="border-card" v-model="currentPoolId" @tab-click="handleChangePool">
     <el-tab-pane
       v-for="(pool, index) in pools" :key="index"
       :name="pool.gachaPoolId">
@@ -115,7 +115,7 @@
       </div>
     </el-tab-pane>
   </el-tabs>
-</div>
+</el-card>
 </template>
 <script>
 import poolsData from '@/data/config/gacha.json'

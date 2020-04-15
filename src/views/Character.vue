@@ -6,7 +6,7 @@
       border
       height="500"
       :default-sort="{prop: 'level', order: 'descending'}"
-      :row-style="{cursor: 'pointer'}"
+      row-class-name="row-dense row-content"
       :cell-style="cellStyle"
       :span-method="spanMethod"
       show-summary
@@ -38,17 +38,22 @@
         </template>
       </el-table-column>
       <el-table-column prop="potential" label="潜能" width="80" sortable>
-        <template slot-scope="scope">
-          <el-tag v-if="scope.row.potential==-1" type="danger" effect="dark" disable-transitions>未持有</el-tag>
-          <div v-else :class="'potential-'+scope.row.potential"></div>
+        <template slot-scope="{row}">
+          <el-tag v-if="row.potential==-1" size="small" type="danger" effect="dark" disable-transitions>未持有</el-tag>
+          <div v-else class="icon-pane potential-pane">
+            <div :class="'potential-'+row.potential"></div>
+            <span>{{row.potential+1}}</span>
+          </div>
         </template>
       </el-table-column>
-      <el-table-column prop="level" label="等级" width="80" sortable :sort-by="['phase', 'level', 'rarity']">
-        <template slot-scope="scope">
-          <div :class="'elite-'+scope.row.phase"></div>
-          <div class="level">
-            <div class="lv-text"></div>
-            <div class="lv-number">{{scope.row.level}}</div>
+      <el-table-column prop="level" label="等级" width="90" sortable :sort-by="['phase', 'level', 'rarity']">
+        <template slot-scope="{row}">
+          <div class="icon-pane elite-pane">
+            <div :class="'elite-'+row.phase"></div>
+            <div class="level-circle">
+              <el-progress :percentage="Math.floor(row.level / maxLevel[row.rarity][row.phase] * 100)" :width="35" :stroke-width="2" :show-text="false" color="#f8d206" type="circle"></el-progress>
+              <div class="level-number">{{row.level}}</div>
+            </div>
           </div>
         </template>
       </el-table-column>
@@ -96,6 +101,7 @@
 import defaultData from '@/data/config/character.json'
 import details from '@/data/source/character_table.json'
 import skillsData from '@/data/source/skill_table.json'
+import { maxLevel } from '@/data/source/gamedata_const.json'
 import '@/assets/styles/character.less'
 import Info from '@/components/CharacterInfo'
 
@@ -106,7 +112,8 @@ export default {
       characters: [],
       professions: {warrior: '近卫', tank: '重装', medic: '医疗', sniper: '狙击', caster: '术师', special: '特种', support: '辅助', pioneer: '先锋'},
       editing: false,
-      editingCharacter: false
+      editingCharacter: false,
+      maxLevel: maxLevel
     }
   },
   computed: {
@@ -139,15 +146,22 @@ export default {
   },
   methods: {
     cellStyle({row, column, rowIndex, columnIndex}) {
-      if(['potential', 'level'].includes(column.property) && row.potential!=-1) {
+      if(row.potential==-1 && 'potential' == column.property) {
         return {
-          backgroundColor: '#313131'
+          padding: '10px 0'
+        }
+      }
+      if(row.potential!=-1 && ['potential', 'level'].includes(column.property)) {
+        return {
+          backgroundColor: '#313131',
+          padding: '3px 0'
         }
       }
     },
     spanMethod({ row, column, rowIndex, columnIndex }) {
-      if (row.potential === -1 && column.property === 'potential') {
-        return [1, 5]
+      if (row.potential === -1) {
+        if(column.property === 'potential') return [1, 5];
+        if(['level', 'skill1', 'skill2', 'skill3'].includes(column.property)) return [1, 0];
       }
     },
     skillSort(a, b, skill) {
@@ -217,8 +231,8 @@ export default {
 .pane-edit {
   position: absolute;
   top: 20px;
-  left: 530px;
-  width: calc(100% - 550px);
+  left: 535px;
+  width: calc(100% - 555px);
 }
 </style>
 <style lang="less">
