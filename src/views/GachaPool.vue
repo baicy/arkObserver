@@ -179,13 +179,13 @@ export default {
     }
   },
   methods: {
-    handleChangePool(tab, event) {
+    handleChangePool(tab) {
       this.currentPoolId = tab.name;
       this.currentPoolLimit = this.pools[tab.index].gachaPoolType=='LimitedAdvancedGacha'?true:false;
     },
     showInput(rarity) {
       this.inputVisible[rarity] = true;
-      this.$nextTick(_ => {
+      this.$nextTick(() => {
         this.$refs['saveInput'+rarity][0].$refs.input.focus();
       });
     },

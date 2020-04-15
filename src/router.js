@@ -7,8 +7,6 @@ import GachaUp from './views/GachaUp'
 import Handbook from './views/Handbook'
 import Character from './views/Character'
 import Stage from './views/Stage'
-import Story from './views/Story'
-import Store from './views/Store'
 import Material from './views/Material'
 
 Vue.use(Router)
@@ -49,16 +47,6 @@ export default new Router({
       path: '/stage',
       name: 'stage',
       component: Stage
-    },
-    {
-      path: '/story',
-      name: 'story',
-      component: Story
-    },
-    {
-      path: '/store',
-      name: 'store',
-      component: Store
     },
     {
       path: '/material',

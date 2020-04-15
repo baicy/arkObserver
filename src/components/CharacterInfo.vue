@@ -142,7 +142,7 @@ export default {
   },
   watch: {
     data: {
-      handler(newVal, oldVal) {
+      handler(newVal) {
         if(!newVal) return;
         this.resetInfo();
       },

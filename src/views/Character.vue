@@ -146,7 +146,7 @@ export default {
     }
   },
   methods: {
-    cellStyle({row, column, rowIndex, columnIndex}) {
+    cellStyle({row, column}) {
       if(row.potential==-1 && 'potential' == column.property) {
         return {
           padding: '10px 0'
@@ -159,7 +159,7 @@ export default {
         }
       }
     },
-    spanMethod({ row, column, rowIndex, columnIndex }) {
+    spanMethod({ row, column }) {
       if (row.potential === -1) {
         if(column.property === 'potential') return [1, 5];
         if(['level', 'skill1', 'skill2', 'skill3'].includes(column.property)) return [1, 0];
@@ -214,7 +214,7 @@ export default {
 
       return sums;
     },
-    editCharacter(row, column, event) {
+    editCharacter(row) {
       this.editing = true;
       this.editingCharacter = row;
     },

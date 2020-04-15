@@ -127,18 +127,19 @@ export default {
         this.$set(results, m.itemId, 0);
         this.$set(this.totalNeeds, m.itemId, 0);
       }
-      this.goldCost = 0;
+      let goldCost = 0;
       for(const m of this.materials) {
         const need = results[m.itemId] + this.requires[m.itemId] - this.cals[m.itemId] - this.stores[m.itemId];
         this.$set(results, m.itemId, (need>0 ? need : 0));
         this.$set(this.totalNeeds, m.itemId, this.totalNeeds[m.itemId] + this.requires[m.itemId]);
         if(!m.formula) continue;
-        this.goldCost += this.cals[m.itemId]*m.formula.goldCost;
+        goldCost += this.cals[m.itemId]*m.formula.goldCost;
         for(const cost of m.formula.costs) {
           this.$set(results, cost[0], results[cost[0]] + (this.cals[m.itemId] * cost[1]));
           this.$set(this.totalNeeds, cost[0], this.totalNeeds[cost[0]] + (this.cals[m.itemId] * cost[1]));
         }
-      } 
+      }
+      this.$set(this, 'goldCost', goldCost);
       return results;
     },
     neededMaterials() {
@@ -150,7 +151,7 @@ export default {
   },
   watch:{
     stores: {
-      handler(newVal, oldVal) {
+      handler(newVal) {
         for(const m of this.materials) {
           if(!m.formula) continue;
           this.$set(this.ableMergeds, m.itemId, !(m.formula.costs.reduce((r, c)=>r && this.stores[c[0]]>=c[1], true)));
@@ -160,13 +161,13 @@ export default {
       deep: true
     },
     cals: {
-      handler(newVal, oldVal) {
+      handler(newVal) {
         this.$store.dispatch('setCal', newVal);
       },
       deep: true
     },
     plans: {
-      handler(newVal, oldVal) {
+      handler() {
         this.updatePlanList();
       },
       deep: true
@@ -207,7 +208,7 @@ export default {
         return la-lb;
       });
     },
-    rowClass({row, rowIndex}) {
+    rowClass({row}) {
       let classes = ['row-dense'];
       if(row.hide) {
         classes.push('row-hide');

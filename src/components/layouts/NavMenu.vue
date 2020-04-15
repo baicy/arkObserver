@@ -22,8 +22,8 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      this.$router.push(key).catch(_=>{});//添加catch防止报错点击重复路由
+    handleSelect(key) {
+      this.$router.push(key).catch(()=>{});//添加catch防止报错点击重复路由
     }
   },
   mounted() {
