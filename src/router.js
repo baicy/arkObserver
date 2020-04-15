@@ -11,8 +11,6 @@ import Story from './views/Story'
 import Store from './views/Store'
 import Material from './views/Material'
 
-import Convert from './views/Convert'
-import Ocr from './views/Ocr'
 Vue.use(Router)
 
 export default new Router({
@@ -66,16 +64,6 @@ export default new Router({
       path: '/material',
       name: 'material',
       component: Material
-    },
-    {
-      path: '/ocr',
-      name: 'ocr',
-      component: Ocr
-    },
-    {
-      path: '/convert',
-      name: 'convert',
-      component: Convert
     },
     {
       path: '/about',
