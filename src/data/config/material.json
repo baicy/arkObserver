@@ -1010,5 +1010,14 @@
       },
       "type": "book"
     }
+  ],
+  "money": [
+    {
+      "itemId": "4001",
+      "name": "龙门币",
+      "rarity": 3,
+      "sortId": 10004,
+      "type": "money"
+    }
   ]
 }

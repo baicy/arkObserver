@@ -6,6 +6,7 @@
       border
       height="500"
       :default-sort="{prop: 'level', order: 'descending'}"
+      header-row-class-name="row-dense"
       row-class-name="row-dense row-content"
       :cell-style="cellStyle"
       :span-method="spanMethod"

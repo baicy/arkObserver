@@ -98,7 +98,7 @@
 </template>
 <script>
 import '@/assets/styles/material.less'
-import { material, book, chip } from '@/data/config/material.json'
+import { material, book, chip, money } from '@/data/config/material.json'
 import Material from '@/components/Material'
 
 export default {
@@ -249,7 +249,8 @@ export default {
     this.materials = [
       ...material.sort((a,b)=>b.rarity-a.rarity),
       ...book.sort((a,b)=>b.rarity-a.rarity),
-      ...chip.sort((a,b)=>b.rarity-a.rarity)
+      ...chip.sort((a,b)=>b.rarity-a.rarity),
+      ...money
     ];
     for(const i in this.materials) {
       this.$set(this.indexes, this.materials[i].itemId, i);

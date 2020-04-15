@@ -127,6 +127,9 @@
     .el-dialog__body {
         padding: 0 20px;
     }
+    .el-dialog__footer {
+        text-align: left;
+    }
     .rarity {
         height: 18px;
         width: 65px;
@@ -154,9 +157,7 @@
     .summary {
         background-color: @colorBackground;
         color: @colorWhite;
-        margin-right: 20px;
         padding: 10px;
-        height: 35px;
         display: flex;
         &>div {
             display: flex;
@@ -201,7 +202,7 @@
     .pane-icon {
         background-color: @colorBackground;
         color: @colorWhite;
-        width: 80px;
+        width: 60px;
         .icon-operate {
             cursor: pointer;
             font-weight: bold;
@@ -211,7 +212,6 @@
         display: flex;
         background-color:@colorBackground;
         padding: 5px 15px;
-        border-right: 20px solid @colorWhite;
         .pane-range {
             width: 180px;
             margin-left: 10px;
@@ -223,6 +223,7 @@
         }
     }
     .range-exp {
+        border-right: 10px solid @colorWhite;
         .el-slider__bar {
             background-color: @colorExp;
         }
@@ -234,6 +235,7 @@
         }
     }
     .range-favor {
+        border-left: 10px solid @colorWhite;
         .el-slider__bar {
             background-color: @colorFavor;
         }
@@ -244,17 +246,29 @@
             color: @colorFavor;
         }
     }
-    .pane-skill {
-        width: 200px;
+    .pane-skills {
         margin-top: 10px;
-        padding: 10px;
-        .skill {
-            .name {
-                text-align: center;
-            }
-        }
-        .operates {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .pane-skill {
+        background-color: @colorBackground;
+        color: @colorWhite;
+        justify-content: space-evenly;
+        padding: 5px 0;
+        .name {
             text-align: center;
+        }
+    }
+    .list-plan {
+        list-style: none;
+        height: 120px;
+        overflow-y: auto;
+        padding-left: 20px;
+        font-size: 14px;
+        li+li {
+            margin-top: 10px;
         }
     }
 }
