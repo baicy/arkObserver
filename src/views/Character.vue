@@ -2,6 +2,8 @@
   <el-card>
     <el-table
       :data="list"
+      ref="charas"
+      id="charas"
       @row-click="editCharacter"
       border
       height="500"
@@ -12,6 +14,7 @@
       :span-method="spanMethod"
       show-summary
       :summary-method="getSummaries"
+      highlight-current-row
       class="character-list">
       <el-table-column prop="name" label="代号" width="100"></el-table-column>
       <el-table-column
@@ -21,23 +24,21 @@
         :filter-method="filterEqual"
         filter-placement="bottom"
         width="100">
-        <template slot-scope="scope">
-          {{professions[scope.row.profession]}}
+        <template slot-scope="{row}">
+          {{professions[row.profession]}}
         </template>
       </el-table-column>
+      <!-- 把稀有度从循环输出图片去掉之后速度提升特别大，其他的都不需要换了 -->
       <el-table-column
         prop="rarity"
         label="稀有度"
-        width="150"
+        width="100"
         :filters="[{text: '6星', value: 5}, {text: '5星', value: 4}, {text: '4星', value: 3}, {text: '3星', value: 2}, {text: '2星', value: 1}, {text: '1星', value: 0}]"
         :filter-method="filterEqual"
+        :formatter="(row)=>(row.rarity+1)+'星'"
         sortable>
-        <template slot-scope="scope">
-          <div class="rarity">
-            <div v-for="i in scope.row.rarity+1" :key="i" class="star"></div>
-          </div>
-        </template>
       </el-table-column>
+      <el-table-column prop="favor" label="信赖" width="75" sortable></el-table-column>
       <el-table-column prop="potential" label="潜能" width="80" sortable>
         <template slot-scope="{row}">
           <el-tag v-if="row.potential==-1" size="small" type="danger" effect="dark" disable-transitions>未持有</el-tag>
@@ -58,32 +59,18 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="技能" sortable :sort-method="skillSort(null,null,0)">
-        <el-table-column prop="skill1" label="技能1" sortable :sort-method="skillSort(null,null,1)">
-          <template slot-scope="scope">
-            <div v-if="scope.row.skillDetails[0]" class="skill">
-              <div class="name">{{scope.row.skillDetails[0].name}}</div>
-              <div :class="'rank-'+scope.row.skillDetails[0].level">
-                <div></div>
-              </div>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="skill2" label="技能2" sortable :sort-method="skillSort(null,null,2)">
-          <template slot-scope="scope">
-            <div v-if="scope.row.skillDetails[1]" class="skill">
-              <div class="name">{{scope.row.skillDetails[1].name}}</div>
-              <div :class="'rank-'+scope.row.skillDetails[1].level">
-                <div></div>
-              </div>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="skill3" label="技能3" sortable :sort-method="skillSort(null,null,3)">
-          <template slot-scope="scope">
-            <div v-if="scope.row.skillDetails[2]" class="skill">
-              <div class="name">{{scope.row.skillDetails[2].name}}</div>
-              <div :class="'rank-'+scope.row.skillDetails[2].level">
+      <el-table-column prop="operator">
+        <template slot="header" slot-scope="{}">
+          <div class="operators">
+            <el-input v-model="newerName" @change="newCharacter" class="character-search" size="mini"></el-input>
+            <el-switch v-model="onlyHaves" class="character-have" active-text="只显示持有干员"></el-switch>
+          </div>
+        </template>
+        <el-table-column v-for="i in 3" :key="i" :label="'技能'+i" sortable :sort-method="skillSort(null,null,i)">
+          <template slot-scope="{row}">
+            <div v-if="row.skillDetails[i-1]" class="skill">
+              <div class="name">{{row.skillDetails[i-1].name}}</div>
+              <div :class="'rank-'+row.skillDetails[i-1].level">
                 <div></div>
               </div>
             </div>
@@ -108,18 +95,21 @@ import Info from '@/components/CharacterInfo'
 
 export default {
   components: { Info },
-  data() {
-    return {
-      characters: [],
-      professions: {warrior: '近卫', tank: '重装', medic: '医疗', sniper: '狙击', caster: '术师', special: '特种', support: '辅助', pioneer: '先锋'},
-      editing: false,
-      editingCharacter: false,
-      maxLevel: maxLevel
-    }
-  },
+  data: () => ({
+    characters: [],
+    professions: {warrior: '近卫', tank: '重装', medic: '医疗', sniper: '狙击', caster: '术师', special: '特种', support: '辅助', pioneer: '先锋'},
+    editing: false,
+    editingCharacter: false,
+    maxLevel: maxLevel,
+    newerName: '',
+    onlyHaves: true
+  }),
   computed: {
     list() {
       let list = [...this.characters];
+      if(this.onlyHaves) {
+        list = list.filter(c=>c.potential>-1);
+      }
       for(let i in list) {
         list[i].profession = details[list[i].id].profession.toLowerCase();
         let skills = [];
@@ -159,25 +149,17 @@ export default {
         }
       }
     },
-    spanMethod({ row, column }) {
+    spanMethod({ row, column, columnIndex }) {
       if (row.potential === -1) {
         if(column.property === 'potential') return [1, 5];
-        if(['level', 'skill1', 'skill2', 'skill3'].includes(column.property)) return [1, 0];
+        if(columnIndex>4) return [1, 0];
       }
     },
     skillSort(a, b, skill) {
-      if(skill) {
-        return (a, b) => {
-          const la = a.skills[skill-1] ? a.skills[skill-1] : -1;
-          const lb = b.skills[skill-1] ? b.skills[skill-1] : -1;
-          return la - lb;
-        }
-      } else {
-        return (a, b) => {
-          const la = a.skills.reduce((sum, x)=>sum+x,0);
-          const lb = b.skills.reduce((sum, x)=>sum+x,0);
-          return la - lb;
-        }
+      return (a, b) => {
+        const la = a.skills[skill-1] ? a.skills[skill-1] : -1;
+        const lb = b.skills[skill-1] ? b.skills[skill-1] : -1;
+        return la - lb;
       }
     },
     filterEqual(value, row, column) {
@@ -202,11 +184,11 @@ export default {
           sums[index] = owned+'/'+data.length;
           return;
         }
-        if (column.property=='skill1') {
+        if (index==6) {
           sums[index] = '精英化: '+phaseCount[2]+'(2)/'+phaseCount[1]+'(1)/'+phaseCount[0];
           return;
         }
-        if (column.property=='skill2') {
+        if (index==7) {
           sums[index] = '专精: '+masterCount[2]+'(3)/'+masterCount[1]+'(2)/'+masterCount[0]+'(1)';
           return;
         }
@@ -220,6 +202,45 @@ export default {
     },
     updateEditingCharacter(id) {
       this.editingCharacter = id?this.$store.getters.characters(id):id;
+    },
+    newCharacter() {
+      const newerName = this.newerName.trim();
+      if(!newerName) return;
+      if(!this.findCharacter(newerName)) {
+        for(const i in details) {
+          if(details[i].name!=newerName) continue;
+          const chara = {
+            id: i,
+            name: details[i].name,
+            rarity: details[i].rarity,
+            potential: -1,
+            favor: 0,
+            phase: 0,
+            level: 1,
+            skills: [1]
+          };
+          this.$store.dispatch('setCharacter', {
+            id: i,
+            data: chara
+          });
+          this.$notify.success({
+            message: '新增干员 ' + newerName
+          });
+          this.$nextTick(()=>{
+            this.findCharacter(newerName);
+          });
+        }
+      }
+    },
+    findCharacter(name) {
+      if(this.characters.findIndex(c=>c.name==name)==-1) return false;
+      const data = this.$refs.charas.tableData;
+      const index = data.findIndex(c=>c.name==name);
+      if(index==-1) return true;
+      const row = document.getElementById('charas').getElementsByClassName('row-content')[index];
+      row.scrollIntoView();
+      this.$refs.charas.setCurrentRow(data[index]);
+      return true;
     }
   }
 }
@@ -231,15 +252,15 @@ export default {
 }
 .pane-edit {
   position: absolute;
-  top: 20px;
-  left: 535px;
-  width: calc(100% - 555px);
+  top: 12px;
+  left: 560px;
+  width: calc(100% - 575px);
 }
 </style>
 <style lang="less">
 .pane-edit {
   .character-info {
-    height: 480px;
+    height: 490px;
   }
 }
 </style>

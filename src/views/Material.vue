@@ -67,13 +67,13 @@
           </div>
         </div>
         <div>
-          <el-input-number v-model="extra" size="mini" :min="0" controls-position="right"></el-input-number>
+          <el-input-number v-model="extra" class="number-mini" size="mini" :min="0" controls-position="right"></el-input-number>
           <el-button @click="addExtraPlan(material.itemId)" type="primary" size="mini">extra</el-button>
         </div>
         <Material slot="reference" class="material" :item="material" :show-number="false"></Material>
       </el-popover>
       <el-tag size="medium" type="primary" effect="dark">{{totalNeeds[material.itemId]}}</el-tag>
-      <el-input-number v-model="requires[material.itemId]" :min="0" class="number" size="mini" controls-position="right"></el-input-number>
+      <el-input-number v-model="requires[material.itemId]" :min="0" class="number-mini number" size="mini" controls-position="right"></el-input-number>
       <el-tag
         v-if="material.formula"
         :type="stores[material.itemId]+cals[material.itemId]<totalNeeds[material.itemId]?'primary':(cals[material.itemId]&&stores[material.itemId]+cals[material.itemId]>totalNeeds[material.itemId]?'danger':'info')"
@@ -83,7 +83,7 @@
         effect="dark">
           <i class="el-icon-s-tools"></i>
       </el-tag>
-      <el-input-number v-if="material.formula" class="number" size="mini" v-model="cals[material.itemId]" :min="0" :max="totalNeeds[material.itemId]||Infinity" controls-position="right"></el-input-number>
+      <el-input-number v-if="material.formula" class="number-mini number" size="mini" v-model="cals[material.itemId]" :min="0" :max="totalNeeds[material.itemId]||Infinity" controls-position="right"></el-input-number>
       <el-tag
         :type="stores[material.itemId]+cals[material.itemId]>=totalNeeds[material.itemId]?'success':'danger'"
         class="tag-store"
@@ -91,7 +91,7 @@
         effect="dark">
           <i class="el-icon-coin"></i>
       </el-tag>
-      <el-input-number class="number" size="mini" v-model="stores[material.itemId]" :min="0" controls-position="right"></el-input-number>
+      <el-input-number class="number-mini number" size="mini" v-model="stores[material.itemId]" :min="0" controls-position="right"></el-input-number>
     </div>
   </div>
 </el-card>

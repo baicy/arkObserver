@@ -15,12 +15,6 @@
       width="200">
     </el-table-column>
     <el-table-column
-      prop="count"
-      label="UP次数"
-      width="100"
-      sortable>
-    </el-table-column>
-    <el-table-column
       prop="ups"
       label="UP">
       <template slot-scope="scope">
@@ -30,15 +24,27 @@
       </template>
     </el-table-column>
     <el-table-column
+      prop="count"
+      label="UP次数"
+      width="100"
+      sortable>
+    </el-table-column>
+    <el-table-column
       prop="lastUp"
       label="上次UP"
-      width="200"
+      width="150"
+      sortable>
+    </el-table-column>
+    <el-table-column
+      prop="shopCount"
+      label="进店次数"
+      width="120"
       sortable>
     </el-table-column>
     <el-table-column
       prop="lastShop"
       label="上次进店"
-      width="200"
+      width="150"
       sortable>
     </el-table-column>
   </el-table>
@@ -76,7 +82,9 @@ export default {
         };
         record.count = record.ups.length;
         record.lastUp = record.ups[0][0];
-        record.lastShop = record.ups.find(x=>x[1]==1) ? record.ups.find(x=>x[1]==1)[0] : '';
+        const shops = record.ups.filter(x=>x[1]==1);
+        record.shopCount = shops.length;
+        record.lastShop = shops.length ? shops[0][0] : '';
         this['list'+i].push(record);
       }
     }

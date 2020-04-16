@@ -24,9 +24,8 @@
         </div>
         <span class="range-value">等级</span>
         <div class="pane-range">
-          <el-slider v-model="level" :min="1" :max="maxLevel"></el-slider>
+          <el-slider v-model="level" :min="1" :max="maxLevel" class="slider-input" show-input input-size="mini"></el-slider>
         </div>
-        <span class="range-value">{{level}}</span>
       </div>
     </el-col>
     <el-col :span="12">
@@ -44,9 +43,8 @@
         </div>
         <span class="range-value">信赖</span>
         <div class="pane-range">
-          <el-slider v-model="favor" :min="0" :max="200"></el-slider>
+          <el-slider v-model="favor" :min="0" :max="200" class="slider-input" show-input input-size="mini"></el-slider>
         </div>
-        <span class="range-value">{{favor}}</span>
       </div>
     </el-col>
   </el-row>
