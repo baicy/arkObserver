@@ -1,27 +1,34 @@
 @colorDanger: #f56c6c;
 @colorSuccess: #67c23a;
+
 .toolbar-ground {
     .el-switch__label {
         color: #ffffff;
+
         &.is-active {
             color: #409EFF;
         }
     }
 }
+
 .popover-material {
     .formula {
         display: flex;
+
         .cost {
             position: relative;
             margin-right: 20px;
+
             :after {
                 content: "+";
                 position: absolute;
                 top: 0;
                 right: -15px;
             }
+
             &:last-child {
                 margin-right: 0;
+
                 :after {
                     content: "";
                 }
@@ -29,73 +36,92 @@
         }
     }
 }
+
 .workshop {
     background: #404040;
     position: relative;
     border: none;
     border-radius: 0;
+
     .el-card__header {
         padding: 0;
     }
+
     .el-card__body {
         padding: 38px 0 18px 20px;
     }
+
     .pane-material {
         position: relative;
         display: grid;
         gap: 5px;
+
         .material:hover {
             cursor: pointer;
         }
+
         .grid-0 {
             grid-column: 1;
         }
+
         .require {
             display: grid;
             grid-template-columns: 30px 70px 30px 60px;
             gap: 5px 0;
             padding: 5px;
+
             .number {
                 width: 60px;
             }
+
             .el-tag {
                 padding: 0;
                 border-radius: 0;
                 text-align: center;
             }
+
             .name {
                 font-size: 15px;
                 grid-column-start: 1;
                 grid-column-end: 3;
             }
+
             .tag-cal {
                 cursor: pointer;
             }
+
             .tag-store {
                 grid-column: 3;
             }
         }
+
         .require.needed {
             background-color: #ffffff;
+
             .name {
                 font-weight: bold;
             }
         }
+
         &::-webkit-scrollbar {
             width: 8px;
             height: 8px;
             background-color: #404040;
         }
+
         &::-webkit-scrollbar-track {
             background-color: #404040;
         }
+
         &::-webkit-scrollbar-corner {
             background-color: #404040;
         }
+
         &::-webkit-scrollbar-thumb {
             background: #ffffff;
         }
     }
+
     .pane-need {
         width: 50%;
         box-sizing: border-box; //使height包括padding和border
@@ -105,44 +131,54 @@
         grid-template-rows: repeat(6, 1fr);
         overflow-y: auto;
     }
+
     .pane-ground {
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: repeat(4, 72px);
         overflow: auto;
         height: 320px;
     }
+
     .toolbar-ground {
         position: absolute;
         top: 210px;
         left: 20px;
     }
+
     .pane-gold {
         position: absolute;
         color: #ffffff;
         right: calc(50% + 10px);
         top: 5px;
     }
+
     .pane-plan {
         display: flex;
     }
+
     .list-plan {
         .icon-tool-remove {
             color: @colorDanger;
         }
+
         .icon-tool-complete {
             color: @colorSuccess;
         }
+
         .row-dense {
             .materials {
                 display: flex;
-                .material +.material {
+
+                .material+.material {
                     margin-left: 10px;
                 }
             }
         }
+
         .row-hide {
             color: #bfbfbf;
             text-decoration: line-through;
+
             .icon-tool-hide {
                 color: #bfbfbf;
             }
