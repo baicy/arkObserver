@@ -223,7 +223,10 @@ export default {
             item: '精英化',
             from: i-1,
             to: i,
-            mats: info.phases[i].evolveCost
+            mats: info.phases[i].evolveCost,
+            charaId: this.data.id,
+            itemType: 'phase',
+            target: i
           });
         }
       }
@@ -242,7 +245,11 @@ export default {
               item: skillsData[this.skills[i].id].levels[0].name,
               from: j-8,
               to: j-7,
-              mats: info.skills[i].levelUpCostCond[j-8].levelUpCost
+              mats: info.skills[i].levelUpCostCond[j-8].levelUpCost,
+              charaId: this.data.id,
+              itemType: 'master',
+              target: j,
+              skillIndex: i
             });
           }
         }
@@ -254,7 +261,11 @@ export default {
           item: '技能',
           from: i,
           to: i+1,
-          mats: info.allSkillLvlup[i-1].lvlUpCost
+          mats: info.allSkillLvlup[i-1].lvlUpCost,
+          charaId: this.data.id,
+          itemType: 'skill',
+          target: i+1,
+          skillCount: this.skills.length
         });
       }
       this.$notify({

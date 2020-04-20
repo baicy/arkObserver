@@ -140,6 +140,7 @@ export default {
         }
       }
       this.$set(this, 'goldCost', goldCost);
+      this.updatePlanList();
       return results;
     },
     neededMaterials() {
@@ -229,11 +230,29 @@ export default {
       for(const m of row.materials) {
         this.$set(this.stores, m[0], this.stores[m[0]]-m[1]);
       }
+      if(row.id.substr(0, 5)!='extra') {
+        let info = this.$store.getters.characters(row.charaId);
+        switch(row.itemType) {
+          case 'phase':
+            info.phase = row.target;
+            break;
+          case 'skill':
+            info.skills = Array(row.skillCount).fill(row.target);
+            break;
+          case 'master':
+            info.skills[row.skillIndex] = row.target;
+            break;
+        }
+        this.$store.dispatch('setCharacter', {
+          id: row.charaId,
+          data: info 
+        });
+      }
       this.$store.dispatch('removePlan', row.id);
     },
     addExtraPlan(mid) {
       let plan = {
-        id: 'extra'+new Date().getTime(),
+        id: 'extra-'+new Date().getTime(),
         chara: '',
         item: '',
         hide: false,
