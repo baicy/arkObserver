@@ -184,6 +184,7 @@ export default {
 .map {
   .row {
     margin: 0;
+    height: 40px;
     .tile {
       box-sizing: border-box;
       width: 40px;

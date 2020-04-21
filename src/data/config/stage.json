@@ -55,6 +55,48 @@
     "name": "往期活动",
     "activities": [
       {
+        "id": "act9d0",
+        "type": "TYPE_ACT9D0",
+        "name": "生于黑夜",
+        "stages": [
+          {
+            "id": "act9d0_01",
+            "code": "DM-1"
+          },
+          {
+            "id": "act9d0_02",
+            "code": "DM-2"
+          },
+          {
+            "id": "act9d0_03",
+            "code": "DM-3"
+          },
+          {
+            "id": "act9d0_04",
+            "code": "DM-4"
+          },
+          {
+            "id": "act9d0_05",
+            "code": "DM-5"
+          },
+          {
+            "id": "act9d0_06",
+            "code": "DM-6"
+          },
+          {
+            "id": "act9d0_07",
+            "code": "DM-7"
+          },
+          {
+            "id": "act9d0_08",
+            "code": "DM-8"
+          }
+        ],
+        "startTime": 1587441600,
+        "endTime": 1588622399,
+        "rewardEndTime": 1589227199
+      },
+      {
         "id": "act7d5",
         "type": "TYPE_ACT4D0",
         "name": "午间逸话",

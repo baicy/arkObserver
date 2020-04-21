@@ -1,3 +1,9 @@
+<!--
+ * @Date: 2020-03-03 05:37:16
+ * @LastEditors: Baixy Lee
+ * @LastEditTime: 2020-04-21 15:55:09
+ * @FilePath: /ark-vue-demo/src/views/Handbook.vue
+ -->
 <template>
 <div class="canvas-container">
   <canvas ref="canvas" width="2000" height="2000"></canvas>
@@ -32,6 +38,7 @@ export default {
     for(let i in linesData)
     {
       this.ctx.strokeStyle = 'white';
+      if(!headsData[linesData[i].point1]) continue; //移除了情报界面的塔露拉和w但是连线未移除
       this.ctx.beginPath();
       this.ctx.moveTo(x0+10+headsData[linesData[i].point1].xPos, y0-5-headsData[linesData[i].point1].yPos);
       this.ctx.lineTo(x0+10+headsData[linesData[i].point2].xPos, y0-5-headsData[linesData[i].point2].yPos);
