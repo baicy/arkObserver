@@ -217,7 +217,7 @@ export default {
             favor: 0,
             phase: 0,
             level: 1,
-            skills: [1]
+            skills: Array(details[i].skills.length).fill(1)
           };
           this.$store.dispatch('setCharacter', {
             id: i,

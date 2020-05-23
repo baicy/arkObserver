@@ -6,7 +6,7 @@
       :name="pool.gachaPoolId">
       <span slot="label">
         <i v-if="pool.open" class="el-icon-magic-stick" />
-        {{pool.gachaPoolName=='适合多种场合的强力干员'?'轮换标准寻访':pool.gachaPoolName}}
+        {{ pool.pickUpType=='Standard' ? '轮换标准寻访' : (pool.pickUpType=='SpecialOnly' ? '联合寻访' : pool.gachaPoolName) }}
       </span>
       <!-- 卡池信息区 -->
       <el-row>
@@ -16,10 +16,10 @@
         </el-col>
         <el-col :span="10">
           <el-row>
-            <el-col :span="6">
+            <el-col :span="8">
               <span>获得概率提升干员：</span>
             </el-col>
-            <el-col :span="18">
+            <el-col :span="16">
               <div v-if="pool.pickUp6">
                 6<i class="el-icon-star-on"></i>
                 <span
