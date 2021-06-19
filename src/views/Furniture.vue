@@ -17,13 +17,13 @@
         <el-tag v-for="(item, index) in scope.row.furnitures" :key="index" class="item-tag" effect="plain">{{item}}</el-tag>
       </template>
     </el-table-column>
-    <el-table-column
+    <!-- <el-table-column
       prop="stages"
       label="掉落关卡">
       <template slot-scope="scope">
         <el-tag v-for="(item, index) in scope.row.stages" :key="index" class="item-tag" effect="plain">{{item}}</el-tag>
       </template>
-    </el-table-column>
+    </el-table-column> -->
   </el-table>
 </el-card>
 </template>
