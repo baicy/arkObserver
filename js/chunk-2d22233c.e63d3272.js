@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d22233c"],{ce37:function(a,e,t){"use strict";t.r(e);var c=t("5a69"),r=t("c0d6");let n={init:()=>{var a=r["a"].getters.getCharacters();if(!Object.keys(a).length){for(var e in c){var t={};t[e]=[0,1,[0,0,0],[0,1,[0,0,0]]],Object.assign(a,t)}r["a"].commit("updateCharacters",a)}}};e["default"]=n}}]);
